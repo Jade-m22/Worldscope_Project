@@ -4,46 +4,15 @@ import "./App.scss";
 import Map from "./components/Map";
 import Filters from "./components/Filters";
 import CardList from "./components/CardList";
-
-// -- Data unique pour tout le site (événements, monuments, conflits...)
-const events = [
-  {
-    title: "Grande Muraille de Chine",
-    country: "Chine",
-    flag: "🇨🇳",
-    year: "220 av. J.-C.",
-    desc: "L'une des 7 merveilles du monde, s'étend sur plus de 20 000 km.",
-    type: "Monument",
-    status: "À visiter",
-    position: [40.4319, 116.5704],
-  },
-  {
-    title: "Colisée",
-    country: "Italie",
-    flag: "🇮🇹",
-    year: "80 ap. J.-C.",
-    desc: "Ancien amphithéâtre romain, symbole de Rome.",
-    type: "Monument",
-    status: "À visiter",
-    position: [41.8902, 12.4922],
-  },
-  {
-    title: "Bataille de Waterloo",
-    country: "Belgique",
-    flag: "🇧🇪",
-    year: "1815",
-    desc: "Victoire décisive sur Napoléon, évènement historique majeur.",
-    type: "Conflit",
-    status: "Conflit",
-    position: [50.6806, 4.4125],
-  },
-  // ... Ajoute tous tes autres lieux ici avec le bon type
-];
+import events from "./data/events";
 
 function filterEvents(type) {
   if (!type) return events;
   if (type === "Monument") return events.filter(e => e.type === "Monument");
   if (type === "Conflit") return events.filter(e => e.type === "Conflit");
+  if (type === "À visiter") return events.filter(e => e.status === "À visiter");
+  if (type === "À éviter") return events.filter(e => e.status === "À éviter");
+  if (type === "Dangereux") return events.filter(e => e.status === "Dangereux");
   return events;
 }
 
@@ -57,7 +26,6 @@ export default function App() {
   // Gestion du clic sur une card: ouvrir le popup correspondant sur la carte
   const handleCardClick = idx => {
     setSelected(idx);
-    // Scroll/zoom sur la map si besoin (optionnel)
     if (mapRef.current) {
       mapRef.current.flyToEvent(idx);
     }

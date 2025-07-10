@@ -1,19 +1,29 @@
-.card-list {
+.carousel-pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-cards {
   display: flex;
   gap: 18px;
-  padding: 12px 0 0 0;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  margin-bottom: 14px;
+  min-height: 170px;
+  width: 100%;
+  justify-content: center;
 }
+
 .card {
   background: #192943ee;
   border-radius: 13px;
   box-shadow: 0 2px 8px #15448828;
   color: #e7fdff;
   padding: 18px 17px 13px 17px;
-  min-width: 180px;
+  min-width: 160px;
   max-width: 220px;
-  flex: 1 1 160px;
+  flex: 1 1 180px;
+  margin-bottom: 0;
+  cursor: pointer;
   h4 {
     font-size: 1.13em;
     margin-bottom: 2px;
@@ -32,16 +42,57 @@
     background: #1a3337;
     &.status-àvisiter { background: #19d59e; color: #123; }
     &.status-conflit { background: #ff5b6b; color: #fff; }
+    &.status-àéviter, &.status-dangereux { background: #ffe65e; color: #aa3d00; }
   }
 }
-@media (max-width: 700px) {
-  .card-list {
-    flex-direction: column;
-    gap: 12px;
+
+/* Responsive ! */
+@media (max-width: 900px) {
+  .carousel-cards {
+    gap: 10px;
   }
   .card {
+    min-width: 48vw;
+    max-width: 92vw;
+    padding: 13px 9px 10px 13px;
+  }
+}
+@media (max-width: 600px) {
+  .carousel-cards {
+    gap: 5px;
+  }
+  .card {
+    min-width: 94vw;
     max-width: 97vw;
-    min-width: 0;
-    padding: 14px 10px 10px 14px;
+    padding: 13px 9px 10px 13px;
+  }
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  .carousel-dot {
+    width: 12px;
+    height: 12px;
+    background: #bbb;
+    border: none;
+    border-radius: 50%;
+    opacity: 0.7;
+    cursor: pointer;
+    margin: 0 2px;
+    transition: background 0.18s;
+    &.active { background: #19d59e; opacity: 1; }
+  }
+  .carousel-arrow {
+    background: #112d38;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 24px; height: 24px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover { background: #19d59e; color: #223; }
   }
 }
