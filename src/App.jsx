@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import Header from "./components/Header";
 import "./App.scss";
 import Map from "./components/Map";
 import Filters from "./components/Filters";
@@ -70,6 +71,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <Header />
       <main>
         <div className="layout-main">
           <aside>
