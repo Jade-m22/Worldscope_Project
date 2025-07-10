@@ -1,0 +1,16 @@
+.geoscope-map {
+  margin: 0 auto 30px auto;
+  border-radius: 18px;
+  box-shadow: 0 8px 40px #214a5c44;
+  outline: 2px solid #223f5265;
+  width: 90vw;
+  max-width: 800px;
+  min-width: 250px;
+  min-height: 340px;
+  @media (max-width: 800px) {
+    width: 99vw;
+    min-width: 160px;
+    height: 54vw;
+    max-height: 80vw;
+  }
+}

@@ -1,0 +1,38 @@
+.timeline {
+  background: rgba(24,36,68,0.85);
+  border-radius: 16px;
+  padding: 22px 20px 12px 20px;
+  margin-bottom: 22px;
+  color: #eaf6ff;
+  box-shadow: 0 2px 16px #14385933;
+  min-width: 220px;
+  h2 {
+    font-size: 1.19rem;
+    margin-bottom: 10px;
+    color: #b0b6fc;
+    letter-spacing: 0.01em;
+  }
+  .timeline-year {
+    font-size: 2.1rem;
+    font-weight: bold;
+    color: #9ed5fe;
+    margin-bottom: 7px;
+    text-align: center;
+  }
+  .timeline-slider {
+    width: 100%;
+    margin: 0;
+    accent-color: #3cfeb3;
+    height: 4px;
+  }
+  .timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.97em;
+    color: #89e9b7;
+    margin-top: 2px;
+  }
+}
+@media (max-width: 900px) {
+  .timeline { min-width: 0; }
+}
