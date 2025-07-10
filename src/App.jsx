@@ -1,10 +1,10 @@
-import './App.css';
+import Header from './components/Header';
 import Map from './components/Map';
 
 function App() {
   return (
-    <div className="App">
-      <h1 style={{ textAlign: 'center' }}>GeoScope</h1>
+    <div style={{ paddingTop: '60px' }}>
+      <Header />
       <Map />
     </div>
   );
