@@ -5,8 +5,9 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-left">
-        <img src={logo} alt="WorldScope Logo" className="logo" />
-        <h1 className="title">WorldScope</h1>
+        <a href="/" className="logo-link">
+          <img src={logo} alt="WorldScope Logo" className="logo" />
+        </a>
       </div>
       <div className="header-right">
         <input

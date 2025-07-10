@@ -70,7 +70,7 @@ export default function App() {
   const filteredEvents = filterEvents(filter);
 
   return (
-    <div className="App">
+    <div className="App with-header">
       <Header />
       <main>
         <div className="layout-main">
