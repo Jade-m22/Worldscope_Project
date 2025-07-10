@@ -1,22 +1,18 @@
 import "./Timeline.scss";
 
-export default function Timeline({ year = 2024, onChange }) {
+export default function Timeline({ min=-3000, max=2025, year, onChange }) {
   return (
     <section className="timeline">
-      <h2>🕓 Chronologie</h2>
-      <div className="timeline-year">{year}</div>
+      <h3>🕓 Chronologie</h3>
       <input
         type="range"
-        min={-3000}
-        max={2024}
+        min={min}
+        max={max}
         value={year}
-        onChange={e => onChange && onChange(Number(e.target.value))}
-        className="timeline-slider"
+        onChange={e => onChange(Number(e.target.value))}
+        step="1"
       />
-      <div className="timeline-labels">
-        <span>-3000</span>
-        <span>2024</span>
-      </div>
+      <div className="timeline-year">{year}</div>
     </section>
   );
 }
