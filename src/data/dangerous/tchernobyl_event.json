@@ -1,0 +1,85 @@
+{
+    "title": "Catastrophe de Tchernobyl",
+    "date": "1986-04-26",
+    "location": {
+      "site": "Centrale nucléaire de Tchernobyl, tranche 4",
+      "city": "Pripyat",
+      "region": "RSS d’Ukraine",
+      "country": "URSS"
+    },
+    "reactor": {
+      "type": "RBMK-1000",
+      "moderator": "graphite",
+      "coolant": "eau",
+      "commissioned": 1977,
+      "operator": "Ministère de l’Énergie de l’URSS"
+    },
+    "chronologie": [
+      {
+        "date": "1986-04-25",
+        "time": null,
+        "event": "Début du test de sûreté sur le réacteur 4"
+      },
+      {
+        "date": "1986-04-26",
+        "time": "01:23",
+        "event": "Arrêt brutal et pic de puissance, deux explosions détruisent la tranche 4"
+      },
+      {
+        "date": "1986-04-26",
+        "time": "02:00",
+        "event": "Incendie du toit et émission de panaches radioactifs"
+      },
+      {
+        "date": "1986-04-27",
+        "time": null,
+        "event": "Évacuation de Pripyat"
+      },
+      {
+        "date": "1986-05-01",
+        "time": null,
+        "event": "Début de la construction du sarcophage"
+      },
+      {
+        "date": "2016-11-29",
+        "time": null,
+        "event": "Achèvement du Nouveau Confinement Sécurisé (NSC)"
+      }
+    ],
+    "causes": [
+      "Défaillances humaines lors du test",
+      "Conception du RBMK (coefficient de vide positif, absence d’enceinte de confinement)"
+    ],
+    "consequences": {
+      "victimes": {
+        "immediate_deaths": 2,
+        "acute_irradiation_deaths": 28,
+        "long_term_health": "Augmentation des cas de cancers, notamment thyroïdien"
+      },
+      "environment": [
+        "Zone d’exclusion de 30 km",
+        "Contamination durable des sols, forêts et cours d’eau",
+        "Points chauds radioactifs"
+      ],
+      "socio_politic": [
+        "Renforcement de la réglementation internationale",
+        "Affaiblissement de la confiance dans le nucléaire soviétique"
+      ]
+    },
+    "impact": [
+      "Révision des normes de sécurité nucléaire",
+      "Amélioration de la transparence et de la communication",
+      "Recherche épidémiologique"
+    ],
+    "legacy": [
+      "Culture de sûreté renforcée",
+      "Structures de confinement robustes",
+      "Gestion à long terme des sites accidentés",
+      "Sensibilisation du public aux risques nucléaires"
+    ],
+    "sources": [
+      "AIEA INSAG-7",
+      "Rapport officiel soviétique",
+      "Études épidémiologiques"
+    ]
+  }

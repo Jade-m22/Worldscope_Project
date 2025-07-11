@@ -115,3 +115,23 @@ body {
     padding: 0;
   }
 }
+
+.detail-container {
+  margin: 1rem;
+  padding: 1rem;
+  background: #1a1f2b;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  position: relative;
+}
+.close-detail {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
