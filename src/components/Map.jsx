@@ -54,7 +54,8 @@ function MapFlyAndPopup({ selected, markersRef }) {
   return null;
 }
 
-const Map = forwardRef(function Map({ data, selected, setSelected }, ref) {
+// AJOUT : onShowDetail en props !
+const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail }, ref) {
   const markersRef = useRef([]);
 
   useImperativeHandle(ref, () => ({
@@ -98,7 +99,7 @@ const Map = forwardRef(function Map({ data, selected, setSelected }, ref) {
           eventHandlers={{
             click: () => setSelected(i),
           }}
-          icon={createColoredPinMarker(markerColors[m.status] || "#4deed6")}
+          icon={createColoredPinMarker(markerColors[m.status] || "#ff0000ff")}
         >
           <Popup>
             <div style={{ minWidth: 180 }}>
@@ -113,13 +114,31 @@ const Map = forwardRef(function Map({ data, selected, setSelected }, ref) {
                 <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
                 {m.title}
               </div>
-              <div style={{ color: "#5efef7" }}>
+              <div style={{ color: "#ff0000ff" }}>
                 {m.country} &middot; {m.year}
               </div>
               <div style={{ margin: "8px 0", fontSize: "0.97em" }}>{m.desc}</div>
               <div style={{ fontSize: "0.85em", color: "#aaa" }}>
                 Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
               </div>
+              {/* AJOUT du bouton voir + */}
+              {onShowDetail &&
+                <button
+                  style={{
+                    marginTop: 10,
+                    padding: "6px 15px",
+                    background: "#19d59e",
+                    border: "none",
+                    borderRadius: "7px",
+                    color: "#111",
+                    cursor: "pointer",
+                    fontWeight: 600
+                  }}
+                  onClick={() => onShowDetail(i)}
+                >
+                  Voir plus de détails
+                </button>
+              }
             </div>
           </Popup>
         </Marker>
