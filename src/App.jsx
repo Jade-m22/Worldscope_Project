@@ -9,10 +9,10 @@ import events from "./data/events";
 import GlobeView from "./components/Globe";
 import EventDetail from "./components/EventDetail";
 
-function filterEvents(filter, year) {
+// On ajoute le paramètre search à la fonction de filtrage
+function filterEvents(filter, year, search) {
   let filtered = events;
   if (filter && filter !== "") {
-    // On filtre sur status ou type selon le filtre
     if (["À visiter", "À éviter", "Dangereux"].includes(filter)) {
       filtered = filtered.filter(e => e.status === filter);
     } else {
@@ -31,6 +31,20 @@ function filterEvents(filter, year) {
       return true;
     });
   }
+  // Recherche globale (case insensitive) sur titre, pays, année, type, status, desc
+  if (search && search.trim() !== "") {
+    const s = search.trim().toLowerCase();
+    filtered = filtered.filter(e => {
+      return (
+        (e.title && e.title.toLowerCase().includes(s)) ||
+        (e.country && e.country.toLowerCase().includes(s)) ||
+        (e.status && e.status.toLowerCase().includes(s)) ||
+        (e.type && e.type.toLowerCase().includes(s)) ||
+        (e.year && String(e.year).toLowerCase().includes(s)) ||
+        (e.desc && e.desc.toLowerCase().includes(s))
+      );
+    });
+  }
   return filtered;
 }
 
@@ -40,12 +54,15 @@ export default function App() {
   const [detailedIdx, setDetailedIdx] = useState(null);
   const [year, setYear] = useState(2025);
   const [viewMode, setViewMode] = useState("map");
+  const [search, setSearch] = useState(""); // ← AJOUT pour la recherche globale
+
   const mapRef = useRef();
-  const detailRef = useRef(); // Pour scroll
+  const detailRef = useRef();
 
-  const filteredEvents = filterEvents(filter, year);
+  // Passe la recherche globale au filtre
+  const filteredEvents = filterEvents(filter, year, search);
 
-  // Déroule l’index vers la zone détail du bas
+  // Pour scroller jusqu'à la section de détail
   const handleShowDetail = (idx) => {
     setDetailedIdx(idx);
     setTimeout(() => {
@@ -64,7 +81,7 @@ export default function App() {
 
   return (
     <div className="with-header">
-      <Header />
+      <Header search={search} setSearch={setSearch} /> {/* Passe la recherche ici */}
       <div className="app-layout">
         <aside className="sidebar">
           <Timeline min={-3000} max={2025} year={year} onChange={handleYear} />
