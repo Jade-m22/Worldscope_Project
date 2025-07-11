@@ -57,10 +57,7 @@ export default function App() {
         </aside>
         <main className="main-content">
           {/* AJOUTÉ : Bouton pour changer de vue */}
-          <div
-            className="view-toggle"
-            style={{ marginBottom: "1rem", textAlign: "center" }}
-          >
+          <div className="view-toggle">
             <button
               onClick={() =>
                 setViewMode((prev) => (prev === "map" ? "globe" : "map"))

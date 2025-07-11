@@ -1,4 +1,6 @@
-html, body, #root {
+html,
+body,
+#root {
   min-height: 100%;
   min-width: 100vw;
   margin: 0;
@@ -62,7 +64,7 @@ body {
     max-width: 100vw;
     min-width: 0;
     width: 100vw;
-    background: rgba(24,36,68,0.94);
+    background: rgba(24, 36, 68, 0.94);
     border-radius: 11px;
     box-shadow: 0 1px 9px #12395a2a;
     padding: 14px 4vw;
@@ -109,9 +111,44 @@ body {
     width: 100vw;
     max-width: 100vw;
   }
-  .main-content, .sidebar, .map-card {
+  .main-content,
+  .sidebar,
+  .map-card {
     max-width: 100vw;
     min-width: 0;
     padding: 0;
+  }
+}
+// src/App.scss
+
+// ... (tes autres styles)
+
+.view-toggle {
+  // Centre le bouton et lui donne un peu d'espace en dessous
+  margin-bottom: 1rem;
+  text-align: center;
+
+  button {
+    // Style de base du bouton
+    background-color: #4a4e69; // Une couleur sobre (bleu-gris foncé)
+    color: #f2e9e4; // Texte clair
+    border: none; // On enlève la bordure par défaut
+    border-radius: 8px; // Des coins arrondis
+    padding: 10px 20px; // Espace intérieur (vertical / horizontal)
+    font-size: 1rem; // Taille du texte
+    font-weight: bold; // Texte en gras
+    cursor: pointer; // Le curseur se transforme en main au survol
+    transition: background-color 0.3s ease, transform 0.2s ease; // Animation douce
+
+    // Effet au survol de la souris
+    &:hover {
+      background-color: #6a6f93; // On éclaircit un peu la couleur
+      transform: translateY(-2px); // Léger mouvement vers le haut
+    }
+
+    // Effet au clic
+    &:active {
+      transform: translateY(0); // Le bouton retrouve sa position initiale
+    }
   }
 }
