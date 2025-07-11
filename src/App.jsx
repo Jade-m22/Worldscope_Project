@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Header from "./components/Header";
 import "./App.scss";
 import Map from "./components/Map";
@@ -6,12 +6,18 @@ import Filters from "./components/Filters";
 import CardList from "./components/CardList";
 import Timeline from "./components/Timeline";
 import events from "./data/events";
-import GlobeView from "./components/Globe"; // AJOUTÉ : Importation du nouveau composant
+import GlobeView from "./components/Globe";
 
-function filterEvents(type, year) {
+// Version corrigée :
+function filterEvents(filter, year) {
   let filtered = events;
-  if (type && type !== "") {
-    filtered = filtered.filter((e) => e.type === type);
+  if (filter && filter !== "") {
+    // On filtre sur status ou type selon le filtre
+    if (["À visiter", "À éviter", "Dangereux"].includes(filter)) {
+      filtered = filtered.filter(e => e.status === filter);
+    } else {
+      filtered = filtered.filter(e => e.type === filter);
+    }
   }
   if (year !== undefined && year !== null) {
     filtered = filtered.filter((e) => {
@@ -30,18 +36,37 @@ function filterEvents(type, year) {
 
 export default function App() {
   const [filter, setFilter] = useState("");
+  // on stocke ici l’objet événement sélectionné
   const [selected, setSelected] = useState(null);
+  // et ici les détails JSON de Tchernobyl
+  const [tchDetails, setTchDetails] = useState(null);
+
   const [year, setYear] = useState(2025);
-  const [viewMode, setViewMode] = useState("map"); // AJOUTÉ : L'état pour gérer la vue (map/globe)
+  const [viewMode, setViewMode] = useState("map");
   const mapRef = useRef();
 
-  const handleCardClick = (idx) => {
-    setSelected(idx);
+  // Chargement du JSON dès que "Tchernobyl" est sélectionné
+  useEffect(() => {
+    if (selected?.title === "Tchernobyl") {
+      fetch("/data/dangerous/tchernobyl_event.json")
+        .then((res) => res.json())
+        .then((json) => setTchDetails(json))
+        .catch((err) => console.error("Erreur fetch Tchernobyl:", err));
+    } else {
+      // on vide les détails pour tout autre événement
+      setTchDetails(null);
+    }
+  }, [selected]);
+
+  // on passe maintenant l'objet event (et non plus un simple index)
+  const handleCardClick = (event) => {
+    setSelected(event);
     if (mapRef.current && viewMode === "map") {
-      // On s'assure de n'appeler flyToEvent qu'en mode carte
-      mapRef.current.flyToEvent(idx);
+      // si besoin, adaptez flyToEvent pour prendre un objet ou un id
+      mapRef.current.flyToEvent(event);
     }
   };
+
   const handleFilter = (type) => setFilter(type);
   const handleYear = (y) => setYear(y);
 
@@ -52,11 +77,16 @@ export default function App() {
       <Header />
       <div className="app-layout">
         <aside className="sidebar">
-          <Timeline min={-3000} max={2025} year={year} onChange={handleYear} />
+          <Timeline
+            min={-3000}
+            max={2025}
+            year={year}
+            onChange={handleYear}
+          />
           <Filters onFilter={handleFilter} active={filter} />
         </aside>
+
         <main className="main-content">
-          {/* AJOUTÉ : Bouton pour changer de vue */}
           <div
             className="view-toggle"
             style={{ marginBottom: "1rem", textAlign: "center" }}
@@ -71,7 +101,6 @@ export default function App() {
           </div>
 
           <div className="map-card">
-            {/* AJOUTÉ : Affichage conditionnel de la carte ou du globe */}
             {viewMode === "map" ? (
               <Map
                 data={filteredEvents}
@@ -83,8 +112,63 @@ export default function App() {
               <GlobeView data={filteredEvents} />
             )}
           </div>
+
           <CardList data={filteredEvents} onCardClick={handleCardClick} />
         </main>
+      </div>
+
+      {/* Conteneur de la fiche détaillée */}
+      <div id="detail-container" className="detail-container">
+        {selected?.title === "Tchernobyl" && tchDetails && (
+          <div className="card">
+            <h2>{tchDetails.title}</h2>
+            <p>
+              <strong>Date :</strong> {tchDetails.date}
+            </p>
+            <p>
+              <strong>Lieu :</strong>{" "}
+              {`${tchDetails.location.site}, ${tchDetails.location.city} (${tchDetails.location.region})`}
+            </p>
+            <p>
+              <strong>Réacteur :</strong>{" "}
+              {`${tchDetails.reactor.type} (modérateur : ${tchDetails.reactor.moderator}, refroidi à l’${tchDetails.reactor.coolant})`}
+            </p>
+            <hr />
+            <p>
+              <strong>Chronologie :</strong>
+            </p>
+            <ul>
+              {tchDetails.chronologie.map((evt, i) => (
+                <li key={i}>
+                  {evt.date}
+                  {evt.time ? ` à ${evt.time}` : ""} — {evt.event}
+                </li>
+              ))}
+            </ul>
+            <p>
+              <strong>Causes :</strong>
+            </p>
+            <ul>
+              {tchDetails.causes.map((c, i) => (
+                <li key={i}>{c}</li>
+              ))}
+            </ul>
+            <p>
+              <strong>Conséquences (victimes) :</strong>
+            </p>
+            <ul>
+              <li>Décès immédiats : {tchDetails.consequences.victimes.immediate_deaths}</li>
+              <li>
+                Syndrome d’irradiation aiguë :{" "}
+                {tchDetails.consequences.victimes.acute_irradiation_deaths}
+              </li>
+              <li>
+                Santé long terme : {tchDetails.consequences.victimes.long_term_health}
+              </li>
+            </ul>
+            {/* Vous pouvez ajouter plus de sections (environnement, impact, legacy…) */}
+          </div>
+        )}
       </div>
     </div>
   );
