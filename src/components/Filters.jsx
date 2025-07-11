@@ -1,14 +1,27 @@
 export default function Filters({ onFilter, active }) {
+  const filters = [
+    { label: "Tous", value: "", icon: "🌍" },
+    { label: "Monuments", value: "Monument", icon: "🗿" },
+    { label: "Conflits", value: "Conflit", icon: "⚔️" },
+    { label: "À visiter", value: "À visiter", icon: "⭐" },
+    { label: "À éviter", value: "À éviter", icon: "⛔" },
+    { label: "Dangereux", value: "Dangereux", icon: "☢️" },
+  ];
+
   return (
     <section className="filters">
       <h3>Filtres</h3>
       <div className="filters-list">
-        <button className={active==="" ? "active" : ""} onClick={()=>onFilter("")}>🌍 Tous</button>
-        <button className={active==="Monument" ? "active" : ""} onClick={()=>onFilter("Monument")}>🗿 Monuments</button>
-        <button className={active==="Conflit" ? "active" : ""} onClick={()=>onFilter("Conflit")}>⚔️ Conflits</button>
-        <button className={active==="À visiter" ? "active" : ""} onClick={()=>onFilter("À visiter")}>⭐ À visiter</button>
-        <button className={active==="À éviter" ? "active" : ""} onClick={()=>onFilter("À éviter")}>⛔ À éviter</button>
-        <button className={active==="Dangereux" ? "active" : ""} onClick={()=>onFilter("Dangereux")}>☢️ Dangereux</button>
+        {filters.map((f) => (
+          <button
+            key={f.value}
+            className={`filter-button ${active === f.value ? "active" : ""}`}
+            onClick={() => onFilter(f.value)}
+          >
+            <span className="icon">{f.icon}</span>
+            {f.label}
+          </button>
+        ))}
       </div>
     </section>
   );

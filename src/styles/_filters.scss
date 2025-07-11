@@ -1,36 +1,54 @@
 .filters {
-  background: rgba(30, 53, 60, 0.68);
-  border-radius: 14px;
-  padding: 17px 12px 10px 18px;
+  background: rgba(17, 27, 38, 0.8);
+  border-radius: 16px;
+  padding: 16px 18px;
   margin-bottom: 24px;
   color: #eaf6ff;
-  box-shadow: 0 2px 12px #881ec533;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
 
   h3 {
-    font-size: 1.18rem;
-    margin-bottom: 9px;
-    color: #a4ffdc;
+    font-size: 1.2rem;
+    margin-bottom: 14px;
     font-weight: 600;
+    color: #b9faff;
   }
+
   .filters-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 12px;
-    button {
-      background: #223d36;
-      color: #5af6d7;
-      border: none;
-      border-radius: 7px;
-      padding: 6px 16px;
-      font-size: 1.05em;
-      cursor: pointer;
-      transition: background 0.12s, color 0.11s, box-shadow 0.16s;
-      box-shadow: 0 1px 5px #29c29922;
-      &:hover, &:focus {
-        background: #2ed7aa;
-        color: #002822;
-        font-weight: bold;
-      }
+  }
+
+  .filter-button {
+    background: #1f2f39;
+    color: #c8fff9;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      background: #2d4f60;
+      color: #e5fffb;
+      transform: translateY(-1px);
+    }
+
+    &.active {
+      background: #35e0c9;
+      color: #002a22;
+      font-weight: 600;
+      box-shadow: 0 0 0 2px #23e6b2;
+    }
+
+    .icon {
+      font-size: 1.2rem;
     }
   }
 }
