@@ -8,10 +8,16 @@ import Timeline from "./components/Timeline";
 import events from "./data/events";
 import GlobeView from "./components/Globe";
 
-function filterEvents(type, year) {
+// Version corrigée :
+function filterEvents(filter, year) {
   let filtered = events;
-  if (type && type !== "") {
-    filtered = filtered.filter((e) => e.type === type);
+  if (filter && filter !== "") {
+    // On filtre sur status ou type selon le filtre
+    if (["À visiter", "À éviter", "Dangereux"].includes(filter)) {
+      filtered = filtered.filter(e => e.status === filter);
+    } else {
+      filtered = filtered.filter(e => e.type === filter);
+    }
   }
   if (year !== undefined && year !== null) {
     filtered = filtered.filter((e) => {
