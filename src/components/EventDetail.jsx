@@ -72,7 +72,6 @@ export default function EventDetail({ event }) {
               fontStyle: "italic",
               lineHeight: 1.4
             }}>
-              {wikiText}
             </div>
           )}
         </div>
