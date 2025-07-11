@@ -2,6 +2,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
+import countryToCode from "../utils/countryCodes";
+import FlagOrEmoji from "../utils/FlagOrEmoji";
 
 // Couleurs des markers selon la catégorie (status)
 const markerColors = {
@@ -27,7 +29,7 @@ function createColoredPinMarker(color) {
   });
 }
 
-// Fix icons for default leaflet (au cas où tu utilises aussi l’icône par défaut quelque part)
+// Fix icons for default leaflet
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -38,7 +40,6 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
-// Permet d'ouvrir une popup programmatique (impératif)
 function MapFlyAndPopup({ selected, markersRef }) {
   const map = useMap();
 
@@ -53,12 +54,9 @@ function MapFlyAndPopup({ selected, markersRef }) {
   return null;
 }
 
-// Main Map component
 const Map = forwardRef(function Map({ data, selected, setSelected }, ref) {
-  // Garde la référence sur tous les markers pour les popups
   const markersRef = useRef([]);
 
-  // Permet à App de déclencher un flyTo
   useImperativeHandle(ref, () => ({
     flyToEvent: idx => {
       if (markersRef.current[idx]) {
@@ -100,14 +98,22 @@ const Map = forwardRef(function Map({ data, selected, setSelected }, ref) {
           eventHandlers={{
             click: () => setSelected(i),
           }}
-          icon={createColoredPinMarker(markerColors[m.status] || "#ff0000ff")}
+          icon={createColoredPinMarker(markerColors[m.status] || "#4deed6")}
         >
           <Popup>
             <div style={{ minWidth: 180 }}>
-              <div style={{ fontSize: "1.1em", fontWeight: 700, marginBottom: 4 }}>
-                {m.flag} {m.title}
+              <div style={{
+                fontSize: "1.1em",
+                fontWeight: 700,
+                marginBottom: 4,
+                display: "flex",
+                alignItems: "center",
+                gap: 8
+              }}>
+                <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
+                {m.title}
               </div>
-              <div style={{ color: "#ff0000ff" }}>
+              <div style={{ color: "#5efef7" }}>
                 {m.country} &middot; {m.year}
               </div>
               <div style={{ margin: "8px 0", fontSize: "0.97em" }}>{m.desc}</div>

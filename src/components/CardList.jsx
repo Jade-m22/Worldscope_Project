@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import "./CardList.scss";
 import events from "../data/events";
+import countryToCode from "../utils/countryCodes";
+import FlagOrEmoji from "../utils/FlagOrEmoji";
 
 function getCardsPerPage() {
   if (window.innerWidth <= 700) return 2;
@@ -15,14 +17,13 @@ export default function CardList({ data = events, onCardClick }) {
   useEffect(() => {
     function handleResize() {
       setCardsPerPage(getCardsPerPage());
-      setPage(0); // Remet à zéro quand on change de taille
+      setPage(0);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const pageCount = Math.ceil(data.length / cardsPerPage);
-
   const pageData = data.slice(page * cardsPerPage, (page + 1) * cardsPerPage);
 
   function gotoPage(idx) {
@@ -47,7 +48,10 @@ export default function CardList({ data = events, onCardClick }) {
               onClick={() => onCardClick && onCardClick(page * cardsPerPage + i)}
               style={{ cursor: "pointer" }}
             >
-              <h4>{item.title}</h4>
+              <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+                <FlagOrEmoji code={countryToCode[item.country]} size="2em" />
+                <h4 style={{ margin: 0 }}>{item.title}</h4>
+              </div>
               <div className="country">{item.country}</div>
               <div className="type">{item.type}</div>
               <div className="year">{item.year}</div>
