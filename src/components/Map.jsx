@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 
-// Utilitaire pour créer un marker SVG coloré
+// Couleurs des markers selon la catégorie (status)
 const markerColors = {
   "À visiter": "#19d59e",
   "Conflit": "#ff5b6b",
@@ -11,13 +11,19 @@ const markerColors = {
   "Dangereux": "#ffe65e"
 };
 
-function createColoredMarker(color) {
+// SVG marker style "flèche piquée"
+function createColoredPinMarker(color) {
   return L.divIcon({
     className: 'custom-marker',
-    html: `<svg width="28" height="40" viewBox="0 0 28 40"><ellipse cx="14" cy="20" rx="13" ry="13" fill="${color}" stroke="#fff" stroke-width="2"/><circle cx="14" cy="20" r="7" fill="#fff" opacity="0.20"/></svg>`,
-    iconSize: [28, 40],
-    iconAnchor: [14, 40],
-    popupAnchor: [0, -34]
+    html: `
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="44" viewBox="0 0 32 44">
+        <path d="M16 44C16 44 30 27 30 18C30 8.05887 23.9411 2 16 2C8.05887 2 2 8.05887 2 18C2 27 16 44 16 44Z"
+          fill="${color}" stroke="#fff" stroke-width="2"/>
+        <circle cx="16" cy="18" r="7" fill="#fff" opacity="0.20"/>
+      </svg>`,
+    iconSize: [32, 44],
+    iconAnchor: [16, 44],
+    popupAnchor: [0, -40]
   });
 }
 
@@ -94,7 +100,7 @@ const Map = forwardRef(function Map({ data, selected, setSelected }, ref) {
           eventHandlers={{
             click: () => setSelected(i),
           }}
-          icon={createColoredMarker(markerColors[m.status] || "#4deed6")}
+          icon={createColoredPinMarker(markerColors[m.status] || "#4deed6")}
         >
           <Popup>
             <div style={{ minWidth: 180 }}>
