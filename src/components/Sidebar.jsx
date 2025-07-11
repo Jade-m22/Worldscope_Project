@@ -1,4 +1,3 @@
-import "./Sidebar.scss";
 import Timeline from "./Timeline";
 import Filters from "./Filters";
 

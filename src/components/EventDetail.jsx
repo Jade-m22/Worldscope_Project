@@ -1,4 +1,3 @@
-import "./EventDetail.scss";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import countryToCode from "../utils/countryCodes";
 
