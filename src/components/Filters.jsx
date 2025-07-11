@@ -1,5 +1,3 @@
-import "./Filters.scss";
-
 export default function Filters({ onFilter, active }) {
   return (
     <section className="filters">

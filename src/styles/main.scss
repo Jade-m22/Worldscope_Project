@@ -2,6 +2,14 @@
 @import './variables';
 @import './header';
 
+@import "./_filters";
+@import "./_cardList";
+@import "./_map";
+@import "./_timeline";
+@import "./_sidebar";
+@import "./_eventDetail";
+
+
 body, html, #root {
   min-height: 100vh;
   min-width: 100vw;
