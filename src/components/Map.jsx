@@ -4,25 +4,28 @@ import L from "leaflet";
 import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
+import "./Map.scss";
 
 // Couleurs des markers selon la catégorie (status)
 const markerColors = {
-  "À visiter": "#19d59e",
-  "Conflit": "#ff5b6b",
-  "À éviter": "#ffe65e",
-  "Dangereux": "#ffe65e"
+  "À visiter": "#19d59e",      // vert
+  "Conflit": "#ff0000ff",      // rouge vif
+  "À éviter": "#ffe65e",       // jaune
+  "Dangereux": "#000000ff",    // noir
+  "Monument": "#0c09c9ff"      // bleu foncé
 };
 
 // SVG marker style "flèche piquée"
 function createColoredPinMarker(color) {
   return L.divIcon({
-    className: 'custom-marker',
+    className: "custom-marker",
     html: `
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="44" viewBox="0 0 32 44">
         <path d="M16 44C16 44 30 27 30 18C30 8.05887 23.9411 2 16 2C8.05887 2 2 8.05887 2 18C2 27 16 44 16 44Z"
           fill="${color}" stroke="#fff" stroke-width="2"/>
         <circle cx="16" cy="18" r="7" fill="#fff" opacity="0.20"/>
-      </svg>`,
+      </svg>
+    `,
     iconSize: [32, 44],
     iconAnchor: [16, 44],
     popupAnchor: [0, -40]
@@ -54,7 +57,7 @@ function MapFlyAndPopup({ selected, markersRef }) {
   return null;
 }
 
-// AJOUT : onShowDetail en props !
+// onShowDetail en props pour "Voir plus de détails"
 const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail }, ref) {
   const markersRef = useRef([]);
 
@@ -73,13 +76,6 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
       minZoom={2}
       maxZoom={6}
       scrollWheelZoom
-      style={{
-        height: "60vh",
-        width: "100%",
-        borderRadius: "18px",
-        boxShadow: "0 4px 22px #11284277",
-        marginBottom: 16,
-      }}
       className="geoscope-map"
       maxBounds={[
         [85, -180],
@@ -99,41 +95,25 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
           eventHandlers={{
             click: () => setSelected(i),
           }}
-          icon={createColoredPinMarker(markerColors[m.status] || "#ff0000ff")}
+          icon={createColoredPinMarker(markerColors[m.status] || markerColors[m.type] || "#4deed6")}
         >
           <Popup>
-            <div style={{ minWidth: 180 }}>
-              <div style={{
-                fontSize: "1.1em",
-                fontWeight: 700,
-                marginBottom: 4,
-                display: "flex",
-                alignItems: "center",
-                gap: 8
-              }}>
+            <div className="map-popup">
+              <div className="map-popup-title">
                 <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
                 {m.title}
               </div>
-              <div style={{ color: "#ff0000ff" }}>
+              <div className="map-popup-meta">
                 {m.country} &middot; {m.year}
               </div>
-              <div style={{ margin: "8px 0", fontSize: "0.97em" }}>{m.desc}</div>
-              <div style={{ fontSize: "0.85em", color: "#aaa" }}>
+              <div className="map-popup-desc">{m.desc}</div>
+              <div className="map-popup-coords">
                 Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
               </div>
               {/* AJOUT du bouton voir + */}
               {onShowDetail &&
                 <button
-                  style={{
-                    marginTop: 10,
-                    padding: "6px 15px",
-                    background: "#19d59e",
-                    border: "none",
-                    borderRadius: "7px",
-                    color: "#111",
-                    cursor: "pointer",
-                    fontWeight: 600
-                  }}
+                  className="map-popup-detail-btn"
                   onClick={() => onShowDetail(i)}
                 >
                   Voir plus de détails

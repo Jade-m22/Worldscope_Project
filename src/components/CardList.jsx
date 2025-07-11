@@ -10,7 +10,7 @@ function getCardsPerPage() {
   return 4;
 }
 
-// AJOUT de onShowDetail en props !
+// onShowDetail => nouvelle prop !
 export default function CardList({ data = events, onCardClick, onShowDetail }) {
   const [page, setPage] = useState(0);
   const [cardsPerPage, setCardsPerPage] = useState(getCardsPerPage());
@@ -18,7 +18,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
   useEffect(() => {
     function handleResize() {
       setCardsPerPage(getCardsPerPage());
-      setPage(0); // Remet à zéro quand on change de taille
+      setPage(0);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -47,29 +47,21 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
               className="card"
               key={i}
               onClick={() => onCardClick && onCardClick(page * cardsPerPage + i)}
-              style={{ cursor: "pointer" }}
+              tabIndex={0}
+              role="button"
+              aria-pressed="false"
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+              <div className="card-header">
                 <FlagOrEmoji code={countryToCode[item.country]} size="2em" />
-                <h4 style={{ margin: 0 }}>{item.title}</h4>
+                <h4>{item.title}</h4>
               </div>
               <div className="country">{item.country}</div>
               <div className="type">{item.type}</div>
               <div className="year">{item.year}</div>
               <div className={`status status-${item.status.replace(/ /g, '').toLowerCase()}`}>{item.status}</div>
-              {/* AJOUT du bouton voir + */}
               {onShowDetail &&
                 <button
-                  style={{
-                    marginTop: 7,
-                    padding: "4px 11px",
-                    background: "#19d59e",
-                    border: "none",
-                    borderRadius: "7px",
-                    color: "#111",
-                    cursor: "pointer",
-                    fontWeight: 600
-                  }}
+                  className="details-btn"
                   onClick={e => {
                     e.stopPropagation();
                     onShowDetail(page * cardsPerPage + i);

@@ -59,7 +59,7 @@ export default function EventDetail({ event }) {
             {event.country} &middot; {event.year}<br/>
             <span style={{ color: "#ffe65e" }}>{event.type}</span>
           </div>
-          <div style={{ margin: "10px 0", fontSize: "1.04em" }}>
+          <div className="event-detail-desc">
             {event.desc}
           </div>
 
