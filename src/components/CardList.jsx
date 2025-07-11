@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import "./CardList.scss";
 import events from "../data/events";
-import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
+import countryToCode from "../utils/countryCodes";
 
 function getCardsPerPage() {
   if (window.innerWidth <= 700) return 2;
@@ -10,14 +10,15 @@ function getCardsPerPage() {
   return 4;
 }
 
-export default function CardList({ data = events, onCardClick }) {
+// AJOUT de onShowDetail en props !
+export default function CardList({ data = events, onCardClick, onShowDetail }) {
   const [page, setPage] = useState(0);
   const [cardsPerPage, setCardsPerPage] = useState(getCardsPerPage());
 
   useEffect(() => {
     function handleResize() {
       setCardsPerPage(getCardsPerPage());
-      setPage(0);
+      setPage(0); // Remet à zéro quand on change de taille
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -56,6 +57,27 @@ export default function CardList({ data = events, onCardClick }) {
               <div className="type">{item.type}</div>
               <div className="year">{item.year}</div>
               <div className={`status status-${item.status.replace(/ /g, '').toLowerCase()}`}>{item.status}</div>
+              {/* AJOUT du bouton voir + */}
+              {onShowDetail &&
+                <button
+                  style={{
+                    marginTop: 7,
+                    padding: "4px 11px",
+                    background: "#19d59e",
+                    border: "none",
+                    borderRadius: "7px",
+                    color: "#111",
+                    cursor: "pointer",
+                    fontWeight: 600
+                  }}
+                  onClick={e => {
+                    e.stopPropagation();
+                    onShowDetail(page * cardsPerPage + i);
+                  }}
+                >
+                  Voir plus de détails
+                </button>
+              }
             </div>
           ))}
         </div>
