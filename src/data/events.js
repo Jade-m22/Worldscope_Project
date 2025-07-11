@@ -3,7 +3,6 @@ import conflicts from "./conflicts";
 import dangerous from "./dangerous";
 import toAvoid from "./to_avoid";
 import monuments from "./monuments";
-import tchernobylDetails from './dangerous/tchernobyl_event.json';
 // Si tu veux un seul tableau regroupant tout:
 const events = [
   ...mustVisit,
