@@ -1,16 +1,36 @@
-.carousel-pages {
+.cardlist-outer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 28px;
 }
 
-.carousel-cards {
+.cardlist-arrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.arrow-btn {
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  color: #47efff;
+  cursor: pointer;
+  transition: color 0.16s;
+  &:hover { color: #17bfb5; }
+  &:active { color: #48ffc6; }
+}
+
+.cards {
   display: flex;
   gap: 18px;
-  margin-bottom: 14px;
-  min-height: 170px;
-  width: 100%;
   justify-content: center;
+  width: 100%;
+  max-width: 880px;
 }
 
 .card {
@@ -19,11 +39,12 @@
   box-shadow: 0 2px 8px #15448828;
   color: #e7fdff;
   padding: 18px 17px 13px 17px;
-  min-width: 160px;
+  min-width: 170px;
   max-width: 220px;
-  flex: 1 1 180px;
-  margin-bottom: 0;
-  cursor: pointer;
+  flex: 1 1 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   h4 {
     font-size: 1.13em;
     margin-bottom: 2px;
@@ -42,57 +63,43 @@
     background: #1a3337;
     &.status-àvisiter { background: #19d59e; color: #123; }
     &.status-conflit { background: #ff5b6b; color: #fff; }
-    &.status-àéviter, &.status-dangereux { background: #ffe65e; color: #aa3d00; }
+    &.status-àéviter,
+    &.status-dangereux { background: #ffe65e; color: #aa3d00; }
   }
 }
 
-/* Responsive ! */
-@media (max-width: 900px) {
-  .carousel-cards {
-    gap: 10px;
-  }
-  .card {
-    min-width: 48vw;
-    max-width: 92vw;
-    padding: 13px 9px 10px 13px;
-  }
-}
-@media (max-width: 600px) {
-  .carousel-cards {
-    gap: 5px;
-  }
-  .card {
-    min-width: 94vw;
-    max-width: 97vw;
-    padding: 13px 9px 10px 13px;
-  }
-}
-
-.carousel-controls {
+.cardlist-dots {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  .carousel-dot {
+  gap: 9px;
+  justify-content: center;
+  margin-top: 11px;
+  .dot {
     width: 12px;
     height: 12px;
-    background: #bbb;
-    border: none;
     border-radius: 50%;
-    opacity: 0.7;
+    background: #4deed6bb;
+    border: none;
+    outline: none;
     cursor: pointer;
-    margin: 0 2px;
-    transition: background 0.18s;
-    &.active { background: #19d59e; opacity: 1; }
+    opacity: 0.45;
+    transition: background 0.15s, opacity 0.14s;
+    &.active {
+      background: #22ffe6;
+      opacity: 1;
+      box-shadow: 0 1px 4px #05b4ab77;
+    }
   }
-  .carousel-arrow {
-    background: #112d38;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 24px; height: 24px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background 0.2s;
-    &:hover { background: #19d59e; color: #223; }
+}
+
+@media (max-width: 900px) {
+  .cards {
+    gap: 7vw;
+    max-width: 97vw;
+  }
+  .card {
+    min-width: 37vw;
+    max-width: 44vw;
+    align-items: center;
+    padding: 13px 9px 12px 13px;
   }
 }
