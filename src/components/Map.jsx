@@ -3,7 +3,25 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 
-// Fix icons
+// Utilitaire pour créer un marker SVG coloré
+const markerColors = {
+  "À visiter": "#19d59e",
+  "Conflit": "#ff5b6b",
+  "À éviter": "#ffe65e",
+  "Dangereux": "#ffe65e"
+};
+
+function createColoredMarker(color) {
+  return L.divIcon({
+    className: 'custom-marker',
+    html: `<svg width="28" height="40" viewBox="0 0 28 40"><ellipse cx="14" cy="20" rx="13" ry="13" fill="${color}" stroke="#fff" stroke-width="2"/><circle cx="14" cy="20" r="7" fill="#fff" opacity="0.20"/></svg>`,
+    iconSize: [28, 40],
+    iconAnchor: [14, 40],
+    popupAnchor: [0, -34]
+  });
+}
+
+// Fix icons for default leaflet (au cas où tu utilises aussi l’icône par défaut quelque part)
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -76,6 +94,7 @@ const Map = forwardRef(function Map({ data, selected, setSelected }, ref) {
           eventHandlers={{
             click: () => setSelected(i),
           }}
+          icon={createColoredMarker(markerColors[m.status] || "#4deed6")}
         >
           <Popup>
             <div style={{ minWidth: 180 }}>
