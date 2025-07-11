@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import "./CardList.scss";
 import events from "../data/events";
-import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
+import countryToCode from "../utils/countryCodes";
 
 function getCardsPerPage() {
   if (window.innerWidth <= 700) return 2;
@@ -10,7 +10,8 @@ function getCardsPerPage() {
   return 4;
 }
 
-export default function CardList({ data = events, onCardClick }) {
+// onShowDetail => nouvelle prop !
+export default function CardList({ data = events, onCardClick, onShowDetail }) {
   const [page, setPage] = useState(0);
   const [cardsPerPage, setCardsPerPage] = useState(getCardsPerPage());
 
@@ -46,16 +47,29 @@ export default function CardList({ data = events, onCardClick }) {
               className="card"
               key={i}
               onClick={() => onCardClick && onCardClick(page * cardsPerPage + i)}
-              style={{ cursor: "pointer" }}
+              tabIndex={0}
+              role="button"
+              aria-pressed="false"
             >
-              <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+              <div className="card-header">
                 <FlagOrEmoji code={countryToCode[item.country]} size="2em" />
-                <h4 style={{ margin: 0 }}>{item.title}</h4>
+                <h4>{item.title}</h4>
               </div>
               <div className="country">{item.country}</div>
               <div className="type">{item.type}</div>
               <div className="year">{item.year}</div>
               <div className={`status status-${item.status.replace(/ /g, '').toLowerCase()}`}>{item.status}</div>
+              {onShowDetail &&
+                <button
+                  className="details-btn"
+                  onClick={e => {
+                    e.stopPropagation();
+                    onShowDetail(page * cardsPerPage + i);
+                  }}
+                >
+                  Voir plus de détails
+                </button>
+              }
             </div>
           ))}
         </div>

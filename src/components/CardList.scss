@@ -45,11 +45,19 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  h4 {
-    font-size: 1.13em;
-    margin-bottom: 2px;
-    color: #c7f9ff;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 3px;
+    h4 {
+      font-size: 1.13em;
+      margin: 0;
+      color: #c7f9ff;
+    }
   }
+
   .country { color: #cbe8ff; font-size: 0.99em; }
   .type { font-size: 0.99em; margin-bottom: 2px; color: #85ffc6; }
   .year { color: #ffe9c2; font-size: 0.95em; }
@@ -61,10 +69,27 @@
     padding: 3px 10px;
     border-radius: 10px;
     background: #1a3337;
-    &.status-àvisiter { background: #19d59e; color: #123; }
-    &.status-conflit { background: #ff5b6b; color: #fff; }
-    &.status-àéviter,
-    &.status-dangereux { background: #ffe65e; color: #aa3d00; }
+    &.status-àvisiter { background: rgb(32, 197, 226); color: #123; }
+    &.status-conflit { background: #ff0000; color: #fff; }
+    &.status-àéviter { background: #ffb74d; color: #111; }
+    &.status-dangereux { background: #000000; color: #ffffff; }
+    &.status-monument { background: #0c09c9; color: #fff; }
+  }
+  .details-btn {
+    margin-top: 7px;
+    padding: 4px 11px;
+    background: #20c5e2;
+    border: none;
+    border-radius: 7px;
+    color: #111;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    transition: background 0.13s, color 0.14s;
+    &:hover, &:focus {
+      background: #15be8a;
+      color: #fff;
+    }
   }
 }
 
