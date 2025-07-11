@@ -100,14 +100,14 @@ const Map = forwardRef(function Map({ data, selected, setSelected }, ref) {
           eventHandlers={{
             click: () => setSelected(i),
           }}
-          icon={createColoredPinMarker(markerColors[m.status] || "#4deed6")}
+          icon={createColoredPinMarker(markerColors[m.status] || "#ff0000ff")}
         >
           <Popup>
             <div style={{ minWidth: 180 }}>
               <div style={{ fontSize: "1.1em", fontWeight: 700, marginBottom: 4 }}>
                 {m.flag} {m.title}
               </div>
-              <div style={{ color: "#5efef7" }}>
+              <div style={{ color: "#ff0000ff" }}>
                 {m.country} &middot; {m.year}
               </div>
               <div style={{ margin: "8px 0", fontSize: "0.97em" }}>{m.desc}</div>
