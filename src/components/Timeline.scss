@@ -1,38 +1,42 @@
 .timeline {
-  background: rgba(24,36,68,0.85);
+  background: linear-gradient(120deg, #263a71 60%, #5451c9 100%);
   border-radius: 16px;
-  padding: 22px 20px 12px 20px;
+  padding: 22px 22px 12px 22px;
   margin-bottom: 22px;
   color: #eaf6ff;
   box-shadow: 0 2px 16px #14385933;
   min-width: 220px;
-  h2 {
+  h3 {
     font-size: 1.19rem;
     margin-bottom: 10px;
-    color: #b0b6fc;
+    color: #fff6c7;
     letter-spacing: 0.01em;
+    text-shadow: 0 1px 7px #184b7e3a;
   }
   .timeline-year {
     font-size: 2.1rem;
     font-weight: bold;
-    color: #9ed5fe;
+    color: #f3ff80;
     margin-bottom: 7px;
     text-align: center;
+    text-shadow: 0 2px 16px #5eebf440;
   }
   .timeline-slider {
     width: 100%;
     margin: 0;
     accent-color: #3cfeb3;
     height: 4px;
+    margin-bottom: 6px;
   }
   .timeline-labels {
     display: flex;
     justify-content: space-between;
-    font-size: 0.97em;
-    color: #89e9b7;
+    font-size: 1.05em;
+    color: #ffefb3;
     margin-top: 2px;
+    text-shadow: 0 1px 6px #081f3242;
   }
 }
 @media (max-width: 900px) {
-  .timeline { min-width: 0; }
+  .timeline { min-width: 0; padding: 16px 6px 8px 10px; }
 }

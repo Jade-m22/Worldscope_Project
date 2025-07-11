@@ -2,6 +2,35 @@
 @import './variables';
 @import './header';
 
+body, html, #root {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: linear-gradient(120deg, #0b1524 60%, #103b66 100%);
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
 .with-header {
-  padding-top: 80px;
+  padding-top: 90px; // Compense la hauteur du header (80px + marge)
+}
+
+.app-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 34px 24px 40px 24px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+@media (max-width: 1100px) {
+  .app-layout {
+    flex-direction: column;
+    gap: 18px;
+    padding: 80px 2vw 22vw 2vw;
+    max-width: 100vw;
+  }
 }

@@ -1,16 +1,20 @@
 .sidebar {
   min-width: 260px;
-  max-width: 320px;
+  max-width: 330px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
   background: none;
+  margin-top: 16px;
 }
-@media (max-width: 900px) {
+
+@media (max-width: 1100px) {
   .sidebar {
     flex-direction: row;
     min-width: 0;
     max-width: 100vw;
-    gap: 8px;
+    gap: 12px;
+    margin-top: 6px;
+    margin-bottom: 18px;
   }
 }

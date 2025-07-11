@@ -12,19 +12,16 @@ function filterEvents(type, year) {
   if (type && type !== "") {
     filtered = filtered.filter(e => e.type === type);
   }
-  // Si year est défini, filtre les events avant ou à cette année
   if (year !== undefined && year !== null) {
     filtered = filtered.filter(e => {
-      // Gère les années avec "av. J.-C."
       if (typeof e.year === "string" && e.year.includes("av. J.-C.")) {
         const y = Number(e.year.replace(/[^\d]/g, "")) * -1;
         return y <= year;
       } else if (typeof e.year === "string" && e.year.match(/\d+/)) {
-        // Gère les années "312 av. J.-C." ou "80 ap. J.-C."
         const y = parseInt(e.year);
         return y <= year;
       }
-      return true; // Par défaut inclus
+      return true;
     });
   }
   return filtered;
@@ -43,29 +40,28 @@ export default function App() {
   const handleFilter = type => setFilter(type);
   const handleYear = y => setYear(y);
 
-  // Events filtrés par type et année
   const filteredEvents = filterEvents(filter, year);
 
   return (
-    <div className="App">
+    <div className="with-header">
       <Header />
-      <main>
-        <div className="app-layout">
-          <aside className="sidebar">
-            <Timeline min={-3000} max={2025} year={year} onChange={handleYear} />
-            <Filters onFilter={handleFilter} active={filter} />
-          </aside>
-          <section className="main-content">
+      <div className="app-layout">
+        <aside className="sidebar">
+          <Timeline min={-3000} max={2025} year={year} onChange={handleYear} />
+          <Filters onFilter={handleFilter} active={filter} />
+        </aside>
+        <main className="main-content">
+          <div className="map-card">
             <Map
               data={filteredEvents}
               selected={selected}
               setSelected={setSelected}
               ref={mapRef}
             />
-            <CardList data={filteredEvents} onCardClick={handleCardClick} />
-          </section>
-        </div>
-      </main>
+          </div>
+          <CardList data={filteredEvents} onCardClick={handleCardClick} />
+        </main>
+      </div>
     </div>
   );
 }
