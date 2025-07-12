@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.scss";
+import GlobeDashboard from "./GlobeDashboard";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -23,7 +24,8 @@ export default function Dashboard() {
       </header>
       <main className="dashboard-content">
         <section className="dashboard-globe">
-          <div className="dashboard-globe-art">
+          <div className="dashboard-globe-wrap">
+            <GlobeDashboard />
             <button
               className="dashboard-globe-btn"
               onClick={() => navigate("/app")}

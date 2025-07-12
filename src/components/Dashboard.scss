@@ -58,74 +58,63 @@
   gap: 48px;
 }
 
+/* --------- Globe et bouton --------- */
 .dashboard-globe {
   flex: 1 1 390px;
   display: flex;
   align-items: center;
   justify-content: center;
-  .dashboard-globe-art {
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    box-shadow: 0 8px 80px #37ffb822, 0 1px 24px #0c2a1766;
-    background: radial-gradient(circle at 70% 38%, #39f2c9 60%, #11363a 100%);
-    position: relative;
-    margin: 0 36px;
-    &::after {
-      content: "";
-      position: absolute;
-      left: 30%;
-      top: 14%;
-      width: 70px;
-      height: 12px;
-      background: rgba(255,255,255,0.22);
-      border-radius: 50%;
-      filter: blur(0.7px);
-      transform: rotate(-14deg);
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      right: 11%;
-      top: 60%;
-      width: 37px;
-      height: 7px;
-      background: rgba(255,255,255,0.14);
-      border-radius: 50%;
-      filter: blur(0.9px);
-      transform: rotate(7deg);
-    }
-    // BOUTON CENTRE GLOBE
-    .dashboard-globe-btn {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
-      color: #001b12;
-      font-weight: bold;
-      font-size: 1.19rem;
-      border: none;
-      border-radius: 30px;
-      padding: 15px 28px;
-      box-shadow: 0 6px 30px #3eeeb944, 0 1.5px 12px #1b7c6855;
-      cursor: pointer;
-      transition: background 0.14s, color 0.14s, transform 0.13s, box-shadow 0.2s;
-      outline: none;
-      z-index: 2;
-      opacity: 0.97;
-      letter-spacing: 0.03em;
-
-      &:hover, &:focus {
-        background: linear-gradient(90deg, #32b3f6 10%, #32f6b8 90%);
-        color: #10272e;
-        transform: translate(-50%, -53%) scale(1.07);
-        box-shadow: 0 10px 34px #3edca644, 0 2.5px 15px #136c8855;
-      }
-    }
+  margin-bottom: 0;
+}
+.dashboard-globe-wrap {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard-globe-wrap > div, // GlobeDashboard
+.dashboard-globe-wrap canvas {
+  width: 320px !important;
+  height: 320px !important;
+  border-radius: 50%;
+  overflow: hidden;
+  background: none !important;
+  box-shadow: 0 8px 80px #37ffb822, 0 1px 24px #0c2a1766;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.dashboard-globe-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, #32f6b8 0%, #32b3f6 100%);
+  color: #01231e;
+  font-weight: 700;
+  font-size: 1.07rem;
+  border: none;
+  border-radius: 25px;
+  padding: 16px 28px;
+  box-shadow: 0 6px 30px #3eeeb944, 0 1.5px 12px #1b7c6855;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  opacity: 0.96;
+  z-index: 2;
+  transition: background 0.18s, color 0.17s, transform 0.13s;
+  border: 2px solid #30fff3;
+  &:hover, &:focus {
+    background: linear-gradient(90deg, #30b7f6 0%, #37ffd2 100%);
+    color: #003c44;
+    transform: translate(-50%, -50%) scale(1.07);
+    box-shadow: 0 10px 38px #2fdca666, 0 2.5px 15px #136c8855;
+    border-color: #fffbe5;
   }
 }
 
+/* ----------- Info panel ----------- */
 .dashboard-info {
   flex: 1 1 320px;
   background: rgba(10,26,34,0.95);
@@ -153,6 +142,7 @@
   }
 }
 
+/* ----------- Footer ----------- */
 .dashboard-footer {
   text-align: center;
   padding: 18px 0 8px 0;
@@ -172,7 +162,6 @@
     align-items: center;
   }
 }
-
 @media (max-width: 650px) {
   .dashboard-header {
     flex-direction: column;
@@ -196,14 +185,21 @@
     gap: 15px;
     padding: 11px 0 12px 0;
   }
-  .dashboard-globe .dashboard-globe-art {
-    width: 60vw;
-    height: 60vw;
+  .dashboard-globe-wrap {
+    width: 85vw;
+    height: 85vw;
     min-width: 140px;
     min-height: 140px;
-    max-width: 260px;
-    max-height: 260px;
-    margin: 0;
+    max-width: 320px;
+    max-height: 320px;
+  }
+  .dashboard-globe-wrap > div, .dashboard-globe-wrap canvas {
+    width: 85vw !important;
+    height: 85vw !important;
+    min-width: 140px;
+    min-height: 140px;
+    max-width: 320px;
+    max-height: 320px;
   }
   .dashboard-info {
     max-width: 95vw;
@@ -221,11 +217,17 @@
   .dashboard-header .dashboard-title-zone h1 {
     font-size: 1.13rem;
   }
-  .dashboard-globe .dashboard-globe-art {
+  .dashboard-globe-wrap {
     min-width: 90px;
     min-height: 90px;
     width: 38vw;
     height: 38vw;
+  }
+  .dashboard-globe-wrap > div, .dashboard-globe-wrap canvas {
+    min-width: 90px;
+    min-height: 90px;
+    width: 38vw !important;
+    height: 38vw !important;
   }
   .dashboard-info {
     padding: 12px 4vw;
