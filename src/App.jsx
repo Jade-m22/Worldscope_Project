@@ -40,12 +40,15 @@ export default function App() {
     }
   };
 
+  // Sécurité : on passe year jamais null/undefined
+  const safeYear = (typeof year === "number" && !isNaN(year)) ? year : 2025;
+
   return (
     <MainLayout
       header={<Header search={search} setSearch={setSearch} />}
       sidebar={
         <>
-          <Timeline min={-3000} max={2025} year={year} onChange={setYear} />
+          <Timeline min={-3000} max={2025} year={safeYear} onChange={setYear} />
           <Filters onFilter={setFilter} active={filter} />
         </>
       }
@@ -69,7 +72,6 @@ export default function App() {
               <GlobeView data={filteredEvents} />
             )}
           </div>
-
           <CardList
             data={filteredEvents}
             onCardClick={handleCardClick}

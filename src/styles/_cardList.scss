@@ -4,6 +4,10 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 28px;
+  background: rgba(14, 29, 38, 0.96);
+  border-radius: 18px;
+  box-shadow: 0 2px 24px #17ffd055, 0 1px 12px #12394044;
+  padding: 16px 0 18px 0;
 }
 
 .cardlist-arrows {
@@ -34,9 +38,9 @@
 }
 
 .card {
-  background: #192943ee;
-  border-radius: 13px;
-  box-shadow: 0 2px 8px #15448828;
+  background: linear-gradient(120deg, #182a39ee 40%, #143a32f2 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 18px #13d0b555, 0 1px 7px #15448828;
   color: #e7fdff;
   padding: 18px 17px 13px 17px;
   min-width: 170px;
@@ -54,11 +58,12 @@
     h4 {
       font-size: 1.13em;
       margin: 0;
-      color: #c7f9ff;
+      color: #53ffe4;
+      text-shadow: 0 1px 4px #173b4a99;
     }
   }
 
-  .country { color: #cbe8ff; font-size: 0.99em; }
+  .country { color: #a8edff; font-size: 0.99em; }
   .type { font-size: 0.99em; margin-bottom: 2px; color: #85ffc6; }
   .year { color: #ffe9c2; font-size: 0.95em; }
   .status {
@@ -68,27 +73,29 @@
     display: inline-block;
     padding: 3px 10px;
     border-radius: 10px;
-    background: #1a3337;
-    &.status-àvisiter { background: rgb(32, 197, 226); color: #123; }
-    &.status-conflit { background: #ff0000; color: #fff; }
-    &.status-àéviter { background: #ffb74d; color: #111; }
-    &.status-dangereux { background: #000000; color: #ffffff; }
+    background: #182634;
+    &.status-àvisiter { background: #19d59e; color: #123; }
+    &.status-conflit { background: #ff5b6b; color: #fff; }
+    &.status-àéviter { background: #ffe65e; color: #aa3d00; }
+    &.status-dangereux { background: #000; color: #fff; }
     &.status-monument { background: #0c09c9; color: #fff; }
   }
   .details-btn {
     margin-top: 7px;
     padding: 4px 11px;
-    background: #20c5e2;
+    background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
     border: none;
-    border-radius: 7px;
+    border-radius: 9px;
     color: #111;
     cursor: pointer;
     font-weight: 600;
     font-size: 1em;
-    transition: background 0.13s, color 0.14s;
+    box-shadow: 0 1px 5px #13eeb133;
+    transition: background 0.13s, color 0.14s, transform 0.12s;
     &:hover, &:focus {
-      background: #15be8a;
-      color: #fff;
+      background: linear-gradient(90deg, #32b3f6 10%, #32f6b8 90%);
+      color: #0b2d36;
+      transform: scale(1.06);
     }
   }
 }
