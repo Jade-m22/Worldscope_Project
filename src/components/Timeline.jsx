@@ -1,5 +1,4 @@
 import React from 'react';
-import './Timeline.scss';
 
 export default function Timeline({ min = -3000, max = 2025, year, onChange }) {
   return (

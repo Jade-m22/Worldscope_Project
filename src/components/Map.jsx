@@ -4,7 +4,6 @@ import L from "leaflet";
 import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
-import "./Map.scss";
 
 // Couleurs des markers selon la catégorie (status)
 const markerColors = {

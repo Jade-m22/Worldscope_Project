@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/VERT_worldscope.webp';
 
-export default function Header() {
+export default function Header({ search, setSearch }) {
   return (
     <header className="header">
       <div className="header-left">
@@ -14,6 +14,8 @@ export default function Header() {
           type="text"
           placeholder="Rechercher un lieu, monument..."
           className="search-input"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
         />
       </div>
     </header>

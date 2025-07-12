@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./CardList.scss";
 import events from "../data/events";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import countryToCode from "../utils/countryCodes";

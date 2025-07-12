@@ -1,51 +1,31 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
+import useEventState from "./hooks/useEventState";
+import filterEvents from "./utils/filterEvents";
+
 import Header from "./components/Header";
-import "./App.scss";
 import Map from "./components/Map";
 import Filters from "./components/Filters";
 import CardList from "./components/CardList";
 import Timeline from "./components/Timeline";
-import events from "./data/events";
 import GlobeView from "./components/Globe";
 import EventDetail from "./components/EventDetail";
-
-function filterEvents(filter, year) {
-  let filtered = events;
-  if (filter && filter !== "") {
-    // On filtre sur status ou type selon le filtre
-    if (["À visiter", "À éviter", "Dangereux"].includes(filter)) {
-      filtered = filtered.filter(e => e.status === filter);
-    } else {
-      filtered = filtered.filter(e => e.type === filter);
-    }
-  }
-  if (year !== undefined && year !== null) {
-    filtered = filtered.filter((e) => {
-      if (typeof e.year === "string" && e.year.includes("av. J.-C.")) {
-        const y = Number(e.year.replace(/[^\d]/g, "")) * -1;
-        return y <= year;
-      } else if (typeof e.year === "string" && e.year.match(/\d+/)) {
-        const y = parseInt(e.year);
-        return y <= year;
-      }
-      return true;
-    });
-  }
-  return filtered;
-}
+import MainLayout from "./layouts/MainLayout";
 
 export default function App() {
-  const [filter, setFilter] = useState("");
-  const [selected, setSelected] = useState(null);
-  const [detailedIdx, setDetailedIdx] = useState(null);
-  const [year, setYear] = useState(2025);
+  const {
+    filter, setFilter,
+    selected, setSelected,
+    detailedIdx, setDetailedIdx,
+    year, setYear,
+    search, setSearch
+  } = useEventState();
+
   const [viewMode, setViewMode] = useState("map");
   const mapRef = useRef();
-  const detailRef = useRef(); // Pour scroll
+  const detailRef = useRef();
 
-  const filteredEvents = filterEvents(filter, year);
+  const filteredEvents = filterEvents(filter, year, search);
 
-  // Déroule l’index vers la zone détail du bas
   const handleShowDetail = (idx) => {
     setDetailedIdx(idx);
     setTimeout(() => {
@@ -59,27 +39,20 @@ export default function App() {
       mapRef.current.flyToEvent(idx);
     }
   };
-  const handleFilter = (type) => setFilter(type);
-  const handleYear = (y) => setYear(y);
 
   return (
-    <div className="with-header">
-      <Header />
-      <div className="app-layout">
-        <aside className="sidebar">
-          <Timeline min={-3000} max={2025} year={year} onChange={handleYear} />
-          <Filters onFilter={handleFilter} active={filter} />
-        </aside>
-        <main className="main-content">
-          <div
-            className="view-toggle"
-            style={{ marginBottom: "1rem", textAlign: "center" }}
-          >
-            <button
-              onClick={() =>
-                setViewMode((prev) => (prev === "map" ? "globe" : "map"))
-              }
-            >
+    <MainLayout
+      header={<Header search={search} setSearch={setSearch} />}
+      sidebar={
+        <>
+          <Timeline min={-3000} max={2025} year={year} onChange={setYear} />
+          <Filters onFilter={setFilter} active={filter} />
+        </>
+      }
+      main={
+        <>
+          <div className="view-toggle" style={{ marginBottom: "1rem", textAlign: "center" }}>
+            <button onClick={() => setViewMode(viewMode === "map" ? "globe" : "map")}>
               Passer à la vue {viewMode === "map" ? "Globe 3D" : "Carte 2D"}
             </button>
           </div>
@@ -97,20 +70,20 @@ export default function App() {
               <GlobeView data={filteredEvents} />
             )}
           </div>
+
           <CardList
             data={filteredEvents}
             onCardClick={handleCardClick}
             onShowDetail={handleShowDetail}
           />
 
-          {/* ZONE DÉTAIL EN BAS */}
           <div ref={detailRef} style={{ minHeight: "240px", marginTop: "2.5em" }}>
             {detailedIdx !== null && filteredEvents[detailedIdx] && (
               <EventDetail event={filteredEvents[detailedIdx]} onClose={() => setDetailedIdx(null)} />
             )}
           </div>
-        </main>
-      </div>
-    </div>
+        </>
+      }
+    />
   );
 }
