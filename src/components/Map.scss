@@ -1,28 +1,14 @@
 .geoscope-map {
   margin: 0 auto 24px auto;
-  border-radius: 22px;
-  box-shadow: 0 8px 64px #32f0bb33, 0 2px 28px #233b4b44;
-  outline: 2px solid #22ffe699;
-  background: rgba(10,22,34,0.97);
+  border-radius: 18px;
+  box-shadow: 0 8px 40px #214a5c44;
+  outline: 2px solid #223f5265;
   width: 90vw;
   max-width: 900px;
   min-width: 280px;
   min-height: 340px;
   height: 54vw;
   max-height: 70vh;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-
-  // Applique ces styles au conteneur Leaflet interne
-  .leaflet-container {
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 22px;
-    overflow: hidden;      // éviter tout débordement de la map !
-    background: transparent;
-    box-shadow: none;
-  }
 
   @media (max-width: 1100px) {
     width: 98vw;
@@ -39,21 +25,8 @@
   }
 }
 
-/* ---- Z-INDEX FIX POUR LES BOUTONS DE ZOOM LEAFLET ---- */
-.leaflet-control {
-  z-index: 100 !important;
-}
-.leaflet-top,
-.leaflet-bottom {
-  z-index: 100 !important;
-}
-.leaflet-pane,
-.leaflet-control-container {
-  z-index: 100 !important;
-}
-
 .custom-marker {
-  filter: drop-shadow(0 2px 8px #0cf8b055);
+  filter: drop-shadow(0 2px 8px #0006);
   transition: filter 0.16s;
   svg { display: block; }
 }
@@ -61,7 +34,7 @@
 // Styles pour la popup
 .map-popup {
   min-width: 180px;
-  color: #043b4b;
+  color: #000000; // Texte par défaut en noir
   font-family: inherit;
 
   .map-popup-title {
@@ -71,25 +44,29 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #000000;
-    text-shadow: 0 1px 4px #19fff344;
+  }
+
+  .map-popup-meta {
+    color: #111 !important; // Met bien en noir (pays & année)
+    font-size: 0.97em;
+    margin-bottom: 4px;
   }
 
   .map-popup-desc {
     margin: 8px 0;
     font-size: 0.97em;
-    color: #07434f;
   }
 
   .map-popup-coords {
     font-size: 0.85em;
+    color: #111 !important; // Met bien en noir (lat/lon)
     margin-bottom: 6px;
   }
 
   .map-popup-detail-btn {
     margin-top: 10px;
     padding: 6px 15px;
-    background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
+    background: #19d59e;
     border: none;
     border-radius: 7px;
     color: #111;
@@ -97,13 +74,12 @@
     font-weight: 600;
     font-size: 1em;
     box-shadow: 0 1px 4px #14a77a33;
-    transition: background 0.13s, color 0.11s, transform 0.11s;
+    transition: background 0.13s, color 0.11s;
 
     &:hover,
     &:focus {
-      background: linear-gradient(90deg, #32b3f6 10%, #32f6b8 90%);
-      color: #10353e;
-      transform: scale(1.07);
+      background: #13c28e;
+      color: #00312c;
     }
   }
 }
