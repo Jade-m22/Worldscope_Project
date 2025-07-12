@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Globe from "globe.gl";
+import "./GlobeDashboard.scss"; // ← Ajoute cette ligne
 
 export default function GlobeDashboard() {
   const globeRef = useRef();
@@ -15,14 +16,12 @@ export default function GlobeDashboard() {
       .atmosphereColor("#3cffe6")
       .atmosphereAltitude(0.13)
       .pointOfView({ lat: 30, lng: 25, altitude: 2.1 })
-      .enablePointerInteraction(false); // Désactive tout drag/zoom
+      .enablePointerInteraction(false);
 
-    // Pas de drag, pas de zoom
     globe.controls().enableZoom = false;
     globe.controls().enablePan = false;
     globe.controls().enableRotate = false;
 
-    // Rotation automatique
     globe.controls().autoRotate = true;
     globe.controls().autoRotateSpeed = 0.55;
     globe.controls().update();
@@ -33,17 +32,7 @@ export default function GlobeDashboard() {
   return (
     <div
       ref={globeRef}
-      style={{
-        width: 320,
-        height: 320,
-        borderRadius: "50%",
-        overflow: "hidden",
-        background: "none",
-        boxShadow: "0 8px 80px #37ffb822, 0 1px 24px #0c2a1766",
-        margin: "0 auto",
-        position: "relative",
-        zIndex: 1,
-      }}
+      className="dashboard-globe-canvas"
     ></div>
   );
 }

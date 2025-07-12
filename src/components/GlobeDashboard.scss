@@ -1,0 +1,14 @@
+.dashboard-globe-canvas {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: none;
+  box-shadow: 0 8px 80px #37ffb822, 0 1px 24px #0c2a1766;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
