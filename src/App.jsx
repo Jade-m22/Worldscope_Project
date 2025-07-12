@@ -56,7 +56,6 @@ export default function App() {
               Passer à la vue {viewMode === "map" ? "Globe 3D" : "Carte 2D"}
             </button>
           </div>
-
           <div className="map-card">
             {viewMode === "map" ? (
               <Map
@@ -76,7 +75,6 @@ export default function App() {
             onCardClick={handleCardClick}
             onShowDetail={handleShowDetail}
           />
-
           <div ref={detailRef} style={{ minHeight: "240px", marginTop: "2.5em" }}>
             {detailedIdx !== null && filteredEvents[detailedIdx] && (
               <EventDetail event={filteredEvents[detailedIdx]} onClose={() => setDetailedIdx(null)} />
