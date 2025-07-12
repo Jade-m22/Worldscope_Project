@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// src/components/EventDetail.jsx
 import { useState, useEffect } from "react";
-=======
->>>>>>> 02efee631c48769add2259262e0c3d8d76265f1b
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import countryToCode from "../utils/countryCodes";
 import { fetchWikiExtract } from "../utils/wiki";
