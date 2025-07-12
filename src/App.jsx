@@ -1,6 +1,4 @@
-import { useState, useRef } from "react";
 import Header from "./components/Header";
-import "./App.scss";
 import Map from "./components/Map";
 import Filters from "./components/Filters";
 import CardList from "./components/CardList";
@@ -8,8 +6,10 @@ import Timeline from "./components/Timeline";
 import events from "./data/events";
 import GlobeView from "./components/Globe";
 import EventDetail from "./components/EventDetail";
+import { useState, useRef } from "react";
+import "./App.scss";
 
-// On ajoute le paramètre search à la fonction de filtrage
+// ----- Fonction de filtrage -----
 function filterEvents(filter, year, search) {
   let filtered = events;
   if (filter && filter !== "") {
@@ -31,7 +31,6 @@ function filterEvents(filter, year, search) {
       return true;
     });
   }
-  // Recherche globale (case insensitive) sur titre, pays, année, type, status, desc
   if (search && search.trim() !== "") {
     const s = search.trim().toLowerCase();
     filtered = filtered.filter(e => {
@@ -54,15 +53,13 @@ export default function App() {
   const [detailedIdx, setDetailedIdx] = useState(null);
   const [year, setYear] = useState(2025);
   const [viewMode, setViewMode] = useState("map");
-  const [search, setSearch] = useState(""); // ← AJOUT pour la recherche globale
+  const [search, setSearch] = useState("");
 
   const mapRef = useRef();
   const detailRef = useRef();
 
-  // Passe la recherche globale au filtre
   const filteredEvents = filterEvents(filter, year, search);
 
-  // Pour scroller jusqu'à la section de détail
   const handleShowDetail = (idx) => {
     setDetailedIdx(idx);
     setTimeout(() => {
@@ -81,17 +78,14 @@ export default function App() {
 
   return (
     <div className="with-header">
-      <Header search={search} setSearch={setSearch} /> {/* Passe la recherche ici */}
+      <Header search={search} setSearch={setSearch} />
       <div className="app-layout">
         <aside className="sidebar">
           <Timeline min={-3000} max={2025} year={year} onChange={handleYear} />
           <Filters onFilter={handleFilter} active={filter} />
         </aside>
         <main className="main-content">
-          <div
-            className="view-toggle"
-            style={{ marginBottom: "1rem", textAlign: "center" }}
-          >
+          <div className="view-toggle" style={{ marginBottom: "1rem", textAlign: "center" }}>
             <button
               onClick={() =>
                 setViewMode((prev) => (prev === "map" ? "globe" : "map"))
@@ -100,7 +94,6 @@ export default function App() {
               Passer à la vue {viewMode === "map" ? "Globe 3D" : "Carte 2D"}
             </button>
           </div>
-
           <div className="map-card">
             {viewMode === "map" ? (
               <Map
@@ -119,7 +112,6 @@ export default function App() {
             onCardClick={handleCardClick}
             onShowDetail={handleShowDetail}
           />
-
           {/* ZONE DÉTAIL EN BAS */}
           <div ref={detailRef} style={{ minHeight: "240px", marginTop: "2.5em" }}>
             {detailedIdx !== null && filteredEvents[detailedIdx] && (
