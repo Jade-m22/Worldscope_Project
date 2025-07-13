@@ -17,7 +17,6 @@
 - [Contribuer](#contribuer)
 - [Screenshots](#screenshots)
 - [Auteurs](#auteurs)
-- [Licence](#licence)
 
 ---
 
@@ -144,3 +143,10 @@ Pour participer :
 2. Crée une branche feature
 
 3. Push et ouvre une pull request
+
+### 🙌 Auteurs
+
+- [Jade](https://github.com/Jade-m22)
+- [Slingo](https://github.com/Slingod)
+- [Jeremy](https://github.com/jeremyfonnard)
+- [Gaetan](https://github.com/GaetanBordes)
