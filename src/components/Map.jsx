@@ -119,7 +119,7 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
               <div className="map-popup-coords" style={{ color: "#000" }}>
                 Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
               </div>
-              {onShowDetail &&
+              
               {onShowDetail && (
                 <button
                   className="map-popup-detail-btn"
