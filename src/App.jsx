@@ -21,10 +21,18 @@ export default function App() {
   } = useEventState();
 
   const [viewMode, setViewMode] = useState("map");
+  const [subFilter, setSubFilter] = useState([]); // ➕ sous-filtres pour "À visiter"
   const mapRef = useRef();
   const detailRef = useRef();
 
-  const filteredEvents = filterEvents(filter, year, search);
+  const handleFilterChange = (value) => {
+    setFilter(value);
+    if (value !== "À visiter") {
+      setSubFilter([]); // Reset les sous-filtres si on quitte "À visiter"
+    }
+  };
+
+  const filteredEvents = filterEvents(filter, year, search, subFilter);
 
   const handleShowDetail = (idx) => {
     setDetailedIdx(idx);
@@ -40,7 +48,6 @@ export default function App() {
     }
   };
 
-  // Sécurité : on passe year jamais null/undefined
   const safeYear = (typeof year === "number" && !isNaN(year)) ? year : 2025;
 
   return (
@@ -49,7 +56,12 @@ export default function App() {
       sidebar={
         <>
           <Timeline min={-3000} max={2025} year={safeYear} onChange={setYear} />
-          <Filters onFilter={setFilter} active={filter} />
+          <Filters
+            onFilter={handleFilterChange}
+            active={filter}
+            subFilter={subFilter}
+            onSubFilter={setSubFilter}
+          />
         </>
       }
       main={

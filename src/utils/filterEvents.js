@@ -1,11 +1,16 @@
 import events from "../data/events";
 
-export default function filterEvents(filter, year, search) {
+export default function filterEvents(filter, year, search, subcategories = []) {
   let filtered = events;
 
   if (filter && filter !== "") {
     if (["À visiter", "À éviter", "Dangereux"].includes(filter)) {
       filtered = filtered.filter(e => e.status === filter);
+
+      if (filter === "À visiter" && subcategories.length > 0) {
+        filtered = filtered.filter(e => subcategories.includes(e.subcategory));
+      }
+
     } else {
       filtered = filtered.filter(e => e.type === filter);
     }
@@ -38,3 +43,4 @@ export default function filterEvents(filter, year, search) {
 
   return filtered;
 }
+

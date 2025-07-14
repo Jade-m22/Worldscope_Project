@@ -8,6 +8,7 @@ const mustVisit = [
     type: "Monument",
     status: "À visiter",
     position: [40.4319, 116.5704],
+    subcategory: "Merveilles du monde"
   },
   {
     title: "Mont Saint-Michel",
@@ -17,7 +18,8 @@ const mustVisit = [
     desc: "Merveille de la Normandie.",
     type: "Monument",
     status: "À visiter",
-    position: [48.6361, -1.5114]
+    position: [48.6361, -1.5114],
+    subcategory: "Monuments historiques"
   },
   {
     title: "Stonehenge",
@@ -27,17 +29,19 @@ const mustVisit = [
     desc: "Célèbre site mégalithique.",
     type: "Monument",
     status: "À visiter",
-    position: [51.1789, -1.8262]
+    position: [51.1789, -1.8262],
+    subcategory: "Sites naturels"
   },
   {
-    title: "Petra",
+    title: "Pétra",
     country: "Jordanie",
     flag: "🇯🇴",
     year: "312 av. J.-C.",
     desc: "Ancienne cité nabatéenne taillée dans la roche, célèbre pour sa façade du Khazneh.",
     type: "Monument",
     status: "À visiter",
-    position: [30.3285, 35.4444]
+    position: [30.3285, 35.4444],
+    subcategory: "Merveilles du monde"
   },
   {
     title: "Chichén Itzá",
@@ -47,7 +51,8 @@ const mustVisit = [
     desc: "Cité maya célèbre pour la pyramide de Kukulcán.",
     type: "Monument",
     status: "À visiter",
-    position: [20.6843, -88.5678]
+    position: [20.6843, -88.5678],
+    subcategory: "Merveilles du monde"
   },
   {
     title: "Machu Picchu",
@@ -57,7 +62,8 @@ const mustVisit = [
     desc: "Ancienne cité inca perchée sur les montagnes des Andes.",
     type: "Monument",
     status: "À visiter",
-    position: [-13.1631, -72.5450]
+    position: [-13.1631, -72.5450],
+    subcategory: "Merveilles du monde"
   },
   {
     title: "Statue du Christ Rédempteur",
@@ -67,7 +73,8 @@ const mustVisit = [
     desc: "Statue monumentale dominant Rio de Janeiro.",
     type: "Monument",
     status: "À visiter",
-    position: [-22.9519, -43.2105]
+    position: [-22.9519, -43.2105],
+    subcategory: "Merveilles du monde"
   },
   {
     title: "Taj Mahal",
@@ -77,7 +84,8 @@ const mustVisit = [
     desc: "Mausolée de marbre blanc, symbole d'amour.",
     type: "Monument",
     status: "À visiter",
-    position: [27.1751, 78.0421]
+    position: [27.1751, 78.0421],
+    subcategory: "Merveilles du monde"
   },
   {
     title: "Colisée",
@@ -87,7 +95,8 @@ const mustVisit = [
     desc: "Ancien amphithéâtre romain emblématique de Rome.",
     type: "Monument",
     status: "À visiter",
-    position: [41.8902, 12.4922]
+    position: [41.8902, 12.4922],
+    subcategory: "Merveilles du monde"
   },
   {
     title: "Pyramide de Khéops (Gizeh)",
@@ -97,7 +106,8 @@ const mustVisit = [
     desc: "La seule des sept merveilles antiques encore debout.",
     type: "Monument",
     status: "À visiter",
-    position: [29.9792, 31.1342]
+    position: [29.9792, 31.1342],
+    subcategory: "Merveilles antiques"
   },
   {
     title: "Jardins suspendus de Babylone",
@@ -107,7 +117,8 @@ const mustVisit = [
     desc: "Jardins mythiques de l’ancienne Babylone.",
     type: "Monument",
     status: "À visiter",
-    position: [32.5436, 44.4200]
+    position: [32.5436, 44.4200],
+    subcategory: "Merveilles antiques"
   },
   {
     title: "Statue de Zeus à Olympie",
@@ -117,7 +128,8 @@ const mustVisit = [
     desc: "Statue monumentale réalisée par Phidias.",
     type: "Monument",
     status: "À visiter",
-    position: [37.6380, 21.6300]
+    position: [37.6380, 21.6300],
+    subcategory: "Merveilles antiques"
   },
   {
     title: "Temple d’Artémis à Éphèse",
@@ -127,7 +139,8 @@ const mustVisit = [
     desc: "Temple grec dédié à Artémis, l'une des merveilles antiques.",
     type: "Monument",
     status: "À visiter",
-    position: [37.9497, 27.3639]
+    position: [37.9497, 27.3639],
+    subcategory: "Merveilles antiques"
   },
   {
     title: "Mausolée d’Halicarnasse",
@@ -137,7 +150,8 @@ const mustVisit = [
     desc: "Tombeau monumental de Mausole.",
     type: "Monument",
     status: "À visiter",
-    position: [37.0379, 27.4241]
+    position: [37.0379, 27.4241],
+    subcategory: "Merveilles antiques"
   },
   {
     title: "Colosse de Rhodes",
@@ -147,7 +161,8 @@ const mustVisit = [
     desc: "Statue monumentale dédiée à Hélios.",
     type: "Monument",
     status: "À visiter",
-    position: [36.4510, 28.2278]
+    position: [36.4510, 28.2278],
+    subcategory: "Merveilles antiques"
   },
   {
     title: "Phare d’Alexandrie",
@@ -157,8 +172,185 @@ const mustVisit = [
     desc: "Phare emblématique sur l’île de Pharos.",
     type: "Monument",
     status: "À visiter",
-    position: [31.2135, 29.8853]
-  }
+    position: [31.2135, 29.8853],
+    subcategory: "Merveilles antiques"
+  },
+  {
+  title: "Angkor Wat",
+  country: "Cambodge",
+  flag: "🇰🇭",
+  year: "XIIe siècle",
+  desc: "Le plus grand temple religieux du monde, vestige de l'empire khmer.",
+  type: "Monument",
+  status: "À visiter",
+  position: [13.4125, 103.8667],
+  subcategory: "Monuments historiques"
+},
+{
+  title: "Grand Canyon",
+  country: "États-Unis",
+  flag: "🇺🇸",
+  year: "Formé il y a des millions d’années",
+  desc: "Immense gorge sculptée par le fleuve Colorado, site naturel spectaculaire.",
+  type: "Monument",
+  status: "À visiter",
+  position: [36.1069, -112.1129],
+  subcategory: "Sites naturels"
+},
+{
+  title: "Borobudur",
+  country: "Indonésie",
+  flag: "🇮🇩",
+  year: "IXe siècle",
+  desc: "Plus grand temple bouddhiste du monde, célèbre pour ses stupas.",
+  type: "Monument",
+  status: "À visiter",
+  position: [-7.6079, 110.2038],
+  subcategory: "Monuments historiques"
+},
+{
+  title: "Mont Fuji",
+  country: "Japon",
+  flag: "🇯🇵",
+  year: "Formation naturelle",
+  desc: "Volcan sacré et symbole emblématique du Japon.",
+  type: "Monument",
+  status: "À visiter",
+  position: [35.3606, 138.7274],
+  subcategory: "Sites naturels"
+},
+{
+  title: "Cathédrale Saint-Basile",
+  country: "Russie",
+  flag: "🇷🇺",
+  year: "1561",
+  desc: "Célèbre cathédrale colorée située sur la place Rouge à Moscou.",
+  type: "Monument",
+  status: "À visiter",
+  position: [55.7525, 37.6231],
+  subcategory: "Monuments historiques"
+},
+{
+  title: "Cappadoce",
+  country: "Turquie",
+  flag: "🇹🇷",
+  year: "Formée naturellement",
+  desc: "Région unique connue pour ses cheminées de fée et habitations troglodytes.",
+  type: "Monument",
+  status: "À visiter",
+  position: [38.6450, 34.8265],
+  subcategory: "Sites naturels"
+},
+{
+  title: "Acropole d'Athènes",
+  country: "Grèce",
+  flag: "🇬🇷",
+  year: "Ve siècle av. J.-C.",
+  desc: "Site antique majeur avec le Parthénon surplombant Athènes.",
+  type: "Monument",
+  status: "À visiter",
+  position: [37.9715, 23.7267],
+  subcategory: "Monuments historiques"
+},
+{
+  title: "Salar d'Uyuni",
+  country: "Bolivie",
+  flag: "🇧🇴",
+  year: "Formation géologique",
+  desc: "Plus grand désert de sel au monde, connu pour ses paysages surréalistes.",
+  type: "Monument",
+  status: "À visiter",
+  position: [-20.1338, -67.4891],
+  subcategory: "Sites naturels"
+},
+{
+  title: "Alhambra de Grenade",
+  country: "Espagne",
+  flag: "🇪🇸",
+  year: "XIIIe siècle",
+  desc: "Palais fortifié d'influence islamique niché sur les hauteurs de Grenade.",
+  type: "Monument",
+  status: "À visiter",
+  position: [37.1761, -3.5881],
+  subcategory: "Monuments historiques"
+},
+{
+  title: "Baie d’Ha Long",
+  country: "Vietnam",
+  flag: "🇻🇳",
+  year: "Formation naturelle",
+  desc: "Paysage marin spectaculaire composé de milliers de pics karstiques.",
+  type: "Monument",
+  status: "À visiter",
+  position: [20.9101, 107.1839],
+  subcategory: "Sites naturels"
+},
+{
+  title: "Îles Galápagos",
+  country: "Équateur",
+  flag: "🇪🇨",
+  year: "Formation naturelle",
+  desc: "Archipel volcanique unique connu pour sa biodiversité exceptionnelle.",
+  type: "Monument",
+  status: "À visiter",
+  position: [-0.9538, -90.9656],
+  subcategory: "Sites naturels"
+},
+{
+  title: "Palais de Versailles",
+  country: "France",
+  flag: "🇫🇷",
+  year: "XVIIe siècle",
+  desc: "Symbole de la monarchie absolue, chef-d'œuvre de l'architecture classique.",
+  type: "Monument",
+  status: "À visiter",
+  position: [48.8049, 2.1204],
+  subcategory: "Monuments historiques"
+},
+{
+  title: "Mosquée bleue",
+  country: "Turquie",
+  flag: "🇹🇷",
+  year: "1616",
+  desc: "Mosquée d'Istanbul célèbre pour ses six minarets et ses faïences bleues.",
+  type: "Monument",
+  status: "À visiter",
+  position: [41.0055, 28.9768],
+  subcategory: "Monuments historiques"
+},
+{
+  title: "Désert de l'Atacama",
+  country: "Chili",
+  flag: "🇨🇱",
+  year: "Formation naturelle",
+  desc: "Un des endroits les plus secs de la planète, célèbre pour ses paysages lunaires.",
+  type: "Monument",
+  status: "À visiter",
+  position: [-24.5000, -68.2500],
+  subcategory: "Sites naturels"
+},
+{
+  title: "Temples d’Abou Simbel",
+  country: "Égypte",
+  flag: "🇪🇬",
+  year: "XIIIe siècle av. J.-C.",
+  desc: "Temples monumentaux taillés dans la roche sous Ramsès II.",
+  type: "Monument",
+  status: "À visiter",
+  position: [22.3372, 31.6258],
+  subcategory: "Monuments historiques"
+},
+{
+  title: "Chutes Victoria",
+  country: "Zambie / Zimbabwe",
+  flag: "🇿🇲",
+  year: "Formation naturelle",
+  desc: "Une des plus grandes chutes d’eau du monde, site naturel impressionnant.",
+  type: "Monument",
+  status: "À visiter",
+  position: [-17.9243, 25.8572],
+  subcategory: "Sites naturels"
+}
 ];
 
 export default mustVisit;

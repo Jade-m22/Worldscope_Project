@@ -5,16 +5,23 @@ import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 
-// Couleurs des markers selon la catégorie (status)
+// Couleurs selon sous-catégorie (si disponible)
+const subcategoryColors = {
+  "Merveilles du monde": "#00d4ff",   // cyan éclatant
+  "Monuments historiques": "#3a85ff", // bleu franc
+  "Sites naturels": "#58ffe0",        // turquoise pâle
+  "Autres": "#9fb8ff"                 // bleu lavande
+};
+
+// Fallback couleurs selon status ou type
 const markerColors = {
   "À visiter": "#19d59e",      // vert
   "Conflit": "#ff0000ff",      // rouge vif
   "À éviter": "#ffe65e",       // jaune
   "Dangereux": "#000000ff",    // noir
-  "Monument": "#0c09c9ff"      // bleu foncé
 };
 
-// SVG marker style "flèche piquée"
+// Génère un marker SVG coloré
 function createColoredPinMarker(color) {
   return L.divIcon({
     className: "custom-marker",
@@ -31,7 +38,7 @@ function createColoredPinMarker(color) {
   });
 }
 
-// Fix icons for default leaflet
+// Fix pour les icônes leaflet par défaut
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -42,6 +49,7 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
+// Fly-to + ouverture popup
 function MapFlyAndPopup({ selected, markersRef }) {
   const map = useMap();
 
@@ -56,7 +64,7 @@ function MapFlyAndPopup({ selected, markersRef }) {
   return null;
 }
 
-// onShowDetail en props pour "Voir plus de détails"
+// Composant Map principal
 const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail }, ref) {
   const markersRef = useRef([]);
 
@@ -91,10 +99,13 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
           position={m.position}
           key={i}
           ref={el => (markersRef.current[i] = el)}
-          eventHandlers={{
-            click: () => setSelected(i),
-          }}
-          icon={createColoredPinMarker(markerColors[m.status] || markerColors[m.type] || "#4deed6")}
+          eventHandlers={{ click: () => setSelected(i) }}
+          icon={createColoredPinMarker(
+            subcategoryColors[m.subcategory] ||
+            markerColors[m.status] ||
+            markerColors[m.type] ||
+            "#4deed6"
+          )}
         >
           <Popup>
             <div className="map-popup">
@@ -109,15 +120,14 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
               <div className="map-popup-coords">
                 Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
               </div>
-              {/* AJOUT du bouton voir + */}
-              {onShowDetail &&
+              {onShowDetail && (
                 <button
                   className="map-popup-detail-btn"
                   onClick={() => onShowDetail(i)}
                 >
                   Voir plus de détails
                 </button>
-              }
+              )}
             </div>
           </Popup>
         </Marker>
