@@ -13,11 +13,16 @@ import MainLayout from "./layouts/MainLayout";
 
 export default function App() {
   const {
-    filter, setFilter,
-    selected, setSelected,
-    detailedIdx, setDetailedIdx,
-    year, setYear,
-    search, setSearch
+    filter,
+    setFilter,
+    selected,
+    setSelected,
+    detailedIdx,
+    setDetailedIdx,
+    year,
+    setYear,
+    search,
+    setSearch,
   } = useEventState();
 
   const [viewMode, setViewMode] = useState("map");
@@ -50,7 +55,7 @@ export default function App() {
     }
   };
 
-  const safeYear = (typeof year === "number" && !isNaN(year)) ? year : 2025;
+  const safeYear = typeof year === "number" && !isNaN(year) ? year : 2025;
 
   return (
     <MainLayout
@@ -70,8 +75,13 @@ export default function App() {
       }
       main={
         <>
-          <div className="view-toggle" style={{ marginBottom: "1rem", textAlign: "center" }}>
-            <button onClick={() => setViewMode(viewMode === "map" ? "globe" : "map")}>
+          <div
+            className="view-toggle"
+            style={{ marginBottom: "1rem", textAlign: "center" }}
+          >
+            <button
+              onClick={() => setViewMode(viewMode === "map" ? "globe" : "map")}
+            >
               Passer à la vue {viewMode === "map" ? "Globe 3D" : "Carte 2D"}
             </button>
           </div>
@@ -85,7 +95,10 @@ export default function App() {
                 onShowDetail={handleShowDetail}
               />
             ) : (
-              <GlobeView data={filteredEvents} />
+              <GlobeView
+                data={filteredEvents}
+                onMarkerClick={handleShowDetail}
+              />
             )}
           </div>
           <CardList
@@ -93,9 +106,15 @@ export default function App() {
             onCardClick={handleCardClick}
             onShowDetail={handleShowDetail}
           />
-          <div ref={detailRef} style={{ minHeight: "240px", marginTop: "2.5em" }}>
+          <div
+            ref={detailRef}
+            style={{ minHeight: "240px", marginTop: "2.5em" }}
+          >
             {detailedIdx !== null && filteredEvents[detailedIdx] && (
-              <EventDetail event={filteredEvents[detailedIdx]} onClose={() => setDetailedIdx(null)} />
+              <EventDetail
+                event={filteredEvents[detailedIdx]}
+                onClose={() => setDetailedIdx(null)}
+              />
             )}
           </div>
         </>

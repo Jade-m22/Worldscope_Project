@@ -3,21 +3,30 @@
 import React from "react";
 import Globe from "react-globe.gl";
 
-const GlobeView = ({ data }) => {
+// 1. On s'assure que le composant accepte "onMarkerClick" en plus de "data"
+const GlobeView = ({ data, onMarkerClick }) => {
+  // 2. On définit la fonction qui sera appelée au clic sur un point
+  const handlePointClick = (event) => {
+    // La fonction onMarkerClick attend l'INDEX de l'événement,
+    // mais le globe nous donne l'OBJET événement complet.
+    // On doit donc trouver l'index de notre événement dans le tableau de données.
+    const eventIndex = data.findIndex((e) => e.title === event.title);
+
+    // Si on a bien trouvé l'index et que la fonction existe, on l'appelle
+    if (eventIndex !== -1 && onMarkerClick) {
+      onMarkerClick(eventIndex);
+    }
+  };
+
   return (
     <Globe
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
       backgroundColor="rgba(0,0,0,0)"
       pointsData={data}
-      // --- CORRECTIONS BASÉES SUR VOS DONNÉES ---
-
-      // On lit la latitude (premier élément du tableau "position")
+      // Configuration des points
       pointLat={(event) => event.position[0]}
-      // On lit la longitude (deuxième élément du tableau "position")
       pointLng={(event) => event.position[1]}
-      // On lit le nom de l'événement depuis la propriété "title"
       pointLabel={(event) => event.title}
-      // On peut maintenant rendre la couleur dynamique selon le type !
       pointColor={(event) => {
         switch (event.type) {
           case "Conflit":
@@ -31,6 +40,8 @@ const GlobeView = ({ data }) => {
         }
       }}
       pointRadius={0.5}
+      // 3. On lie notre fonction à l'événement de clic du globe
+      onPointClick={handlePointClick}
     />
   );
 };
