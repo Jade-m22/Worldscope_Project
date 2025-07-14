@@ -6,6 +6,7 @@ import { fetchWikiExtract } from "../utils/wiki";
 export default function EventDetail({ event }) {
   const [wikiText, setWikiText] = useState("");
   const [wikiImage, setWikiImage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -28,6 +29,16 @@ export default function EventDetail({ event }) {
     };
   }, [event.title]);
 
+  // Optionnel : fermeture avec la touche Echap
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const handleKey = (e) => {
+      if (e.key === "Escape") setIsModalOpen(false);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isModalOpen]);
+
   if (!event) return null;
 
   return (
@@ -35,7 +46,12 @@ export default function EventDetail({ event }) {
       <div className="event-detail-main">
         {wikiImage && (
           <div className="event-detail-image">
-            <img src={wikiImage} alt={event.title} />
+            <img
+              src={wikiImage}
+              alt={event.title}
+              style={{ cursor: "zoom-in" }}
+              onClick={() => setIsModalOpen(true)}
+            />
           </div>
         )}
 
@@ -63,7 +79,18 @@ export default function EventDetail({ event }) {
           {wikiText && <div className="event-detail-more">{wikiText}</div>}
         </div>
       </div>
-    </div>
 
-      );
+      {/* Modal lightbox */}
+      {isModalOpen && (
+        <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
+          <img
+            src={wikiImage}
+            alt={event.title}
+            className="modal-image"
+            onClick={e => e.stopPropagation()} // empêche fermeture en cliquant sur l'image
+          />
+        </div>
+      )}
+    </div>
+  );
 }
