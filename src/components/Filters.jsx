@@ -1,3 +1,5 @@
+import { subcategoryColors as subColors } from "../utils/colors";
+
 export default function Filters({ onFilter, active, subFilter, onSubFilter }) {
   const filters = [
     { label: "Tous", value: "", icon: "🌍" },
@@ -11,15 +13,9 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter }) {
     "Merveilles du monde",
     "Monuments historiques",
     "Sites naturels",
+    "Merveilles antiques",
     "Autres"
   ];
-
-  const subColors = {
-    "Merveilles du monde": "#00d4ff",   // cyan éclatant
-    "Monuments historiques": "#3a85ff", // bleu franc
-    "Sites naturels": "#58ffe0",        // turquoise pâle
-    "Autres": "#9fb8ff"                 // bleu lavande
-  };
 
   return (
     <section className="filters">
@@ -53,7 +49,7 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter }) {
                     />
                     <span
                       className="color-dot"
-                      style={{ backgroundColor: subColors[cat] }}
+                      style={{ backgroundColor: subColors[cat] || "#ccc"}}
                     ></span>
                     {cat}
                   </label>
