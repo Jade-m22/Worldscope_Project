@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Globe from "globe.gl";
-import "./GlobeDashboard.scss"; // ← Ajoute cette ligne
+import "../styles/GlobeDashboard.scss";
 
 export default function GlobeDashboard() {
   const globeRef = useRef();

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./Dashboard.scss";
+import "../styles/Dashboard.scss";
 import GlobeDashboard from "./GlobeDashboard";
 
 export default function Dashboard() {

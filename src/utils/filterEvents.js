@@ -43,4 +43,3 @@ export default function filterEvents(filter, year, search, subcategories = []) {
 
   return filtered;
 }
-

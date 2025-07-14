@@ -6,7 +6,6 @@ const GlobeView = () => {
     <Globe
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
       backgroundColor="rgba(0,0,0,0)"
-      // Prépare les props quand tu en auras besoin
     />
   );
 };

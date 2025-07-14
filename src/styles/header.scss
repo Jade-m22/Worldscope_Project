@@ -1,11 +1,15 @@
-@use './variables';
+$primary-color: #1e3a8a;
+$secondary-color: #0f172a;
+$text-light: #ffffff;
+$text-dark: #213547;
+$color: red;
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #182e43 40%, #106356 100%);
-  color: #eaf6ff;
+  background: linear-gradient(90deg, $secondary-color 40%, $primary-color 100%);
+  color: $text-light;
   padding: 0 2.5rem;
   height: 80px;
   width: 100vw;

@@ -30,7 +30,7 @@ const countryToCode = {
   "Corée du Sud": "KR",
 
   // ZONES SPÉCIALES OU PAYS MULTIPLES
-  "Corée du Nord / Corée du Sud": "🇰🇵/🇰🇷",     // emoji duo
+  "Corée du Nord / Corée du Sud": "🇰🇵/🇰🇷",
   "Iran / Oman": "🇮🇷/🇴🇲",
   "Népal/Chine": "🇳🇵/🇨🇳",
   "Groenland Est (Zone militaire)": "⚠️",
