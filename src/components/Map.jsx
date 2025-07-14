@@ -4,22 +4,7 @@ import L from "leaflet";
 import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
-
-// Couleurs selon sous-catégorie (si disponible)
-const subcategoryColors = {
-  "Merveilles du monde": "#00d4ff",   // cyan éclatant
-  "Monuments historiques": "#3a85ff", // bleu franc
-  "Sites naturels": "#58ffe0",        // turquoise pâle
-  "Autres": "#9fb8ff"                 // bleu lavande
-};
-
-// Fallback couleurs selon status ou type
-const markerColors = {
-  "À visiter": "#19d59e",      // vert
-  "Conflit": "#ff0000ff",      // rouge vif
-  "À éviter": "#ffe65e",       // jaune
-  "Dangereux": "#000000ff",    // noir
-};
+import { subcategoryColors, markerColors } from "../utils/colors";
 
 // Génère un marker SVG coloré
 function createColoredPinMarker(color) {
