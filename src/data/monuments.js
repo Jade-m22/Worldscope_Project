@@ -7,7 +7,9 @@ const monuments = [
     desc: "La seule des sept merveilles antiques encore debout.",
     type: "Monument",
     status: "À visiter",
-    position: [29.9792, 31.1342]
+    position: [29.9792, 31.1342],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Jardins suspendus de Babylone",
@@ -17,7 +19,9 @@ const monuments = [
     desc: "Jardins mythiques de l’ancienne Babylone.",
     type: "Monument",
     status: "À visiter",
-    position: [32.5436, 44.4200]
+    position: [32.5436, 44.4200],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Statue de Zeus à Olympie",
@@ -27,7 +31,9 @@ const monuments = [
     desc: "Statue monumentale réalisée par Phidias.",
     type: "Monument",
     status: "À visiter",
-    position: [37.6380, 21.6300]
+    position: [37.6380, 21.6300],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Temple d’Artémis à Éphèse",
@@ -37,7 +43,9 @@ const monuments = [
     desc: "Temple grec dédié à Artémis, l'une des merveilles antiques.",
     type: "Monument",
     status: "À visiter",
-    position: [37.9497, 27.3639]
+    position: [37.9497, 27.3639],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Mausolée d’Halicarnasse",
@@ -47,7 +55,9 @@ const monuments = [
     desc: "Tombeau monumental de Mausole.",
     type: "Monument",
     status: "À visiter",
-    position: [37.0379, 27.4241]
+    position: [37.0379, 27.4241],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Colosse de Rhodes",
@@ -57,7 +67,9 @@ const monuments = [
     desc: "Statue monumentale dédiée à Hélios.",
     type: "Monument",
     status: "À visiter",
-    position: [36.4510, 28.2278]
+    position: [36.4510, 28.2278],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Phare d’Alexandrie",
@@ -67,7 +79,9 @@ const monuments = [
     desc: "Phare emblématique sur l’île de Pharos.",
     type: "Monument",
     status: "À visiter",
-    position: [31.2135, 29.8853]
+    position: [31.2135, 29.8853],
+    wikiExtract: "",
+    image: ""
   },
 
   // 7 merveilles du monde moderne
@@ -80,6 +94,8 @@ const monuments = [
     type: "Monument",
     status: "À visiter",
     position: [40.4319, 116.5704],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Petra",
@@ -89,7 +105,9 @@ const monuments = [
     desc: "Ancienne cité nabatéenne taillée dans la roche, célèbre pour sa façade du Khazneh.",
     type: "Monument",
     status: "À visiter",
-    position: [30.3285, 35.4444]
+    position: [30.3285, 35.4444],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Statue du Christ Rédempteur",
@@ -99,7 +117,9 @@ const monuments = [
     desc: "Statue monumentale dominant Rio de Janeiro.",
     type: "Monument",
     status: "À visiter",
-    position: [-22.9519, -43.2105]
+    position: [-22.9519, -43.2105],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Machu Picchu",
@@ -109,7 +129,9 @@ const monuments = [
     desc: "Ancienne cité inca perchée sur les montagnes des Andes.",
     type: "Monument",
     status: "À visiter",
-    position: [-13.1631, -72.5450]
+    position: [-13.1631, -72.5450],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Chichén Itzá",
@@ -119,7 +141,9 @@ const monuments = [
     desc: "Cité maya célèbre pour la pyramide de Kukulcán.",
     type: "Monument",
     status: "À visiter",
-    position: [20.6843, -88.5678]
+    position: [20.6843, -88.5678],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Colisée",
@@ -129,7 +153,9 @@ const monuments = [
     desc: "Ancien amphithéâtre romain emblématique de Rome.",
     type: "Monument",
     status: "À visiter",
-    position: [41.8902, 12.4922]
+    position: [41.8902, 12.4922],
+    wikiExtract: "",
+    image: ""
   },
   {
     title: "Taj Mahal",
@@ -139,7 +165,9 @@ const monuments = [
     desc: "Mausolée de marbre blanc, symbole d'amour.",
     type: "Monument",
     status: "À visiter",
-    position: [27.1751, 78.0421]
+    position: [27.1751, 78.0421],
+    wikiExtract: "",
+    image: ""
   }
 ];
 

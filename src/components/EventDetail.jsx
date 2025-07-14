@@ -5,25 +5,30 @@ import { fetchWikiExtract } from "../utils/wiki";
 
 export default function EventDetail({ event }) {
   const [wikiText, setWikiText] = useState("");
+  const [wikiImage, setWikiImage] = useState("");
 
   useEffect(() => {
     let mounted = true;
     if (!event?.title) return;
     // reset à chaque changement d’event
     setWikiText("");
+    setWikiImage("");
+
     fetchWikiExtract(event.title)
-      .then(text => {
-        if (mounted && text) setWikiText(text);
+      .then(data => {
+        if (mounted && data) {
+          setWikiText(data.extract);
+          setWikiImage(data.image);
+        }
       })
       .catch(err => console.error(err));
+
     return () => {
       mounted = false;
     };
   }, [event.title]);
 
   if (!event) return null;
-
-  const imgPath = `/assets/images/${event.title.replace(/[^\w]/g, "_")}.webp`;
 
   return (
     <div style={{
@@ -37,19 +42,21 @@ export default function EventDetail({ event }) {
       minHeight: 260
     }}>
       <div style={{ display: "flex", gap: 30, alignItems: "flex-start" }}>
-        <img
-          src={imgPath}
-          alt={event.title}
-          style={{
-            width: 210,
-            height: 170,
-            objectFit: "cover",
-            borderRadius: "13px",
-            boxShadow: "0 3px 11px #2a445544"
-          }}
-          onError={e => e.target.style.display = "none"}
-        />
+        {wikiImage && (
+          <img
+            src={wikiImage}
+            alt={event.title}
+            style={{
+              width: 210,
+              height: 170,
+              objectFit: "cover",
+              borderRadius: "13px",
+              boxShadow: "0 3px 11px #2a445544"
+            }}
+          />
+        )}
         <div>
+
           <div style={{ fontSize: "1.3em", fontWeight: 700, marginBottom: 5 }}>
             <FlagOrEmoji code={countryToCode[event.country]} size="1.5em" />
             {" "}{event.title}
