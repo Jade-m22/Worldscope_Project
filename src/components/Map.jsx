@@ -34,11 +34,19 @@ L.Icon.Default.mergeOptions({
 
 function ForceLeafletResize() {
   const map = useMap();
+
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       map.invalidateSize();
-    }, 250);
+
+      const bounds = map.getBounds();
+      const center = bounds.getCenter();
+      map.setView(center, map.getZoom(), { animate: false });
+    }, 350);
+
+    return () => clearTimeout(timeout);
   }, [map]);
+
   return null;
 }
 

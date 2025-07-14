@@ -1,68 +1,23 @@
 .geoscope-map {
   width: 100%;
-  height: 420px;
-  max-width: 900px;
-  margin: 0 auto 24px auto;
-  border-radius: 22px;
-  box-shadow: 0 8px 64px #32f0bb33, 0 2px 28px #233b4b44;
-  outline: 2px solid #22ffe699;
-  background: rgba(10,22,34,0.97);
-  position: relative;
-  z-index: 1;
+  height: 100%;
+  flex: 1;
   overflow: hidden;
-  display: flex;
-  align-items: stretch;
-
-  .leaflet-container {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 320px !important;
-    border-radius: 22px;
-    background: #d0e5e8 !important;
-    box-shadow: none;
-    display: block !important;
-    position: relative;
-  }
-  
-  .leaflet-pane {
-    background: #d0e5e8 !important;
-  }
-  .leaflet-pane,
-  .leaflet-control-container {
-    z-index: 100 !important;
-  }
-  .leaflet-control {
-    z-index: 120 !important;
-  }
-  .leaflet-top,
-  .leaflet-bottom {
-    z-index: 120 !important;
-  }
-
-  @media (max-width: 1100px) {
-    max-width: 99vw;
-    height: 45vw;
-    min-height: 220px;
-    max-height: 60vw;
-  }
-  @media (max-width: 700px) {
-    max-width: 99vw;
-    min-height: 180px;
-    height: 60vw;
-    max-height: 90vw;
-  }
+  border-radius: inherit;
 }
 
 .custom-marker {
-  filter: drop-shadow(0 2px 8px #0cf8b055);
+  filter: drop-shadow(0 2px 8px #0006);
   transition: filter 0.16s;
   svg { display: block; }
 }
 
+// Styles pour la popup
 .map-popup {
   min-width: 180px;
-  color: #043b4b;
+  color: #000000; // Texte par défaut en noir
   font-family: inherit;
+
   .map-popup-title {
     font-size: 1.1em;
     font-weight: 700;
@@ -70,31 +25,29 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #000;
-    text-shadow: 0 1px 4px #19fff344;
   }
+
   .map-popup-meta {
-    color: #000;
-    font-weight: 600;
+    color: #111 !important; // Met bien en noir (pays & année)
     font-size: 0.97em;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin-bottom: 4px;
   }
+
   .map-popup-desc {
     margin: 8px 0;
     font-size: 0.97em;
-    color: #07434f;
   }
+
   .map-popup-coords {
     font-size: 0.85em;
-    color: #000;
+    color: #111 !important; // Met bien en noir (lat/lon)
     margin-bottom: 6px;
   }
+
   .map-popup-detail-btn {
     margin-top: 10px;
     padding: 6px 15px;
-    background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
+    background: #19d59e;
     border: none;
     border-radius: 7px;
     color: #111;
@@ -102,14 +55,12 @@
     font-weight: 600;
     font-size: 1em;
     box-shadow: 0 1px 4px #14a77a33;
-    transition: background 0.13s, color 0.11s, transform 0.11s;
+    transition: background 0.13s, color 0.11s;
 
     &:hover,
     &:focus {
-      background: linear-gradient(90deg, #32b3f6 10%, #32f6b8 90%);
-      color: #10353e;
-      transform: scale(1.07);
+      background: #13c28e;
+      color: #00312c;
     }
   }
 }
-
