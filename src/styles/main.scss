@@ -1,13 +1,13 @@
-@import './reset';
-@import './variables';
-@import './header';
+@use './reset';
+@use './variables';
+@use './header';
+@use './filters';
+@use './cardList';
+@use './map';
+@use './timeline';
+@use './sidebar';
+@use './eventDetail';
 
-@import "./_filters";
-@import "./_cardList";
-@import "./_map";
-@import "./_timeline";
-@import "./_sidebar";
-@import "./_eventDetail";
 
 body, html, #root {
   min-height: 100vh;
