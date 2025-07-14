@@ -42,6 +42,18 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
+// --------- Ajout Force Resize ---------
+function ForceLeafletResize() {
+  const map = useMap();
+  useEffect(() => {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 250);
+  }, [map]);
+  return null;
+}
+// --------------------------------------
+
 function MapFlyAndPopup({ selected, markersRef }) {
   const map = useMap();
 
@@ -56,7 +68,6 @@ function MapFlyAndPopup({ selected, markersRef }) {
   return null;
 }
 
-// onShowDetail en props pour "Voir plus de détails"
 const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail }, ref) {
   const markersRef = useRef([]);
 
@@ -81,7 +92,9 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
         [-85, 180],
       ]}
       maxBoundsViscosity={1.0}
+      // PAS de style={{width, height}}
     >
+      <ForceLeafletResize />
       <TileLayer
         url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
         attribution="© OpenStreetMap contributors, tiles: OpenStreetMap France"
@@ -102,14 +115,13 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
                 <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
                 {m.title}
               </div>
-              <div className="map-popup-meta">
+              <div className="map-popup-meta" style={{ color: "#000", fontWeight: 600 }}>
                 {m.country} &middot; {m.year}
               </div>
               <div className="map-popup-desc">{m.desc}</div>
-              <div className="map-popup-coords">
+              <div className="map-popup-coords" style={{ color: "#000" }}>
                 Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
               </div>
-              {/* AJOUT du bouton voir + */}
               {onShowDetail &&
                 <button
                   className="map-popup-detail-btn"
