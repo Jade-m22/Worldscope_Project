@@ -21,18 +21,20 @@ export default function App() {
   } = useEventState();
 
   const [viewMode, setViewMode] = useState("map");
-  const [subFilter, setSubFilter] = useState([]); // ➕ sous-filtres pour "À visiter"
+  const [subFilter, setSubFilter] = useState([]);
+  const [country, setCountry] = useState("");
+
   const mapRef = useRef();
   const detailRef = useRef();
 
   const handleFilterChange = (value) => {
     setFilter(value);
     if (value !== "À visiter") {
-      setSubFilter([]); // Reset les sous-filtres si on quitte "À visiter"
+      setSubFilter([]);
     }
   };
 
-  const filteredEvents = filterEvents(filter, year, search, subFilter);
+  const filteredEvents = filterEvents(filter, year, search, subFilter, country);
 
   const handleShowDetail = (idx) => {
     setDetailedIdx(idx);
@@ -61,6 +63,8 @@ export default function App() {
             active={filter}
             subFilter={subFilter}
             onSubFilter={setSubFilter}
+            country={country}
+            onCountryChange={setCountry}
           />
         </>
       }
