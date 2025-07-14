@@ -13,8 +13,7 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter }) {
     "Merveilles du monde",
     "Monuments historiques",
     "Sites naturels",
-    "Merveilles antiques",
-    "Autres"
+    "Merveilles antiques"
   ];
 
   return (

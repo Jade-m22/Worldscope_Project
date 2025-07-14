@@ -3,7 +3,6 @@ export const subcategoryColors = {
   "Monuments historiques": "#3a85ff", // bleu franc
   "Sites naturels": "#58ffe0",        // turquoise pâle
   "Merveilles antiques": "#3a8ee0",   // bleu royal
-  "Autres": "#9fb8ff"                 // bleu lavande
 };
 
 export const markerColors = {
