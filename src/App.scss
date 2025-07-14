@@ -34,25 +34,32 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  min-height: 720px;
 }
 
 // Map card avec halo “néo-futuriste”
 .map-card {
-  background: rgba(10, 22, 34, 0.96);
   border-radius: 22px;
-  box-shadow: 0 8px 64px 0 #32f0bb26, 0 2px 28px 0 #233b4b44;
-  padding: 18px 18px 12px 18px;
-  margin-bottom: 24px;
+  padding: 0;
+  margin: 0 auto 24px auto;
   position: relative;
   z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  // Option: halo animé autour de la carte
+  width: 90vw;
+  max-width: 1000px;
+  height: 480px;
+  min-height: 480px;
+  max-height: 480px;
+  overflow: hidden;
+  flex-shrink: 0;
+
   &::before {
     content: '';
     position: absolute;
-    left: 50%; top: 50%;
+    left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
     width: 104%;
     height: 106%;
@@ -60,6 +67,12 @@
     background: radial-gradient(circle, #21ffc455 0%, #0d223000 70%);
     z-index: -1;
     pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    height: 360px;
+    min-height: 360px;
+    max-height: 360px;
   }
 }
 

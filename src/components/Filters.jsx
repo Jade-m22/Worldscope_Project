@@ -1,6 +1,8 @@
 import { subcategoryColors as subColors } from "../utils/colors";
+import countryToCode from "../utils/countryCodes";
+import events from "../data/events";
 
-export default function Filters({ onFilter, active, subFilter, onSubFilter }) {
+export default function Filters({ onFilter, active, subFilter, onSubFilter, onCountryChange, country }) {
   const filters = [
     { label: "Tous", value: "", icon: "🌍" },
     { label: "Conflits", value: "Conflit", icon: "⚔️" },
@@ -16,8 +18,34 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter }) {
     "Merveilles antiques"
   ];
 
+  // Extraire tous les pays uniques à partir des événements
+  const countries = Array.from(new Set(events.map(e => e.country).filter(Boolean)))
+    .sort((a, b) => a.localeCompare(b));
+
   return (
     <section className="filters">
+      {/* Sélecteur de pays */}
+      <div className="country-select">
+        <label htmlFor="country">
+          🌎 Filtrer par pays :
+          <select
+            id="country"
+            value={country}
+            onChange={(e) => onCountryChange(e.target.value)}
+          >
+            <option value="">Tous les pays</option>
+            {countries.map((c) => {
+              const emoji = countryToCode[c];
+              return (
+                <option key={c} value={c}>
+                  {emoji ? `${emoji} ` : ""}{c}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+      </div>
+
       <h3>Filtres</h3>
       <div className="filters-list">
         {filters.map((f) => (
@@ -48,7 +76,7 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter }) {
                     />
                     <span
                       className="color-dot"
-                      style={{ backgroundColor: subColors[cat] || "#ccc"}}
+                      style={{ backgroundColor: subColors[cat] || "#ccc" }}
                     ></span>
                     {cat}
                   </label>
@@ -58,6 +86,16 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter }) {
           </div>
         ))}
       </div>
+      <button
+        className="reset-button"
+        onClick={() => {
+          onFilter("");
+          onSubFilter([]);
+          onCountryChange("");
+        }}
+      >
+        🔄 Réinitialiser les filtres
+      </button>
     </section>
   );
 }

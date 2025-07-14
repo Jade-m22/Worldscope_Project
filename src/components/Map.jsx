@@ -6,7 +6,6 @@ import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import { subcategoryColors, markerColors } from "../utils/colors";
 
-// Génère un marker SVG coloré
 function createColoredPinMarker(color) {
   return L.divIcon({
     className: "custom-marker",
@@ -23,7 +22,6 @@ function createColoredPinMarker(color) {
   });
 }
 
-// Fix pour les icônes leaflet par défaut
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -34,19 +32,24 @@ L.Icon.Default.mergeOptions({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
 });
 
-// --------- Ajout Force Resize ---------
 function ForceLeafletResize() {
   const map = useMap();
+
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       map.invalidateSize();
-    }, 250);
+
+      const bounds = map.getBounds();
+      const center = bounds.getCenter();
+      map.setView(center, map.getZoom(), { animate: false });
+    }, 350);
+
+    return () => clearTimeout(timeout);
   }, [map]);
+
   return null;
 }
-// --------------------------------------
 
-// Fly-to + ouverture popup
 function MapFlyAndPopup({ selected, markersRef }) {
   const map = useMap();
 
@@ -61,16 +64,16 @@ function MapFlyAndPopup({ selected, markersRef }) {
   return null;
 }
 
-// Composant Map principal
 const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail }, ref) {
   const markersRef = useRef([]);
+  const mapInstance = useRef(null);
 
   useImperativeHandle(ref, () => ({
     flyToEvent: idx => {
       if (markersRef.current[idx]) {
         markersRef.current[idx].openPopup();
       }
-    },
+    }
   }));
 
   return (
@@ -81,12 +84,9 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
       maxZoom={6}
       scrollWheelZoom
       className="geoscope-map"
-      maxBounds={[
-        [85, -180],
-        [-85, 180],
-      ]}
+      maxBounds={[[85, -180], [-85, 180]]}
       maxBoundsViscosity={1.0}
-      // PAS de style={{width, height}}
+      whenCreated={(map) => { mapInstance.current = map }}
     >
       <ForceLeafletResize />
       <TileLayer
@@ -119,7 +119,6 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
               <div className="map-popup-coords" style={{ color: "#000" }}>
                 Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
               </div>
-              
               {onShowDetail && (
                 <button
                   className="map-popup-detail-btn"

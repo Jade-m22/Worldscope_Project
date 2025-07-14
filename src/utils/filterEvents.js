@@ -1,19 +1,29 @@
 import events from "../data/events";
 
-export default function filterEvents(filter, year, search, subcategories = []) {
+export default function filterEvents(
+  filter,
+  year,
+  search,
+  subcategories = [],
+  country = ""
+) {
   let filtered = events;
 
   if (filter && filter !== "") {
     if (["À visiter", "À éviter", "Dangereux"].includes(filter)) {
       filtered = filtered.filter(e => e.status === filter);
 
+      // Sous-catégories pour "À visiter"
       if (filter === "À visiter" && subcategories.length > 0) {
         filtered = filtered.filter(e => subcategories.includes(e.subcategory));
       }
-
     } else {
       filtered = filtered.filter(e => e.type === filter);
     }
+  }
+
+  if (country && country !== "") {
+    filtered = filtered.filter(e => e.country === country);
   }
 
   if (year !== undefined && year !== null) {
