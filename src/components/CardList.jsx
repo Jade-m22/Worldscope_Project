@@ -46,7 +46,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                 </h4>
                 <div className="card-details">
                   <div className="country">{item.country}</div>
-                  <div className="type">{item.type}</div>
+                  <div className="type">{item.subcategory || item.type}</div>
                   <div className="year">{item.year}</div>
                   <div
                     className={`status status-${item.status.replace(/ /g, "").toLowerCase()}`}
@@ -55,13 +55,14 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                   </div>
                   {onShowDetail && (
                     <button
-                      className="details-btn"
+                      className="card-action-btn"
                       onClick={(e) => {
                         e.stopPropagation();
                         onShowDetail(i);
                       }}
                     >
-                      Voir plus de détails
+                      <span className="text">Voir</span>
+                      <span className="icon">+</span>
                     </button>
                   )}
                 </div>
@@ -71,12 +72,14 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
         })}
 
         {visibleCount < data.length && (
-          <button
-            className="show-more-btn"
-            onClick={() => setVisibleCount(visibleCount + 10)}
-          >
-            + Voir plus
-          </button>
+          <div className="show-more-wrapper">
+            <button
+              className="show-more-btn"
+              onClick={() => setVisibleCount(visibleCount + 10)}
+            >
+              + Voir plus
+            </button>
+          </div>
         )}
       </div>
     </div>

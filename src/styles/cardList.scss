@@ -39,8 +39,7 @@
 .card {
   position: relative;
   border-radius: 18px;
-  min-width: 170px;
-  max-width: 220px;
+  width: 200px;
   height: 280px;
   flex: 0 0 auto;
   scroll-snap-align: start;
@@ -106,6 +105,7 @@
     overflow: hidden;
     transform: translateY(0%);
     transition: transform 0.3s ease;
+    text-align: center;
   }
 
   .card-details {
@@ -134,30 +134,88 @@
       &.status-monument { background: #0c09c9; color: #fff; }
     }
 
-    .details-btn {
-      margin-top: 7px;
-      padding: 4px 11px;
-      background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
+    // 👇 Petit bouton + (pour onShowDetail)
+    .card-action-btn {
+      background-color: #fff;
+      color: #1e1f2b;
+      font-weight: bold;
+      font-size: 0.85rem;
       border: none;
-      border-radius: 9px;
-      color: #111;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      gap: 0;
       cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95em;
-      box-shadow: 0 1px 5px #13eeb133;
-      transition: background 0.13s, color 0.14s, transform 0.12s;
-      &:hover, &:focus {
-        background: linear-gradient(90deg, #32b3f6 10%, #32f6b8 90%);
-        color: #0b2d36;
-        transform: scale(1.06);
+      transition: all 0.3s ease;
+      margin: 12px auto 0 auto;
+      overflow: hidden;
+
+      .text {
+        opacity: 0;
+        width: 0;
+        margin-right: 0;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .icon {
+        font-weight: bold;
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover {
+        padding: 6px 14px;
+        gap: 6px;
+
+        .text {
+          opacity: 1;
+          width: auto;
+          margin-right: 4px;
+        }
+
+        .icon {
+          transform: translateX(2px);
+        }
       }
     }
+  }
+
+  &:hover .card-action-btn {
+    opacity: 1;
+  }
+}
+
+// 👇 Bouton global "Voir plus" (classique)
+.show-more-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 14px 0;
+}
+
+.show-more-btn {
+  background-color: transparent;
+  color: #33f6ff;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 2px solid #33f6ff;
+  border-radius: 12px;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #33f6ff;
+    color: #0e1d26;
   }
 }
 
 .cardlist-arrows,
 .cardlist-dots {
-  display: none; // ❌ suppression flèches + points
+  display: none;
 }
 
 @media (max-width: 900px) {
