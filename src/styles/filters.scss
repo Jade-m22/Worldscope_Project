@@ -155,3 +155,113 @@
     color: #00352e;
   }
 }
+/* Tablettes (≤ 768px) */
+@media (max-width: 768px) {
+  .filters {
+    padding: 18px 12px;
+  }
+  .filters-list {
+    gap: 10px;
+  }
+  .filter-button {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+  .filter-button .icon {
+    font-size: 1.1rem;
+  }
+  .subfilters {
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+  .sub-title {
+    font-size: 0.9rem; /* 0.9rem */
+  }
+  .subfilter-label {
+    gap: 8px;
+    font-size: 0.9rem; /* 0.9rem */
+  }
+  .country-select label {
+    font-size: 0.9rem; /* 0.9em */
+  }
+  .country-select select {
+    padding: 5px;
+  }
+  .reset-button {
+    padding: 9px 12px;
+    font-size: 0.9rem; /* 0.9rem */
+  }
+}
+
+/* Mobiles (≤ 480px) */
+@media (max-width: 480px) {
+  .filters {
+    margin: 0 12px 20px;
+    padding: 16px 10px;
+  }
+  .filters-list {
+    gap: 8px;
+  }
+  .filter-button {
+    padding: 9px 10px;
+    font-size: 0.9rem; /* 0.9rem */
+  }
+  .filter-button .icon {
+    font-size: 1rem;
+  }
+  .subfilters {
+    margin-top: 12px;
+    padding-top: 8px;
+  }
+  .sub-title {
+    font-size: 0.85rem;
+  }
+  .subfilter-label {
+    gap: 6px;
+    font-size: 0.85rem;
+  }
+  .country-select {
+    margin-bottom: 0.8rem;
+  }
+  .country-select label {
+    font-size: 0.9rem; /* 0.9em */
+  }
+  .country-select select {
+    width: 100%;
+    font-size: 0.95em;
+  }
+  .reset-button {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.9rem; /* 0.9rem */
+  }
+}
+
+/* Très petits écrans (≤ 360px) */
+@media (max-width: 360px) {
+  .filters {
+    margin: 0 8px 16px;
+    padding: 14px 8px;
+  }
+  .filter-button {
+    padding: 8px 9px;
+    font-size: 0.8rem; /* 0.8rem */
+  }
+  .filter-button .icon {
+    font-size: 0.9rem; /* 0.9rem */
+  }
+  .sub-title {
+    font-size: 0.8rem; /* 0.8rem */
+  }
+  .subfilter-label {
+    font-size: 0.8rem; /* 0.8rem */
+  }
+  .color-dot {
+    width: 11px;
+    height: 11px;
+  }
+  .reset-button {
+    padding: 7px 8px;
+    font-size: 0.8rem; /* 0.8rem */
+  }
+}

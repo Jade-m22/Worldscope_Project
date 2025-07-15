@@ -18,3 +18,31 @@
     margin-bottom: 18px;
   }
 }
+
+/* Tablettes portrait (≤ 768px) */
+@media (max-width: 768px) {
+  .sidebar {
+    flex-direction: column;
+    align-items: stretch;
+    min-width: auto;
+    max-width: 100vw;
+    gap: 16px;
+    margin: 12px 0;
+  }
+}
+
+/* Mobiles standard (≤ 480px) */
+@media (max-width: 480px) {
+  .sidebar {
+    gap: 12px;
+    margin: 10px 0;
+  }
+}
+
+/* Très petits écrans (≤ 360px) */
+@media (max-width: 360px) {
+  .sidebar {
+    gap: 8px;
+    margin: 8px 0;
+  }
+}

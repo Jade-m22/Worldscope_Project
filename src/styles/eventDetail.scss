@@ -58,7 +58,7 @@
 // ===== NOUVEAU STYLE HIGHLIGHT NEON =====
 .event-detail-highlight {
   background: rgba(16, 35, 50, 0.82); // Fond bleu nuit translucide
-  border: 1.5px solid #38ffd8;         // Contour turquoise néon
+  border: 1.5px solid #38ffd8; // Contour turquoise néon
   box-shadow: 0 0 12px #32ffe299, 0 1px 10px #223b3d3a;
   padding: 7px 18px;
   border-radius: 11px;
@@ -111,8 +111,12 @@
   animation: modalFadeIn 0.16s;
 }
 @keyframes modalFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .modal-image {
   max-width: 96vw;
@@ -123,4 +127,72 @@
   background: #0a2231;
   object-fit: contain;
   transition: box-shadow 0.18s;
+}
+
+/* Tablettes (<= 768px déjà géré sur .event-detail-main, on affine ici) */
+@media (max-width: 768px) {
+  .event-detail {
+    padding: 32px 24px;
+  }
+  .event-detail-image {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+  }
+  .event-detail-text {
+    gap: 10px;
+  }
+  .event-detail-title {
+    font-size: 1.6rem;
+  }
+  .event-detail-desc {
+    font-size: 1rem;
+  }
+}
+
+/* Petits écrans (<= 480px) */
+@media (max-width: 480px) {
+  .event-detail {
+    margin: 20px 12px;
+    padding: 24px 16px;
+  }
+  .event-detail-main {
+    gap: 24px;
+  }
+  .event-detail-title {
+    font-size: 1.4rem;
+    gap: 6px;
+  }
+  .event-detail-meta {
+    font-size: 0.9rem;
+  }
+  .event-detail-desc {
+    font-size: 0.95rem;
+  }
+  .event-detail-more {
+    font-size: 0.9rem;
+  }
+  .event-detail-highlight {
+    padding: 6px 14px;
+    font-size: 1rem;
+  }
+}
+
+/* Très petits écrans (<= 360px) */
+@media (max-width: 360px) {
+  .event-detail {
+    padding: 18px 12px;
+  }
+  .event-detail-title {
+    font-size: 1.3rem;
+  }
+  .event-detail-meta {
+    font-size: 0.85rem;
+  }
+  .event-detail-desc {
+    font-size: 0 Nineem; /* 0.9rem */
+  }
+  .modal-image {
+    max-width: 90vw;
+    max-height: 85vh;
+  }
 }
