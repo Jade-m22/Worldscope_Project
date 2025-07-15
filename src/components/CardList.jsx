@@ -5,23 +5,36 @@ import countryToCode from "../utils/countryCodes";
 import { fetchWikiExtract } from "../utils/wiki";
 
 export default function CardList({ data = events, onCardClick, onShowDetail }) {
-  const [visibleCount, setVisibleCount] = useState(10);
+  const cardsPerPage = 4;
+  const [startIndex, setStartIndex] = useState(0);
   const [wikiImages, setWikiImages] = useState({});
 
-  const visibleData = data.slice(0, visibleCount);
+  const visibleData = data.slice(startIndex, startIndex + cardsPerPage);
 
   useEffect(() => {
-    visibleData.forEach((item) => {
-      if (!wikiImages[item.title]) {
-        fetchWikiExtract(item.title).then((res) => {
-          if (res?.image) {
-            setWikiImages((prev) => ({ ...prev, [item.title]: res.image }));
-          }
-        });
-      }
+    const preloadData = data.slice(startIndex, startIndex + cardsPerPage + 10);
+    const titlesToFetch = preloadData
+      .filter(item => !wikiImages[item.title])
+      .map(item => item.title);
+
+    if (titlesToFetch.length === 0) return;
+
+    Promise.all(
+      titlesToFetch.map((title) =>
+        fetchWikiExtract(title).then((res) => ({ title, image: res?.image }))
+      )
+    ).then((results) => {
+      const newImages = {};
+      results.forEach(({ title, image }) => {
+        if (image) newImages[title] = image;
+      });
+      setWikiImages((prev) => ({ ...prev, ...newImages }));
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visibleData]);
+  }, [startIndex, data, wikiImages]);
+
+  const handleShowMore = () => {
+    setStartIndex(prev => prev + cardsPerPage);
+  };
 
   return (
     <div className="cardlist-outer">
@@ -31,11 +44,9 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
           return (
             <div
               className="card"
-              key={i}
-              onClick={() => onCardClick && onCardClick(i)}
-              style={{
-                "--bg-url": imageUrl ? `url(${imageUrl})` : "none",
-              }}
+              key={item.title}
+              onClick={() => onCardClick?.(i + startIndex)}
+              style={{ "--bg-url": imageUrl ? `url(${imageUrl})` : "none" }}
               tabIndex={0}
               role="button"
               aria-pressed="false"
@@ -49,9 +60,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                   <div className="country">{item.country}</div>
                   <div className="type">{item.subcategory || item.type}</div>
                   <div className="year">{item.year}</div>
-                  <div
-                    className={`status status-${item.status.replace(/ /g, "").toLowerCase()}`}
-                  >
+                  <div className={`status status-${item.status.replace(/ /g, "").toLowerCase()}`}>
                     {item.status}
                   </div>
                   {onShowDetail && (
@@ -59,7 +68,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                       className="card-action-btn"
                       onClick={(e) => {
                         e.stopPropagation();
-                        onShowDetail(i);
+                        onShowDetail(i + startIndex);
                       }}
                     >
                       <span className="text">Voir</span>
@@ -71,18 +80,15 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
             </div>
           );
         })}
-
-        {visibleCount < data.length && (
-          <div className="show-more-wrapper">
-            <button
-              className="show-more-btn"
-              onClick={() => setVisibleCount(visibleCount + 10)}
-            >
-              + Voir plus
-            </button>
-          </div>
-        )}
       </div>
+
+      {startIndex + cardsPerPage < data.length && (
+        <div className="show-more-wrapper">
+          <button className="show-more-btn" onClick={handleShowMore}>
+            + Voir plus
+          </button>
+        </div>
+      )}
     </div>
   );
 }
