@@ -12,7 +12,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
   const visibleData = data.slice(startIndex, startIndex + cardsPerPage);
 
   useEffect(() => {
-    const preloadData = data.slice(startIndex, startIndex + cardsPerPage + 10);
+    const preloadData = data.slice(startIndex, startIndex + cardsPerPage);
     const titlesToFetch = preloadData
       .filter(item => !wikiImages[item.title])
       .map(item => item.title);
@@ -33,7 +33,11 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
   }, [startIndex, data, wikiImages]);
 
   const handleShowMore = () => {
-    setStartIndex(prev => prev + cardsPerPage);
+    setStartIndex(prev => {
+      const next = prev + cardsPerPage;
+      if (next + cardsPerPage <= data.length) return next;
+      return 0;
+    });
   };
 
   return (
