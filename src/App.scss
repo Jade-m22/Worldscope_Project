@@ -76,14 +76,6 @@
   }
 }
 
-// CardList : applique ombre & fond doux si ce n’est pas déjà le cas
-.cardlist-outer {
-  background: rgba(12, 25, 36, 0.94);
-  border-radius: 18px;
-  box-shadow: 0 1.5px 12px #25b8b555;
-  padding: 11px 0 14px 0;
-}
-
 // Bouton toggle vue
 .view-toggle button {
   background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
