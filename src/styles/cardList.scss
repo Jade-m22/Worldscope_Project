@@ -1,126 +1,163 @@
 .cardlist-outer {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 28px;
+  max-width: 1000px;
+  margin: 24px auto;
   background: rgba(14, 29, 38, 0.96);
   border-radius: 18px;
   box-shadow: 0 2px 24px #17ffd055, 0 1px 12px #12394044;
-  padding: 16px 0 18px 0;
-}
-
-.cardlist-arrows {
+  padding: 16px 0 10px 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-}
-
-.arrow-btn {
-  font-size: 2rem;
-  background: transparent;
-  border: none;
-  color: #47efff;
-  cursor: pointer;
-  transition: color 0.16s;
-  &:hover { color: #17bfb5; }
-  &:active { color: #48ffc6; }
+  max-height: 330px;
 }
 
 .cards {
   display: flex;
   gap: 18px;
-  justify-content: center;
+  overflow-x: auto;
+  padding: 0 14px;
+  scroll-padding: 14px;
+  -webkit-overflow-scrolling: touch;
   width: 100%;
-  max-width: 880px;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #33f6ff80;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #0e1d26;
+    border-radius: 10px;
+  }
 }
 
 .card {
-  background: linear-gradient(120deg, #182a39ee 40%, #143a32f2 100%);
+  position: relative;
   border-radius: 18px;
-  box-shadow: 0 2px 18px #13d0b555, 0 1px 7px #15448828;
-  color: #e7fdff;
-  padding: 18px 17px 13px 17px;
   min-width: 170px;
   max-width: 220px;
-  flex: 1 1 170px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  height: 280px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  cursor: pointer;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: block;
+  transition: transform 0.3s;
 
-  .card-header {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg-url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    transition: filter 0.3s ease;
+  }
+
+  &:hover::before {
+    filter: blur(3px) brightness(0.8);
+  }
+
+  &:hover .card-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 40%);
+  }
+
+  &:hover .card-title {
+    transform: translateY(-85%);
+  }
+
+  &:hover .card-details {
+    opacity: 1;
+    max-height: 300px;
+  }
+
+  .card-overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    padding: 14px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.35), transparent 60%);
     display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-bottom: 3px;
-    h4 {
-      font-size: 1.13em;
-      margin: 0;
-      color: #53ffe4;
-      text-shadow: 0 1px 4px #173b4a99;
-    }
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: background 0.3s ease;
   }
 
-  .country { color: #a8edff; font-size: 0.99em; }
-  .type { font-size: 0.99em; margin-bottom: 2px; color: #85ffc6; }
-  .year { color: #ffe9c2; font-size: 0.95em; }
-  .status {
-    font-size: 0.98em;
-    font-weight: bold;
-    margin-top: 6px;
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 10px;
-    background: #182634;
-    &.status-àvisiter { background: #19d59e; color: #123; }
-    &.status-conflit { background: #ff5b6b; color: #fff; }
-    &.status-àéviter { background: #ffe65e; color: #aa3d00; }
-    &.status-dangereux { background: #000; color: #fff; }
-    &.status-monument { background: #0c09c9; color: #fff; }
+  .card-title {
+    font-size: 1.15em;
+    color: #fff;
+    text-shadow: 0 1px 4px #000000aa;
+    margin-bottom: 6px;
+    line-height: 1.3em;
+    max-height: 2.6em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transform: translateY(0%);
+    transition: transform 0.3s ease;
   }
-  .details-btn {
-    margin-top: 7px;
-    padding: 4px 11px;
-    background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
-    border: none;
-    border-radius: 9px;
-    color: #111;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1em;
-    box-shadow: 0 1px 5px #13eeb133;
-    transition: background 0.13s, color 0.14s, transform 0.12s;
-    &:hover, &:focus {
-      background: linear-gradient(90deg, #32b3f6 10%, #32f6b8 90%);
-      color: #0b2d36;
-      transform: scale(1.06);
+
+  .card-details {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 10px;
+    transition: all 0.4s ease;
+
+    .country { color: #a8edff; font-size: 0.9em; }
+    .type { color: #85ffc6; font-size: 0.9em; }
+    .year { color: #ffe9c2; font-size: 0.9em; }
+
+    .status {
+      font-size: 0.88em;
+      font-weight: bold;
+      margin-top: 6px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      background: #182634;
+      display: inline-block;
+      &.status-àvisiter { background: #19d59e; color: #123; }
+      &.status-conflit { background: #ff5b6b; color: #fff; }
+      &.status-àéviter { background: #ffe65e; color: #aa3d00; }
+      &.status-dangereux { background: #000; color: #fff; }
+      &.status-monument { background: #0c09c9; color: #fff; }
+    }
+
+    .details-btn {
+      margin-top: 7px;
+      padding: 4px 11px;
+      background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
+      border: none;
+      border-radius: 9px;
+      color: #111;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95em;
+      box-shadow: 0 1px 5px #13eeb133;
+      transition: background 0.13s, color 0.14s, transform 0.12s;
+      &:hover, &:focus {
+        background: linear-gradient(90deg, #32b3f6 10%, #32f6b8 90%);
+        color: #0b2d36;
+        transform: scale(1.06);
+      }
     }
   }
 }
 
+.cardlist-arrows,
 .cardlist-dots {
-  display: flex;
-  gap: 9px;
-  justify-content: center;
-  margin-top: 11px;
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #4deed6bb;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    opacity: 0.45;
-    transition: background 0.15s, opacity 0.14s;
-    &.active {
-      background: #22ffe6;
-      opacity: 1;
-      box-shadow: 0 1px 4px #05b4ab77;
-    }
-  }
+  display: none; // ❌ suppression flèches + points
 }
 
 @media (max-width: 900px) {
@@ -128,10 +165,9 @@
     gap: 7vw;
     max-width: 97vw;
   }
+
   .card {
     min-width: 37vw;
     max-width: 44vw;
-    align-items: center;
-    padding: 13px 9px 12px 13px;
   }
 }
