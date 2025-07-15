@@ -225,3 +225,36 @@
     font-size: 0.8rem; /* 0.8em */
   }
 }
+.scroll-to-top {
+  background: linear-gradient(120deg, #1c2e3b 60%, #143a32 100%);
+  border-radius: 18px;
+  padding: 12px;
+  margin-bottom: 0;           // pas de margin à ce niveau
+  color: #eaf6ff;
+  box-shadow: 
+    0 4px 28px #13efc988,
+    0 2px 14px #14385933;
+  border: 1.5px solid #2affc5;
+  backdrop-filter: blur(3px);
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;          // taille de la flèche
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  z-index: 1000;
+  opacity: 0.85;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
