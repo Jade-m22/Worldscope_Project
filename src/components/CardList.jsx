@@ -5,10 +5,13 @@ import countryToCode from "../utils/countryCodes";
 import { fetchWikiExtract } from "../utils/wiki";
 
 export default function CardList({ data = events, onCardClick, onShowDetail }) {
+  const [visibleCount, setVisibleCount] = useState(10);
   const [wikiImages, setWikiImages] = useState({});
 
+  const visibleData = data.slice(0, visibleCount);
+
   useEffect(() => {
-    data.forEach((item) => {
+    visibleData.forEach((item) => {
       if (!wikiImages[item.title]) {
         fetchWikiExtract(item.title).then((res) => {
           if (res?.image) {
@@ -17,12 +20,12 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
         });
       }
     });
-  }, [data]);
+  }, [visibleData]);
 
   return (
     <div className="cardlist-outer">
       <div className="cards">
-        {data.map((item, i) => {
+        {visibleData.map((item, i) => {
           const imageUrl = wikiImages[item.title];
           return (
             <div
@@ -45,7 +48,9 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                   <div className="country">{item.country}</div>
                   <div className="type">{item.type}</div>
                   <div className="year">{item.year}</div>
-                  <div className={`status status-${item.status.replace(/ /g, '').toLowerCase()}`}>
+                  <div
+                    className={`status status-${item.status.replace(/ /g, "").toLowerCase()}`}
+                  >
                     {item.status}
                   </div>
                   {onShowDetail && (
@@ -64,6 +69,15 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
             </div>
           );
         })}
+
+        {visibleCount < data.length && (
+          <button
+            className="show-more-btn"
+            onClick={() => setVisibleCount(visibleCount + 10)}
+          >
+            + Voir plus
+          </button>
+        )}
       </div>
     </div>
   );
