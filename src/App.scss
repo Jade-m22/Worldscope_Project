@@ -1,6 +1,5 @@
 // Fond général, le même que la page Dashboard
 .with-header, .app-layout, body, html {
-  background: linear-gradient(135deg, #0d2127 0%, #0a1e29 50%, #174233 100%);
   min-height: 100vh;
   width: 100vw;
   box-sizing: border-box;
@@ -16,7 +15,6 @@
 
 // Sidebar
 .sidebar {
-  background: rgba(14, 29, 38, 0.92);
   border-radius: 16px;
   padding: 26px 16px 18px 16px;
   min-width: 220px;

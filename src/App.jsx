@@ -19,8 +19,6 @@ export default function App() {
     setSelected,
     detailedIdx,
     setDetailedIdx,
-    year,
-    setYear,
     search,
     setSearch,
   } = useEventState();
@@ -28,6 +26,9 @@ export default function App() {
   const [viewMode, setViewMode] = useState("map");
   const [subFilter, setSubFilter] = useState([]);
   const [country, setCountry] = useState("");
+
+  // ✅ plage temporelle par défaut : -3000 → 2025
+  const [range, setRange] = useState([-3000, 2025]);
 
   const mapRef = useRef();
   const detailRef = useRef();
@@ -39,7 +40,8 @@ export default function App() {
     }
   };
 
-  const filteredEvents = filterEvents(filter, year, search, subFilter, country);
+  // ✅ on utilise la plage d'années au lieu d'une seule année
+  const filteredEvents = filterEvents(filter, range, search, subFilter, country);
 
   const handleShowDetail = (idx) => {
     setDetailedIdx(idx);
@@ -55,14 +57,19 @@ export default function App() {
     }
   };
 
-  const safeYear = typeof year === "number" && !isNaN(year) ? year : 2025;
-
   return (
     <MainLayout
       header={<Header search={search} setSearch={setSearch} />}
       sidebar={
         <>
-          <Timeline min={-3000} max={2025} year={safeYear} onChange={setYear} />
+          {/* ✅ Nouvelle Timeline avec plage + label animé */}
+          <Timeline
+            min={-3000}
+            max={2025}
+            range={range}
+            onChange={setRange}
+            labelMode="above" // change à "below" pour tester l'autre option
+          />
           <Filters
             onFilter={handleFilterChange}
             active={filter}
