@@ -19,17 +19,24 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
 
     if (titlesToFetch.length === 0) return;
 
-    Promise.all(
-      titlesToFetch.map((title) =>
-        fetchWikiExtract(title).then((res) => ({ title, image: res?.image }))
-      )
-    ).then((results) => {
-      const newImages = {};
-      results.forEach(({ title, image }) => {
-        if (image) newImages[title] = image;
+    let i = 0;
+    function fetchNext() {
+      if (i >= titlesToFetch.length) return;
+
+      const title = titlesToFetch[i];
+      fetchWikiExtract(title).then((res) => {
+        if (res?.image) {
+          setWikiImages((prev) => ({
+            ...prev,
+            [title]: res.image
+          }));
+        }
+        i++;
+        setTimeout(fetchNext, 300); // délai de 300ms entre chaque appel
       });
-      setWikiImages((prev) => ({ ...prev, ...newImages }));
-    });
+    }
+    fetchNext();
+
   }, [startIndex, data, wikiImages]);
 
   const handleShowMore = () => {
