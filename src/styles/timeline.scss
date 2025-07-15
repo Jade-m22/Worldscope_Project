@@ -68,3 +68,49 @@
     h3 { font-size: 1.09rem; }
   }
 }
+/* Écrans moyens (≤ 500px) */
+@media (max-width: 500px) {
+  .timeline {
+    padding: 8px 5px 6px 8px;
+  }
+  .timeline-year {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+  }
+  .timeline-slider {
+    height: 5px;
+  }
+  .timeline-labels {
+    font-size: 0.9rem; /* 0.9em */
+    margin-top: 1px;
+    span {
+      font-size: 1em;
+    }
+  }
+  h3 {
+    font-size: 1em;
+    gap: 6px;
+  }
+}
+
+/* Mobiles (≤ 360px) */
+@media (max-width: 360px) {
+  .timeline {
+    padding: 6px 4px;
+  }
+  .timeline-year {
+    font-size: 1.2rem;
+  }
+  .timeline-slider {
+    height: 4px;
+  }
+  .timeline-labels {
+    font-size: 0.8rem; /* 0.8em */
+    span {
+      font-size: 0.9rem; /* 0.9em */
+    }
+  }
+  h3 {
+    font-size: 0.95rem;
+  }
+}

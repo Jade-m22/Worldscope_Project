@@ -12,3 +12,36 @@
   align-items: center;
   justify-content: center;
 }
+/* Tablettes (≤ 768px) */
+@media (max-width: 768px) {
+  .dashboard-globe-canvas {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* Mobiles (≤ 480px) */
+@media (max-width: 480px) {
+  .dashboard-globe-canvas {
+    width: 220px;
+    height: 220px;
+    box-shadow: 0 6px 60px #37ffb822, 0 1px 18px #0c2a1766;
+  }
+}
+
+/* Très petits écrans (≤ 360px) */
+@media (max-width: 360px) {
+  .dashboard-globe-canvas {
+    width: 180px;
+    height: 180px;
+    box-shadow: 0 4px 40px #37ffb822, 0 1px 12px #0c2a1766;
+  }
+}
+
+/* Optionnel : occuper 80vw sur écrans ultra‑petits */
+@media (max-width: 320px) {
+  .dashboard-globe-canvas {
+    width: 80vw;
+    height: 80vw;
+  }
+}

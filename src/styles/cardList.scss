@@ -135,3 +135,61 @@
     padding: 13px 9px 12px 13px;
   }
 }
+
+/* Tablettes (<= 600px) */
+@media (max-width: 600px) {
+  .cards {
+    gap: 5vw;
+    max-width: 95vw;
+  }
+  .card {
+    min-width: 45vw;
+    max-width: 90vw;
+    padding: 12px 8px 10px 12px;
+  }
+  .card-header h4 { font-size: 1em; }
+  .country,
+  .type,
+  .year { font-size: 0.9em; }
+  .details-btn { font-size: 0.95em; padding: 3px 10px; }
+}
+
+/* Petits mobiles (<= 480px) */
+@media (max-width: 480px) {
+  .cardlist-outer {
+    padding: 12px 0 14px;
+  }
+  .cards {
+    flex-direction: column;
+    gap: 4vh;
+  }
+  .card {
+    width: 80vw;
+    max-width: none;
+    padding: 10px 6px 8px 10px;
+    align-items: center;
+  }
+  .card-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .card-header h4 { font-size: 1.05em; text-align: center; }
+  .country,
+  .type,
+  .year { text-align: center; }
+  .details-btn { width: 100%; text-align: center; }
+}
+
+/* Très petits écrans (<= 360px) */
+@media (max-width: 360px) {
+  .card {
+    min-width: 90vw;
+    padding: 8px 5px 6px 8px;
+  }
+  .card-header h4 { font-size: 1em; }
+  .country,
+  .type,
+  .year { font-size: 0.85em; }
+  .arrow-btn { font-size: 1.7rem; }
+}
