@@ -20,6 +20,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
         });
       }
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visibleData]);
 
   return (
