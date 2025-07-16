@@ -1,19 +1,17 @@
 .filters {
-  background: linear-gradient(120deg, #15232f 60%, #11382c 100%);
+  background: #15232f;
   border-radius: 16px;
   padding: 20px 16px;
   margin-bottom: 20px;
   color: #eaf6ff;
-  box-shadow: 0 4px 28px #18ffe999, 0 1px 14px #133b3c33;
-  border: 1.5px solid #22ffe6;
   box-sizing: border-box;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 
   h3 {
     font-size: 1.1rem;
     margin-bottom: 12px;
     font-weight: 600;
     color: #35f5e7;
-    text-shadow: 0 1px 6px #15efcd99;
   }
 
   .filters-list {
@@ -27,9 +25,9 @@
   .filter-button {
     flex: 1 1 calc(48% - 10px);
     min-width: 120px;
-    background: #193144e8;
+    background: #1f2e3a;
     color: #c8fff9;
-    border: 1px solid #1fffd711;
+    border: 1px solid transparent;
     border-radius: 10px;
     padding: 10px 12px;
     font-size: 0.95rem;
@@ -39,46 +37,26 @@
     gap: 0.5em;
     cursor: pointer;
     text-align: center;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px #0efadd33;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 
     &:hover {
       background: #24dbb6;
       color: #013e2b;
-      transform: scale(1.025);
+      transform: scale(1.03);
+      border-color: #1cd5a2;
     }
 
     &.active {
-      background: linear-gradient(90deg, #29ffe6 20%, #2bffc1 95%);
+      background: #29ffe6;
       color: #013e2b;
       font-weight: 700;
-      border: 1.5px solid #31ffd6;
-      box-shadow: 0 0 0 2px #1be7c822, 0 2px 10px #15ffd799;
-      transform: scale(1.03);
+      border: 1.5px solid #1cd5a2;
+      box-shadow: 0 0 8px #24d3b1aa;
+      transform: scale(1.05);
     }
 
     .icon {
       font-size: 1.1rem;
-      filter: drop-shadow(0 1px 3px #28ffdc40);
-    }
-  }
-
-  .reset-button {
-    display: block;
-    margin: 16px auto 0;
-    padding: 8px 14px;
-    background: #193144;
-    color: #aafef6;
-    border: 1px solid #28ffe377;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-
-    &:hover {
-      background: #2cf4c1;
-      color: #00352e;
     }
   }
 
@@ -134,6 +112,35 @@
       font-size: 0.9rem;
       border-radius: 8px;
       border: 1px solid #ccc;
+      background: #1f2e3a;
+      color: #eaf6ff;
+      transition: border-color 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #24dbb6;
+        box-shadow: 0 0 5px #24dbb6aa;
+      }
+    }
+  }
+
+  .reset-button {
+    display: block;
+    margin: 16px auto 0;
+    padding: 8px 14px;
+    background: #193144;
+    color: #aafef6;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+
+    &:hover {
+      background: #24dbb6;
+      color: #013e2b;
+      border-color: #24dbb6;
     }
   }
 }
@@ -144,7 +151,6 @@
     padding: 14px 8px;
     max-width: 100%;
     overflow: hidden;
-    box-sizing: border-box;
   }
 
   .filters-list {

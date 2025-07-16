@@ -14,7 +14,7 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import MobileMenu from "./components/MobileMenu";
 import MainLayout from "./layouts/MainLayout";
 
-import "./App.scss";
+import "./styles/main.scss";
 
 export default function App() {
   const isMobile = useIsMobile();
