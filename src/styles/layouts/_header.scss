@@ -1,0 +1,106 @@
+$primary-color: #1e3a8a;
+$secondary-color: #0f172a;
+$text-light: #ffffff;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, $secondary-color 40%, $primary-color 100%);
+  color: $text-light;
+  padding: 0 2rem;
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  box-shadow: 0 3px 24px rgba(10, 30, 60, 0.14);
+  border-bottom: 1.5px solid #2ef9c880;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.search-input {
+  padding: 0.45rem 1.1rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: 240px;
+  max-width: 100%;
+  background: #183357;
+  color: #eaf6ff;
+  transition: box-shadow 0.15s, background 0.18s;
+  box-shadow: 0 2px 6px #1e3a8a22;
+
+  &:focus {
+    background: #102e4b;
+    box-shadow: 0 3px 12px #29ffe555, 0 1px 5px #18c9b944;
+  }
+}
+
+// ≤ 768px : tablette
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
+    height: 68px;
+  }
+
+  .logo {
+    height: 44px;
+  }
+
+  .search-input {
+    width: 180px;
+    font-size: 0.95rem;
+  }
+}
+
+// ≤ 500px : mobile
+@media (max-width: 500px) {
+  .header {
+    padding: 0 0.8rem;
+    height: 60px;
+  }
+
+  .logo {
+    height: 36px;
+  }
+
+  .search-input {
+    width: 130px;
+    font-size: 0.85rem;
+  }
+}
+
+// ≤ 400px : tout petit mobile
+@media (max-width: 400px) {
+  .search-input {
+    width: 100px;
+    font-size: 0.8rem;
+  }
+}
