@@ -27,7 +27,7 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter, onCo
       {/* Sélecteur de pays */}
       <div className="country-select">
         <label htmlFor="country">
-          🌎 Filtrer par pays :
+          🌎 Filtrer par pays
           <select
             id="country"
             value={country}
@@ -46,7 +46,6 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter, onCo
         </label>
       </div>
 
-      <h3>Filtres</h3>
       <div className="filters-list">
         {filters.map((f) => (
           <div key={f.value}>

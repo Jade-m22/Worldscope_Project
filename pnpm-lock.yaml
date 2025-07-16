@@ -11,6 +11,9 @@ importers:
       globe.gl:
         specifier: ^2.42.0
         version: 2.42.0
+      icons:
+        specifier: ^1.0.0
+        version: 1.0.0
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -952,6 +955,10 @@ packages:
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+
+  icons@1.0.0:
+    resolution: {integrity: sha512-7POum3AHKovjEEXg4ITL2opTzGjnN2UnUIhv5LsUX+SjKBsFMjRyANShrCubt0KQdNdcX2wAym+JXOt6LceuYA==}
+    deprecated: Package no longer supported. Contact support@npmjs.com for more info.
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
@@ -2299,6 +2306,8 @@ snapshots:
   h3-js@4.2.1: {}
 
   has-flag@4.0.0: {}
+
+  icons@1.0.0: {}
 
   ignore@5.3.2: {}
 

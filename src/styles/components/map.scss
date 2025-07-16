@@ -1,4 +1,3 @@
-// Map card avec halo “néo-futuriste”
 .map-card {
   border-radius: 22px;
   padding: 0;
@@ -29,12 +28,6 @@
     z-index: -1;
     pointer-events: none;
   }
-
-  @media (max-width: 768px) {
-    height: 360px;
-    min-height: 360px;
-    max-height: 360px;
-  }
 }
 
 .geoscope-map {
@@ -48,13 +41,15 @@
 .custom-marker {
   filter: drop-shadow(0 2px 8px #0006);
   transition: filter 0.16s;
-  svg { display: block; }
+
+  svg {
+    display: block;
+  }
 }
 
-// Styles pour la popup
 .map-popup {
   min-width: 180px;
-  color: #000000; // Texte par défaut en noir
+  color: #000;
   font-family: inherit;
 
   .map-popup-title {
@@ -67,7 +62,7 @@
   }
 
   .map-popup-meta {
-    color: #111 !important; // Met bien en noir (pays & année)
+    color: #111 !important;
     font-size: 0.97em;
     margin-bottom: 4px;
   }
@@ -79,7 +74,7 @@
 
   .map-popup-coords {
     font-size: 0.85em;
-    color: #111 !important; // Met bien en noir (lat/lon)
+    color: #111 !important;
     margin-bottom: 6px;
   }
 
@@ -104,127 +99,107 @@
   }
 }
 
-/* Tablettes (≤ 768px) */
-@media (max-width: 768px) {
-  .geoscope-map {
-    height: 400px;
-  }
-  .map-popup {
-    min-width: 150px;
-    font-size: 0.9rem; /* 0.9em */
-  }
-  .map-popup-title {
-    font-size: 1em;
-  }
-  .map-popup-meta,
-  .map-popup-desc {
-    font-size: 0.9rem; /* 0.9em */
-  }
-  .map-popup-coords {
-    font-size: 0.8rem; /* 0.8em */
-  }
-  .map-popup-detail-btn {
-    padding: 5px 12px;
-    font-size: 0.9rem; /* 0.9em */
-  }
-}
+/* ----------- Responsive ----------- */
 
-/* Mobiles (≤ 480px) */
-@media (max-width: 480px) {
-  .geoscope-map {
-    height: 300px;
-  }
-  .custom-marker {
-    transform: scale(0.85);
-  }
-  .map-popup {
-    min-width: 130px;
-    padding: 8px;
-  }
-  .map-popup-title {
-    font-size: 0.95em;
-    gap: 6px;
-  }
-  .map-popup-meta,
-  .map-popup-desc {
-    font-size: 0.85em;
-  }
-  .map-popup-coords {
-    font-size: 0.8rem; /* 0.8em */
-  }
-  .map-popup-detail-btn {
-    padding: 4px 10px;
-    font-size: 0.8rem; /* 0.8em */
-  }
-}
-
-/* Très petits écrans (≤ 360px) */
-@media (max-width: 360px) {
-  .geoscope-map {
-    height: 240px;
-  }
-  .custom-marker {
-    transform: scale(0.7);
-  }
-  .map-popup {
-    min-width: 110px;
-  }
-  .map-popup-title {
-    font-size: 0.9rem /* 0.9em */
-  }
-  .map-popup-meta,
-  .map-popup-desc,
-  .map-popup-coords {
-    font-size: 0.8rem; /* 0.8em */
-  }
-  .map-popup-detail-btn {
-    padding: 3px 8px;
-    font-size: 0.8rem; /* 0.8em */
-  }
-}
-
-/* Tablettes (≤ 768px) */
 @media (max-width: 768px) {
   .map-card {
     height: 360px;
     min-height: 360px;
     max-height: 360px;
+    margin-bottom: 8px !important;
   }
-  .cardlist-outer {
-    padding: 9px 0 12px;
+
+  .geoscope-map {
+    height: 400px;
+  }
+
+  .map-popup {
+    min-width: 150px;
+    font-size: 0.9rem;
+  }
+
+  .map-popup-title {
+    font-size: 1em;
+  }
+
+  .map-popup-meta,
+  .map-popup-desc {
+    font-size: 0.9rem;
+  }
+
+  .map-popup-coords {
+    font-size: 0.8rem;
+  }
+
+  .map-popup-detail-btn {
+    padding: 5px 12px;
+    font-size: 0.9rem;
   }
 }
 
-/* Petits écrans (≤ 600px) */
-@media (max-width: 600px) {
-  .map-card {
-    width: 95vw;
-  }
-  .cardlist-outer {
-    padding: 8px 0 10px;
-  }
-}
-
-/* Mobiles (≤ 480px) */
 @media (max-width: 480px) {
   .map-card {
-    height: 300px;
-    min-height: 300px;
-    max-height: 300px;
+    margin-bottom: 4px !important;
   }
-  .cardlist-outer {
-    padding: 6px 0 8px;
+
+  .geoscope-map {
+    height: 300px;
+  }
+
+  .custom-marker {
+    transform: scale(0.85);
+  }
+
+  .map-popup {
+    min-width: 130px;
+    padding: 8px;
+  }
+
+  .map-popup-title {
+    font-size: 0.95em;
+    gap: 6px;
+  }
+
+  .map-popup-meta,
+  .map-popup-desc {
+    font-size: 0.85em;
+  }
+
+  .map-popup-coords {
+    font-size: 0.8rem;
+  }
+
+  .map-popup-detail-btn {
+    padding: 4px 10px;
+    font-size: 0.8rem;
   }
 }
 
-/* Très petits écrans (≤ 360px) */
 @media (max-width: 360px) {
-  .map-card {
-    height: 260px;
-    min-height: 260px;
-    max-height: 260px;
+  .geoscope-map {
+    height: 240px;
   }
-  .cardlist-outer {
-    padding: 4px 0 6px;
+
+  .custom-marker {
+    transform: scale(0.7);
+  }
+
+  .map-popup {
+    min-width: 110px;
+  }
+
+  .map-popup-title {
+    font-size: 0.9rem;
+  }
+
+  .map-popup-meta,
+  .map-popup-desc,
+  .map-popup-coords {
+    font-size: 0.8rem;
+  }
+
+  .map-popup-detail-btn {
+    padding: 3px 8px;
+    font-size: 0.8rem;
   }
 }
