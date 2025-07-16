@@ -1,24 +1,23 @@
 // src/components/Globe.jsx
 
-// 1. On importe "useRef" et "useEffect" en plus de React
-import React, { useRef, useEffect } from "react";
+// On importe useEffect et forwardRef
+import React, { useEffect, forwardRef } from "react";
 import Globe from "react-globe.gl";
 import countriesData from "../data/countries.json";
 
-// Note: Pour cette solution, on n'a plus besoin de forwardRef pour l'instant
-const GlobeView = ({ data, onMarkerClick }) => {
-  // 2. On crée une "télécommande" (ref) pour notre globe
-  const globeEl = useRef();
-
-  // 3. On utilise useEffect pour exécuter du code après l'affichage du globe
+const GlobeView = forwardRef(({ data, onMarkerClick }, ref) => {
+  // ON AJOUTE DE NOUVEAU LE HOOK USEEFFECT
   useEffect(() => {
-    // On s'assure que le globe est bien là
-    if (globeEl.current) {
-      // On accède à ses contrôles et on active manuellement la rotation
-      globeEl.current.controls().autoRotate = true;
-      globeEl.current.controls().autoRotateSpeed = 0.5;
+    // On s'assure que la ref est prête
+    if (ref && ref.current) {
+      // On utilise la ref pour accéder aux contrôles et activer la rotation
+      ref.current.controls().autoRotate = true;
+      ref.current.controls().autoRotateSpeed = 0.5;
+
+      // On désactive le zoom au scroll pour une meilleure expérience
+      ref.current.controls().enableZoom = false;
     }
-  }, []); // Le tableau vide signifie : "ne fais ça qu'une seule fois"
+  }, [ref]); // On exécute cet effet quand la ref est disponible
 
   const handlePointClick = (event) => {
     const eventIndex = data.findIndex((e) => e.title === event.title);
@@ -29,14 +28,10 @@ const GlobeView = ({ data, onMarkerClick }) => {
 
   return (
     <Globe
-      // 4. On branche notre "télécommande" sur le globe
-      ref={globeEl}
+      ref={ref}
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
       backgroundColor="rgba(0,0,0,0)"
-      // On peut réactiver les données
       pointsData={data}
-      polygonsData={countriesData.features}
-      // ... (le reste de vos props reste identique)
       pointLat={(event) => event.position[0]}
       pointLng={(event) => event.position[1]}
       pointLabel={(event) => event.title}
@@ -54,12 +49,13 @@ const GlobeView = ({ data, onMarkerClick }) => {
       }}
       pointRadius={0.5}
       onPointClick={handlePointClick}
+      polygonsData={countriesData.features}
       polygonCapColor={() => "rgba(0, 0, 0, 0)"}
       polygonSideColor={() => "rgba(0, 0, 0, 0)"}
       polygonStrokeColor={() => "#ffffff60"}
       polygonAltitude={0.01}
     />
   );
-};
+});
 
 export default GlobeView;

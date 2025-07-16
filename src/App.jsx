@@ -30,11 +30,10 @@ export default function App() {
   const [viewMode, setViewMode] = useState("map");
   const [subFilter, setSubFilter] = useState([]);
   const [country, setCountry] = useState("");
-
-  // ✅ plage temporelle par défaut : -3000 → 2025
   const [range, setRange] = useState([-3000, 2025]);
 
   const mapRef = useRef();
+  const globeRef = useRef();
   const detailRef = useRef();
 
   const handleFilterChange = (value) => {
@@ -44,20 +43,51 @@ export default function App() {
     }
   };
 
-  // ✅ on utilise la plage d'années au lieu d'une seule année
-  const filteredEvents = filterEvents(filter, range, search, subFilter, country);
+  const filteredEvents = filterEvents(
+    filter,
+    range,
+    search,
+    subFilter,
+    country
+  );
 
+  // MODIFIÉ : Arrête la rotation ici
   const handleShowDetail = (idx) => {
+    if (globeRef.current) {
+      globeRef.current.controls().autoRotate = false;
+    }
     setDetailedIdx(idx);
     setTimeout(() => {
       detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 180);
   };
 
+  // AJOUTÉ : Nouvelle fonction pour fermer les détails et relancer la rotation
+  const handleCloseDetail = () => {
+    setDetailedIdx(null);
+    if (globeRef.current) {
+      globeRef.current.controls().autoRotate = true;
+    }
+  };
+
   const handleCardClick = (idx) => {
     setSelected(idx);
+    const event = filteredEvents[idx];
+
     if (mapRef.current && viewMode === "map") {
       mapRef.current.flyToEvent(idx);
+    } else if (globeRef.current && viewMode === "globe" && event) {
+      if (globeRef.current) {
+        globeRef.current.controls().autoRotate = false;
+      }
+      globeRef.current.pointOfView(
+        {
+          lat: event.position[0],
+          lng: event.position[1],
+          altitude: 0.5,
+        },
+        1600
+      );
     }
   };
 
@@ -66,13 +96,12 @@ export default function App() {
       header={<Header search={search} setSearch={setSearch} />}
       sidebar={
         <>
-          {/* ✅ Nouvelle Timeline avec plage + label animé */}
           <Timeline
             min={-3000}
             max={2025}
             range={range}
             onChange={setRange}
-            labelMode="above" // change à "below" pour tester l'autre option
+            labelMode="above"
           />
           <Filters
             onFilter={handleFilterChange}
@@ -107,6 +136,7 @@ export default function App() {
               />
             ) : (
               <GlobeView
+                ref={globeRef}
                 data={filteredEvents}
                 onMarkerClick={handleShowDetail}
               />
@@ -124,7 +154,7 @@ export default function App() {
             {detailedIdx !== null && filteredEvents[detailedIdx] && (
               <EventDetail
                 event={filteredEvents[detailedIdx]}
-                onClose={() => setDetailedIdx(null)}
+                onClose={handleCloseDetail} // MODIFIÉ : On utilise la nouvelle fonction
               />
             )}
           </div>
