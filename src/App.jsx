@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+// src/App.jsx
+import React, { useRef, useState } from "react";
 import useEventState from "./hooks/useEventState";
 import filterEvents from "./utils/filterEvents";
 
@@ -9,7 +10,10 @@ import CardList from "./components/CardList";
 import Timeline from "./components/Timeline";
 import GlobeView from "./components/Globe";
 import EventDetail from "./components/EventDetail";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 import MainLayout from "./layouts/MainLayout";
+
+import "./App.scss";
 
 export default function App() {
   const {
