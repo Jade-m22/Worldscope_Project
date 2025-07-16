@@ -1,0 +1,198 @@
+.event-detail {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #111827;
+  color: #f9fafb;
+  padding: 40px 32px;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.event-detail-main {
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.event-detail-image {
+  flex: 0 0 420px;
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.event-detail-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.event-detail-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.event-detail-meta {
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+// ===== NOUVEAU STYLE HIGHLIGHT NEON =====
+.event-detail-highlight {
+  background: rgba(16, 35, 50, 0.82); // Fond bleu nuit translucide
+  border: 1.5px solid #38ffd8; // Contour turquoise néon
+  box-shadow: 0 0 12px #32ffe299, 0 1px 10px #223b3d3a;
+  padding: 7px 18px;
+  border-radius: 11px;
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #32ffe2;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+  margin-top: 3px;
+  transition: box-shadow 0.19s;
+
+  &:hover {
+    box-shadow: 0 0 18px #38ffd8cc, 0 1px 12px #1ee1b866;
+  }
+}
+
+.event-detail-type {
+  color: #faffb1; // Jaune pastel néon
+  font-weight: 600;
+}
+
+.event-detail-subcategory {
+  color: #32b3f6; // Bleu vif
+  font-weight: 500;
+  margin-left: 7px;
+}
+
+.event-detail-desc {
+  font-size: 1.05rem;
+  color: #e2e8f0;
+}
+
+.event-detail-more {
+  font-style: italic;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+// === MODAL PHOTO FULLSCREEN ===
+.modal-backdrop {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(10, 22, 34, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  animation: modalFadeIn 0.16s;
+}
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.modal-image {
+  max-width: 96vw;
+  max-height: 90vh;
+  border-radius: 18px;
+  box-shadow: 0 8px 64px #0cf8b088;
+  cursor: zoom-out;
+  background: #0a2231;
+  object-fit: contain;
+  transition: box-shadow 0.18s;
+}
+
+/* Tablettes (<= 768px déjà géré sur .event-detail-main, on affine ici) */
+@media (max-width: 768px) {
+  .event-detail {
+    padding: 32px 24px;
+  }
+  .event-detail-image {
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+  }
+  .event-detail-text {
+    gap: 10px;
+  }
+  .event-detail-title {
+    font-size: 1.6rem;
+  }
+  .event-detail-desc {
+    font-size: 1rem;
+  }
+}
+
+/* Petits écrans (<= 480px) */
+@media (max-width: 480px) {
+  .event-detail {
+    margin: 20px 12px;
+    padding: 24px 16px;
+  }
+  .event-detail-main {
+    gap: 24px;
+  }
+  .event-detail-title {
+    font-size: 1.4rem;
+    gap: 6px;
+  }
+  .event-detail-meta {
+    font-size: 0.9rem;
+  }
+  .event-detail-desc {
+    font-size: 0.95rem;
+  }
+  .event-detail-more {
+    font-size: 0.9rem;
+  }
+  .event-detail-highlight {
+    padding: 6px 14px;
+    font-size: 1rem;
+  }
+}
+
+/* Très petits écrans (<= 360px) */
+@media (max-width: 360px) {
+  .event-detail {
+    padding: 18px 12px;
+  }
+  .event-detail-title {
+    font-size: 1.3rem;
+  }
+  .event-detail-meta {
+    font-size: 0.85rem;
+  }
+  .event-detail-desc {
+    font-size: 0 Nineem; /* 0.9rem */
+  }
+  .modal-image {
+    max-width: 90vw;
+    max-height: 85vh;
+  }
+}
