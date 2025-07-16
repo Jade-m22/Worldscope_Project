@@ -1,18 +1,15 @@
 // src/components/Globe.jsx
 
+// On importe React, mais plus besoin de useState/useEffect
 import React from "react";
 import Globe from "react-globe.gl";
 
-// 1. On s'assure que le composant accepte "onMarkerClick" en plus de "data"
-const GlobeView = ({ data, onMarkerClick }) => {
-  // 2. On définit la fonction qui sera appelée au clic sur un point
-  const handlePointClick = (event) => {
-    // La fonction onMarkerClick attend l'INDEX de l'événement,
-    // mais le globe nous donne l'OBJET événement complet.
-    // On doit donc trouver l'index de notre événement dans le tableau de données.
-    const eventIndex = data.findIndex((e) => e.title === event.title);
+// On importe directement notre fichier JSON local
+import countriesData from "../data/countries.json";
 
-    // Si on a bien trouvé l'index et que la fonction existe, on l'appelle
+const GlobeView = ({ data, onMarkerClick }) => {
+  const handlePointClick = (event) => {
+    const eventIndex = data.findIndex((e) => e.title === event.title);
     if (eventIndex !== -1 && onMarkerClick) {
       onMarkerClick(eventIndex);
     }
@@ -23,25 +20,29 @@ const GlobeView = ({ data, onMarkerClick }) => {
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
       backgroundColor="rgba(0,0,0,0)"
       pointsData={data}
-      // Configuration des points
       pointLat={(event) => event.position[0]}
       pointLng={(event) => event.position[1]}
       pointLabel={(event) => event.title}
       pointColor={(event) => {
         switch (event.type) {
           case "Conflit":
-            return "rgba(255, 0, 0, 0.7)"; // Rouge pour les conflits
+            return "rgba(255, 0, 0, 0.7)";
           case "À visiter":
-            return "rgba(0, 255, 0, 0.7)"; // Vert pour "À visiter"
+            return "rgba(0, 255, 0, 0.7)";
           case "Dangereux":
-            return "rgba(255, 165, 0, 0.7)"; // Orange pour "Dangereux"
+            return "rgba(255, 165, 0, 0.7)";
           default:
-            return "rgba(100, 100, 255, 0.7)"; // Bleu par défaut
+            return "rgba(100, 100, 255, 0.7)";
         }
       }}
       pointRadius={0.5}
-      // 3. On lie notre fonction à l'événement de clic du globe
       onPointClick={handlePointClick}
+      // On utilise directement les données importées
+      polygonsData={countriesData.features}
+      polygonCapColor={() => "rgba(0, 0, 0, 0)"}
+      polygonSideColor={() => "rgba(0, 0, 0, 0)"}
+      polygonStrokeColor={() => "#ffffff60"}
+      polygonAltitude={0.01}
     />
   );
 };
