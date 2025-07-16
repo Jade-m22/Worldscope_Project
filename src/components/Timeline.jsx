@@ -19,12 +19,19 @@ export default function Timeline({ min = -3000, max = 2025, range = [min, max], 
           min={min}
           max={max}
           onChange={onChange}
-          renderTrack={({ props, children }) => (
-            <div {...props} className="timeline-track">
-              {children}
-            </div>
-          )}
-          renderThumb={({ props }) => <div {...props} className="timeline-thumb" />}
+          renderTrack={({ props, children }) => {
+            // Ici on extrait key (si présent) et on le passe explicitement
+            const { key, ...rest } = props;
+            return (
+              <div key={key} {...rest} className="timeline-track">
+                {children}
+              </div>
+            );
+          }}
+          renderThumb={({ props }) => {
+            const { key, ...rest } = props;
+            return <div key={key} {...rest} className="timeline-thumb" />;
+          }}
         />
       </div>
 
