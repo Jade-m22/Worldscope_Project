@@ -1,14 +1,17 @@
+// src/components/Header.jsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../assets/VERT_worldscope.webp';
 
 export default function Header({ search, setSearch }) {
   return (
     <header className="header">
       <div className="header-left">
-        <a href="/" className="logo-link">
+        <Link to="/" className="logo-link">
           <img src={logo} alt="WorldScope Logo" className="logo" />
-        </a>
+        </Link>
       </div>
+
       <div className="header-right">
         <input
           type="text"
@@ -17,6 +20,10 @@ export default function Header({ search, setSearch }) {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
+
+        <Link to="/quiz">
+          <button className="quiz-button">Quiz</button>
+        </Link>
       </div>
     </header>
   );
