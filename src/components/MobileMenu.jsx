@@ -12,8 +12,8 @@ export default function MobileMenu(props) {
       </button>
 
       <div className={`mobile-panel ${open ? "open" : ""}`}>
-        <Filters {...props} />
         <Timeline {...props} />
+        <Filters {...props} />
       </div>
     </div>
   );
