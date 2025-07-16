@@ -21,6 +21,7 @@ export default function useFiltersLogic() {
 
   const mapRef = useRef();
   const detailRef = useRef();
+  const globeRef = useRef();
 
   const handleFilterChange = (value) => {
     setFilter(value);
@@ -44,11 +45,8 @@ export default function useFiltersLogic() {
   const filteredEvents = filterEvents(filter, range, search, subFilter, country);
 
   return {
-    // pour Header
     search,
     setSearch,
-
-    // pour les filtres
     filterProps: {
       onFilter: handleFilterChange,
       active: filter,
@@ -60,15 +58,12 @@ export default function useFiltersLogic() {
       onChange: setRange,
       labelMode: "above",
     },
-
-    // pour la map/globe
     viewMode,
     setViewMode,
     filteredEvents,
     mapRef,
+    globeRef,
     detailRef,
-
-    // pour la carte et le détail
     selected,
     setSelected,
     detailedIdx,
