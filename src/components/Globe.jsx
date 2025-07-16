@@ -20,7 +20,7 @@ const GlobeView = ({ data, onMarkerClick }) => {
 
   return (
     <Globe
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+      globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
       backgroundColor="rgba(0,0,0,0)"
       pointsData={data}
       // Configuration des points
