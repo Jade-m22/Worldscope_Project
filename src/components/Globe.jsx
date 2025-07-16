@@ -1,5 +1,3 @@
-// src/components/Globe.jsx
-
 // On importe useEffect et forwardRef
 import React, { useEffect, forwardRef } from "react";
 import Globe from "react-globe.gl";

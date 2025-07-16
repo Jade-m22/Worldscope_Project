@@ -1,4 +1,3 @@
-// src/components/ScrollToTopButton.jsx
 import React, { useState, useEffect } from 'react';
 
 const ScrollToTopButton = () => {
