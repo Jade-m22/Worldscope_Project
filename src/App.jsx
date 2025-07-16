@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useRef, useState } from "react";
 import useEventState from "./hooks/useEventState";
 import filterEvents from "./utils/filterEvents";
