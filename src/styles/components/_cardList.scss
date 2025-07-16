@@ -107,6 +107,7 @@
     overflow: hidden;
     margin-top: 10px;
     transition: all 0.4s ease;
+    color: #ffffff;
 
     .year    { color: #ffe9c2; font-size: 0.9em; }
 
@@ -226,7 +227,6 @@
   .country,
   .type,
   .year { font-size: 0.9em; }
-  .details-btn { font-size: 0.95em; padding: 3px 10px; }
 }
 
 /* Petits mobiles (<= 480px) */
@@ -253,7 +253,6 @@
   .country,
   .type,
   .year { text-align: center; }
-  .details-btn { width: 100%; text-align: center; }
 }
 
 /* Très petits écrans (<= 360px) */
