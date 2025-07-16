@@ -1,0 +1,137 @@
+.mobile-menu-container {
+  display: none;
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+
+  .mobile-menu-toggle {
+    display: block;
+    width: fit-content;
+    max-width: 92vw;
+    margin: 12px auto;
+    padding: 8px 14px;
+    background: linear-gradient(120deg, #1c2e3b, #123f36);
+    color: #eaf6ff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    border: 1.5px solid #29ffe6;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 10px #18ffe955;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background: #29ffe6;
+      color: #002b26;
+    }
+  }
+
+  .mobile-panel {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+      max-height 0.4s ease,
+      opacity 0.3s ease,
+      padding 0.3s ease,
+      transform 0.3s ease;
+    box-sizing: border-box;
+    overflow-x: hidden;
+
+    &.open {
+      max-height: 3000px;
+      opacity: 1;
+      padding-top: 12px;
+      transform: translateY(0);
+    }
+
+    .filters,
+    .timeline {
+      margin: 0 auto 18px;
+      width: 100%;
+      max-width: 94vw;
+      font-size: 0.88rem;
+      transform: scale(0.96);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-container {
+    display: block;
+  }
+
+  .sidebar > .filters,
+  .sidebar > .timeline {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-container {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .mobile-panel .filters,
+  .mobile-panel .timeline {
+    transform: scale(0.88);
+    transform-origin: top center;
+  }
+
+  .mobile-panel .filters h3 {
+    font-size: 1rem;
+  }
+
+  .mobile-panel .filter-button {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .mobile-panel .filter-button .icon {
+    font-size: 1rem;
+  }
+
+  .mobile-panel .subfilters {
+    padding-top: 6px;
+    margin-top: 10px;
+  }
+
+  .mobile-panel .subfilter-label {
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .mobile-panel .country-select label {
+    font-size: 0.85rem;
+  }
+
+  .mobile-panel .country-select select {
+    font-size: 0.85rem;
+    padding: 4px 6px;
+  }
+
+  .mobile-panel .reset-button,
+  .mobile-panel .timeline-reset {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+  .mobile-panel .timeline-range-values,
+  .mobile-panel .timeline-labels {
+    font-size: 0.85rem;
+  }
+
+  .mobile-panel .timeline-thumb {
+    height: 14px;
+    width: 14px;
+  }
+
+  .mobile-panel .timeline-clock {
+    width: 32px;
+    height: 32px;
+  }
+}
