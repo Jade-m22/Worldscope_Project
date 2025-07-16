@@ -40,18 +40,18 @@
     transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 
     &:hover {
-      background: #24dbb6;
-      color: #013e2b;
+      background: #c2fff180;
+      color: #000000;
       transform: scale(1.03);
-      border-color: #1cd5a2;
+      border-color: #ffffff;
+      font-weight: 700;
     }
 
     &.active {
-      background: #29ffe6;
-      color: #013e2b;
+      background: #1e3a8a;
+      color: #ffffff;
       font-weight: 700;
-      border: 1.5px solid #1cd5a2;
-      box-shadow: 0 0 8px #24d3b1aa;
+      border: 1.5px solid #2ef9c880;
       transform: scale(1.05);
     }
 

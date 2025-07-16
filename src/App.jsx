@@ -30,6 +30,7 @@ export default function App() {
     selected,
     setSelected,
     detailedIdx,
+    setDetailedIdx,
     handleShowDetail,
     handleCardClick,
   } = useFiltersLogic();
