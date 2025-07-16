@@ -28,12 +28,6 @@
     z-index: -1;
     pointer-events: none;
   }
-
-  @media (max-width: 768px) {
-    height: 360px;
-    min-height: 360px;
-    max-height: 360px;
-  }
 }
 
 .geoscope-map {
@@ -53,7 +47,6 @@
   }
 }
 
-/* Map popup styles */
 .map-popup {
   min-width: 180px;
   color: #000;
@@ -106,25 +99,38 @@
   }
 }
 
-/* Responsive map popups and map height */
+/* ----------- Responsive ----------- */
+
 @media (max-width: 768px) {
+  .map-card {
+    height: 360px;
+    min-height: 360px;
+    max-height: 360px;
+    margin-bottom: 8px !important;
+  }
+
   .geoscope-map {
     height: 400px;
   }
+
   .map-popup {
     min-width: 150px;
     font-size: 0.9rem;
   }
+
   .map-popup-title {
     font-size: 1em;
   }
+
   .map-popup-meta,
   .map-popup-desc {
     font-size: 0.9rem;
   }
+
   .map-popup-coords {
     font-size: 0.8rem;
   }
+
   .map-popup-detail-btn {
     padding: 5px 12px;
     font-size: 0.9rem;
@@ -132,27 +138,37 @@
 }
 
 @media (max-width: 480px) {
+  .map-card {
+    margin-bottom: 4px !important;
+  }
+
   .geoscope-map {
     height: 300px;
   }
+
   .custom-marker {
     transform: scale(0.85);
   }
+
   .map-popup {
     min-width: 130px;
     padding: 8px;
   }
+
   .map-popup-title {
     font-size: 0.95em;
     gap: 6px;
   }
+
   .map-popup-meta,
   .map-popup-desc {
     font-size: 0.85em;
   }
+
   .map-popup-coords {
     font-size: 0.8rem;
   }
+
   .map-popup-detail-btn {
     padding: 4px 10px;
     font-size: 0.8rem;
@@ -163,20 +179,25 @@
   .geoscope-map {
     height: 240px;
   }
+
   .custom-marker {
     transform: scale(0.7);
   }
+
   .map-popup {
     min-width: 110px;
   }
+
   .map-popup-title {
     font-size: 0.9rem;
   }
+
   .map-popup-meta,
   .map-popup-desc,
   .map-popup-coords {
     font-size: 0.8rem;
   }
+
   .map-popup-detail-btn {
     padding: 3px 8px;
     font-size: 0.8rem;
