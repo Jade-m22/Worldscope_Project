@@ -3,6 +3,7 @@ import events from "../data/events";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import countryToCode from "../utils/countryCodes";
 import { fetchWikiExtract } from "../utils/wiki";
+import SeeMoreButton from "./SeeMoreButton";
 
 export default function CardList({ data = events, onCardClick, onShowDetail }) {
   const cardsPerPage = 4;
@@ -75,16 +76,12 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                     {item.status}
                   </div>
                   {onShowDetail && (
-                    <button
-                      className="card-action-btn"
+                    <SeeMoreButton
                       onClick={(e) => {
                         e.stopPropagation();
                         onShowDetail(i + startIndex);
                       }}
-                    >
-                      <span className="text">Voir</span>
-                      <span className="icon">+</span>
-                    </button>
+                    />
                   )}
                 </div>
               </div>
@@ -94,11 +91,10 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
       </div>
 
       {startIndex + cardsPerPage < data.length && (
-        <div className="show-more-wrapper">
-          <button className="show-more-btn" onClick={handleShowMore}>
-            + Voir plus
-          </button>
-        </div>
+          <SeeMoreButton
+            onClick={handleShowMore}
+            size="large"
+          />
       )}
     </div>
   );
