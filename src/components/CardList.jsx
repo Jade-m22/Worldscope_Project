@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import events from "../data/events";
-import FlagOrEmoji from "../utils/FlagOrEmoji";
 import countryToCode from "../utils/countryCodes";
 import { fetchWikiExtract } from "../utils/wiki";
 import SeeMoreButton from "./SeeMoreButton";
@@ -65,8 +64,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
             >
               <div className="card-overlay">
                 <h4 className="card-title">
-                  <FlagOrEmoji code={countryToCode[item.country]} size="1.2em" />
-                  {item.title}
+                  {countryToCode[item.country]} {item.title}
                 </h4>
                 <div className="card-details">
                   <div className="country">{item.country}</div>
