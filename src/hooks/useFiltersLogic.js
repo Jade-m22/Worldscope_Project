@@ -35,6 +35,9 @@ export default function useFiltersLogic() {
     }, 180);
   };
 
+    // Pour fermer le détail
+    const handleCloseDetail = () => setDetailedIdx(null);
+
   const handleCardClick = (idx) => {
     setSelected(idx);
     if (mapRef.current && viewMode === "map") {
@@ -70,5 +73,6 @@ export default function useFiltersLogic() {
     setDetailedIdx,
     handleShowDetail,
     handleCardClick,
+    handleCloseDetail
   };
 }

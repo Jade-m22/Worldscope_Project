@@ -30,13 +30,10 @@ export default function App() {
     selected,
     setSelected,
     detailedIdx,
-    setDetailedIdx,
     handleShowDetail,
     handleCardClick,
+    handleCloseDetail,
   } = useFiltersLogic();
-
-  // Pour fermer le détail
-  const handleCloseDetail = () => setDetailedIdx(null);
 
   return (
     <>
