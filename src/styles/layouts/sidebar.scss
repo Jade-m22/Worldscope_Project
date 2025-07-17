@@ -20,7 +20,7 @@
     flex-direction: row;
     gap: 18px;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
   }
 }
 
@@ -34,10 +34,11 @@
 @media (max-width: 600px) {
   .sidebar {
     flex-direction: column;
-    width: 90vw;
+    width: 70vw;
     max-width: none;
-    margin: 0 auto 16px;
+    margin-bottom: 16px;
     gap: 14px;
+    align-items: center;
   }
 }
 
