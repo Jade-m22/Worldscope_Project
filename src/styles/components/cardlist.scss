@@ -176,6 +176,7 @@
     max-width: calc(50% - 12px);
     height: 230px;
     scroll-snap-align: start;
+    justify-content: space-between;
 
     &::after {
       opacity: 1 !important;
@@ -185,7 +186,7 @@
     .card-overlay {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
       padding: 12px 10px;
       background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 40%);
     }
