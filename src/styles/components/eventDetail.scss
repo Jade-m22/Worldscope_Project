@@ -90,12 +90,14 @@
 .event-detail-desc {
   font-size: 1.05rem;
   color: #e2e8f0;
+  text-align: justify;
 }
 
 .event-detail-more {
   font-style: italic;
   color: #cbd5e1;
   line-height: 1.6;
+  text-align: justify;
 }
 
 // === MODAL PHOTO FULLSCREEN ===
@@ -152,11 +154,15 @@
 /* Petits écrans (<= 480px) */
 @media (max-width: 480px) {
   .event-detail {
-    margin: 20px 12px;
+    width: 95vw;
+    max-width: 95vw;
+    margin: 20px auto;
     padding: 24px 16px;
   }
   .event-detail-main {
     gap: 24px;
+    flex-direction: column;
+    align-items: center;
   }
   .event-detail-title {
     font-size: 1.4rem;
