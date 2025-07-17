@@ -12,6 +12,7 @@ import EventDetail from "./components/EventDetail";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import MobileMenu from "./components/MobileMenu";
 import MainLayout from "./layouts/MainLayout";
+import BottomSheetPopup from "./components/BottomSheetPopup";
 
 import "./styles/main.scss";
 
@@ -93,6 +94,16 @@ export default function App() {
           </>
         }
       />
+      {isMobile && selected !== null && (
+        <BottomSheetPopup
+          event={filteredEvents[selected]}
+          onClose={() => setSelected(null)}
+          onShowDetail={() => {
+            handleShowDetail(selected);
+            setSelected(null);
+          }}
+        />
+      )}
       <ScrollToTopButton />
     </>
   );

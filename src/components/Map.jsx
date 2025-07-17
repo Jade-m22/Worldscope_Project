@@ -5,6 +5,7 @@ import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import { subcategoryColors, markerColors } from "../utils/colors";
+import BottomSheetPopup from "./BottomSheetPopup";
 
 function createColoredPinMarker(color) {
   return L.divIcon({
@@ -106,29 +107,31 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
             "#4deed6"
           )}
         >
-          <Popup>
-            <div className="map-popup">
-              <div className="map-popup-title">
-                <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
-                {m.title}
+          {window.innerWidth > 768 && (
+            <Popup>
+              <div className="map-popup">
+                <div className="map-popup-title">
+                  <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
+                  {m.title}
+                </div>
+                <div className="map-popup-meta" style={{ color: "#000", fontWeight: 600 }}>
+                  {m.country} &middot; {m.year}
+                </div>
+                <div className="map-popup-desc">{m.desc}</div>
+                <div className="map-popup-coords" style={{ color: "#000" }}>
+                  Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
+                </div>
+                {onShowDetail && (
+                  <button
+                    className="map-popup-detail-btn"
+                    onClick={() => onShowDetail(i)}
+                  >
+                    Voir plus de détails
+                  </button>
+                )}
               </div>
-              <div className="map-popup-meta" style={{ color: "#000", fontWeight: 600 }}>
-                {m.country} &middot; {m.year}
-              </div>
-              <div className="map-popup-desc">{m.desc}</div>
-              <div className="map-popup-coords" style={{ color: "#000" }}>
-                Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
-              </div>
-              {onShowDetail && (
-                <button
-                  className="map-popup-detail-btn"
-                  onClick={() => onShowDetail(i)}
-                >
-                  Voir plus de détails
-                </button>
-              )}
-            </div>
-          </Popup>
+            </Popup>
+          )}
         </Marker>
       ))}
       <MapFlyAndPopup selected={selected} markersRef={markersRef} />
