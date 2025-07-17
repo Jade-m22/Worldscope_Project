@@ -1,0 +1,89 @@
+// src/styles/components/quiz.scss
+
+.quiz {
+    background: #15232f;                // même fond que .filters
+    border-radius: 16px;
+    padding: 20px 16px;
+    margin: 24px auto;
+    max-width: 600px;
+    color: #eaf6ff;                     // texte clair
+    box-sizing: border-box;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  
+    // En‑tête du quiz
+    > h3 {
+      font-size: 1rem;
+      margin-bottom: 16px;
+      font-weight: 600;
+      color: #35f5e7;                   // accent bleu cyan
+      text-align: center;
+    }
+  
+    // Texte de la question
+    > p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+  
+    // Liste des options
+    > ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    // Chaque option
+    > ul > li {
+      margin: 0;
+  
+      button {
+        width: 100%;
+        padding: 12px 16px;
+        background: #1c3547;            // légèrement plus sombre
+        border: 2px solid transparent;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        color: #eaf6ff;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s, border-color 0.2s;
+  
+        &:hover {
+          background: #102334;
+        }
+  
+        // État « sélectionné »
+        &.selected {
+          border-color: #35f5e7;
+          background: #0f2b3d;
+        }
+      }
+    }
+  
+    // (optionnel) pieds de page : bouton « Suivant » ou « Terminer »
+    &-footer {
+      margin-top: 20px;
+      text-align: center;
+  
+      .quiz-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        background: #35f5e7;
+        color: #15232f;
+        cursor: pointer;
+        transition: opacity 0.2s;
+  
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  
