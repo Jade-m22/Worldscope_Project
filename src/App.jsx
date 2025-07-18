@@ -37,13 +37,12 @@ export default function App() {
   } = useFiltersLogic();
 
   return (
-    <>
+    <div className="dashboard-bg">
       <MainLayout
         header={<Header search={search} setSearch={setSearch} />}
         sidebar={
           !isMobile ? (
             <div className="desktop-filters">
-              {/* Ici, la Timeline reçoit bien year et onChange depuis filterProps */}
               <Timeline {...filterProps} />
               <Filters {...filterProps} />
             </div>
@@ -105,6 +104,6 @@ export default function App() {
         />
       )}
       <ScrollToTopButton />
-    </>
+    </div>
   );
 }
