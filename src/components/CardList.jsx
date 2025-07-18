@@ -8,6 +8,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
   const cardsPerPage = 4;
   const [startIndex, setStartIndex] = useState(0);
   const [wikiImages, setWikiImages] = useState({});
+  const [loadingTitles, setLoadingTitles] = useState([]);
 
   const visibleData = data.slice(startIndex, startIndex + cardsPerPage);
 
@@ -20,30 +21,43 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
     if (titlesToFetch.length === 0) return;
 
     let i = 0;
+
     function fetchNext() {
       if (i >= titlesToFetch.length) return;
 
       const title = titlesToFetch[i];
-      fetchWikiExtract(title).then((res) => {
-        if (res?.image) {
-          setWikiImages((prev) => ({
-            ...prev,
-            [title]: res.image
-          }));
-        }
-        i++;
-        setTimeout(fetchNext, 300); // délai de 300ms entre chaque appel
-      });
-    }
-    fetchNext();
+      setLoadingTitles(prev => [...prev, title]);
 
+      fetchWikiExtract(title).then(res => {
+        if (res?.image) {
+          const img = new Image();
+          img.src = res.image;
+          img.onload = () => {
+            setWikiImages(prev => ({
+              ...prev,
+              [title]: res.image,
+            }));
+            setLoadingTitles(prev => prev.filter(t => t !== title));
+          };
+          img.onerror = () => {
+            setLoadingTitles(prev => prev.filter(t => t !== title));
+          };
+        } else {
+          setLoadingTitles(prev => prev.filter(t => t !== title));
+        }
+      });
+
+      i++;
+      setTimeout(fetchNext, 300);
+    }
+
+    fetchNext();
   }, [startIndex, data, wikiImages]);
 
   const handleShowMore = () => {
     setStartIndex(prev => {
       const next = prev + cardsPerPage;
-      if (next + cardsPerPage <= data.length) return next;
-      return 0;
+      return next + cardsPerPage <= data.length ? next : 0;
     });
   };
 
@@ -52,16 +66,29 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
       <div className="cards">
         {visibleData.map((item, i) => {
           const imageUrl = wikiImages[item.title];
+          const isLoading = loadingTitles.includes(item.title);
+
           return (
             <div
               className="card"
               key={item.title}
               onClick={() => onCardClick?.(i + startIndex)}
-              style={{ "--bg-url": imageUrl ? `url(${imageUrl})` : "none" }}
+              style={{
+                "--bg-url": imageUrl ? `url(${imageUrl})` : "none",
+                backgroundColor: imageUrl ? "transparent" : "#111",
+                position: "relative"
+              }}
               tabIndex={0}
               role="button"
               aria-pressed="false"
             >
+              {isLoading && <div className="card-skeleton" />}
+              {isLoading && (
+                <div className="card-loading-spinner">
+                  <div className="spinner" />
+                </div>
+              )}
+
               <div className="card-overlay">
                 <h4 className="card-title">
                   {countryToCode[item.country]} {item.title}
@@ -89,10 +116,7 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
       </div>
 
       {startIndex + cardsPerPage < data.length && (
-          <SeeMoreButton
-            onClick={handleShowMore}
-            size="large"
-          />
+        <SeeMoreButton onClick={handleShowMore} size="large" />
       )}
     </div>
   );
