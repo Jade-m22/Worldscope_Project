@@ -1,0 +1,69 @@
+.scroll-to-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1200;
+  background: linear-gradient(90deg, #2bf5e3 0%, #38e9ad 100%);
+  color: #003a32;
+  border: none;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  box-shadow: 0 3px 16px #1ae7c456, 0 0.5px 4px #003a3255;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.88;
+  transition: opacity 0.18s, box-shadow 0.22s, transform 0.14s;
+  outline: none;
+  user-select: none;
+}
+
+.scroll-to-top-btn:hover,
+.scroll-to-top-btn:focus {
+  opacity: 1;
+  box-shadow: 0 5px 28px #23ffea85, 0 2px 8px #00a98177;
+  transform: scale(1.06);
+}
+
+.scroll-to-top-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, visibility 0.25s;
+}
+
+.scroll-to-top-btn .arrow {
+  display: block;
+  margin-top: -2px;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #003a32;
+}
+
+/* Responsive : plus petit et plus haut sur mobile */
+@media (max-width: 650px) {
+  .scroll-to-top-btn {
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+  .scroll-to-top-btn .arrow {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .scroll-to-top-btn {
+    bottom: 12px;
+    right: 12px;
+    width: 46px;
+    height: 46px;
+    font-size: 1.2rem;
+    z-index: 5000 !important;
+  }
+}

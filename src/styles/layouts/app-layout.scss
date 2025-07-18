@@ -2,7 +2,8 @@
 
 .with-header, .app-layout, body, html {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   box-sizing: border-box;
 }
 
@@ -16,6 +17,7 @@
   margin: 0 auto;
   box-sizing: border-box;
   z-index: 1;
+  // background: rgba(0,255,0,0.12); // Debug: à enlever si pas utile
 }
 
 .main-content {
@@ -44,13 +46,23 @@
   }
 }
 
+@media (max-width: 700px) {
+  .app-layout {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 @media (max-width: 600px) {
   .app-layout {
-    padding: 24px 4vw 20px 4vw;
+    padding: 24px 0 20px 0;
     gap: 16px;
   }
   .main-content {
-    width: 95vw;
+    width: 100vw;
     min-height: 520px;
   }
   .with-header {
@@ -64,11 +76,13 @@
 
 @media (max-width: 480px) {
   .app-layout {
-    padding: 20px 5vw 18px 5vw;
+    padding: 20px 0 18px 0;
     gap: 12px;
   }
   .main-content {
     min-height: 400px;
+    width: 100vw;
+    max-width: 100vw;
   }
   .with-header {
     padding-top: 75px;
@@ -81,11 +95,13 @@
 
 @media (max-width: 360px) {
   .app-layout {
-    padding: 16px 6vw 16px 6vw;
+    padding: 16px 0 16px 0;
     gap: 8px;
   }
   .main-content {
     min-height: 320px;
+    width: 100vw;
+    max-width: 100vw;
   }
   .with-header {
     padding-top: 70px;
