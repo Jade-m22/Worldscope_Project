@@ -1,8 +1,15 @@
 import { subcategoryColors as subColors } from "../utils/colors";
-import countryToCode from "../utils/countryCodes";
 import events from "../data/events";
+import CountrySelect from "./CountrySelect";
 
-export default function Filters({ onFilter, active, subFilter, onSubFilter, onCountryChange, country }) {
+export default function Filters({
+  onFilter,
+  active,
+  subFilter,
+  onSubFilter,
+  onCountryChange,
+  country
+}) {
   const filters = [
     { label: "Tous", value: "", icon: "🌍" },
     { label: "Conflits", value: "Conflit", icon: "⚔️" },
@@ -18,7 +25,7 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter, onCo
     "Merveilles antiques"
   ];
 
-  // Extraire tous les pays uniques à partir des événements
+  // Liste unique des pays (utilisé par CountrySelect)
   const countries = Array.from(new Set(events.map(e => e.country).filter(Boolean)))
     .sort((a, b) => a.localeCompare(b));
 
@@ -28,22 +35,13 @@ export default function Filters({ onFilter, active, subFilter, onSubFilter, onCo
       <div className="country-select">
         <label htmlFor="country">
           🌎 Filtrer par pays
-          <select
-            id="country"
-            value={country}
-            onChange={(e) => onCountryChange(e.target.value)}
-          >
-            <option value="">Tous les pays</option>
-            {countries.map((c) => {
-              const emoji = countryToCode[c];
-              return (
-                <option key={c} value={c}>
-                  {emoji ? `${emoji} ` : ""}{c}
-                </option>
-              );
-            })}
-          </select>
         </label>
+        <CountrySelect
+          id="country"
+          value={country}
+          onChange={onCountryChange}
+          countries={countries}
+        />
       </div>
 
       <div className="filters-list">
