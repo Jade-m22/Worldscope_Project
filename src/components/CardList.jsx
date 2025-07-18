@@ -3,6 +3,7 @@ import events from "../data/events";
 import countryToCode from "../utils/countryCodes";
 import { fetchWikiExtract } from "../utils/wiki";
 import SeeMoreButton from "./SeeMoreButton";
+import FlagOrEmoji from "../utils/FlagOrEmoji";
 
 export default function CardList({ data = events, onCardClick, onShowDetail }) {
   const cardsPerPage = 4;
@@ -91,7 +92,10 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
 
               <div className="card-overlay">
                 <h4 className="card-title">
-                  {countryToCode[item.country]} {item.title}
+                  <span className="flag-wrap">
+                    <FlagOrEmoji code={countryToCode[item.country]} size="1.5em" />
+                  </span>
+                  <span className="title-text">{item.title}</span>
                 </h4>
                 <div className="card-details">
                   <div className="country">{item.country}</div>

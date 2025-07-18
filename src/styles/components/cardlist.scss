@@ -86,27 +86,35 @@
   }
 
   .card-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
+    min-height: 2.4em;
     font-size: 1.15em;
+    font-weight: 700;
     color: #fff;
     text-shadow: 0 1px 4px #000000aa;
-    height: 3.2em;
-    line-height: 1em;
+    line-height: 1.18;
     text-align: center;
     transform: translateY(400%);
     transition: transform 0.2s ease-out;
     will-change: transform;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
     overflow: hidden;
     z-index: 5;
 
-    img {
+    .flag-wrap {
+      display: flex;
+      align-items: center;
+      margin-right: 0.17em;
+      flex-shrink: 0;
+    }
+    .title-text {
       display: inline-block;
-      height: 1.2em;
-      vertical-align: middle;
-      margin-right: 0.4em;
+      white-space: normal;
+      word-break: break-word;
+      max-width: 92%;
+      text-align: left;
     }
   }
 
@@ -241,32 +249,40 @@
     }
 
     .card-title {
-      height: auto !important;
-      transform: translateY(0) !important;
-      overflow: visible !important;
-      display: block !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.4em !important;
+      min-height: 2.1em !important;
+      font-size: 1em !important;
+      font-weight: 700;
       text-align: center;
-      white-space: normal !important;
-      line-height: 1.2em;
-      font-size: 1em;
+      color: #fff;
       text-shadow: 0 1px 4px #000000aa;
+      line-height: 1.18;
+      overflow: hidden;
       margin-bottom: 6px;
+      transform: none !important;
 
-      -webkit-line-clamp: unset !important;
-      line-clamp: unset !important;
-      -webkit-box-orient: unset !important;
+      .flag-wrap {
+        display: flex;
+        align-items: center;
+        margin-right: 0.14em;
+        flex-shrink: 0;
+      }
+      .title-text {
+        display: inline-block;
+        white-space: normal;
+        word-break: break-word;
+        max-width: 92%;
+        text-align: left;
+      }
     }
 
     .card-details {
       opacity: 1 !important;
       pointer-events: auto !important;
       font-size: 0.8em;
-    }
-
-    .card-title img {
-      height: 1.2em;
-      vertical-align: middle;
-      margin-right: 0.4em;
     }
   }
 
