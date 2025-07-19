@@ -42,12 +42,25 @@
       transform 0.3s ease;
     box-sizing: border-box;
     overflow-x: hidden;
+    pointer-events: none;
+    position: relative;
+    z-index: 1000;
 
     &.open {
-      max-height: 3000px;
+      max-height: 90vh;
       opacity: 1;
       padding-top: 12px;
       transform: translateY(0);
+      overflow-y: auto;
+      background: #132331ee;
+      pointer-events: all;
+    }
+
+    .mobile-panel-inner {
+      width: 100%;
+      max-width: 95vw;
+      margin: 0 auto;
+      padding-bottom: 8px;
     }
 
     .filters,
@@ -68,7 +81,6 @@
     align-items: center;
     flex-direction: column;
   }
-
   .sidebar > .filters,
   .sidebar > .timeline {
     display: none !important;
@@ -87,50 +99,40 @@
     transform: scale(0.88);
     transform-origin: top center;
   }
-
   .mobile-panel .filters h3 {
     font-size: 1rem;
   }
-
   .mobile-panel .filter-button {
     padding: 8px 10px;
     font-size: 0.85rem;
   }
-
   .mobile-panel .filter-button .icon {
     font-size: 1rem;
   }
-
   .mobile-panel .subfilters {
     padding-top: 6px;
     margin-top: 10px;
   }
-
   .mobile-panel .subfilter-label {
     font-size: 0.8rem;
     gap: 6px;
   }
-
   .mobile-panel .country-select label {
     font-size: 0.85rem;
   }
-
   .mobile-panel .country-select select {
     font-size: 0.85rem;
     padding: 4px 6px;
   }
-
   .mobile-panel .reset-button,
   .mobile-panel .timeline-reset {
     font-size: 0.85rem;
     padding: 6px 10px;
   }
-
   .mobile-panel .timeline-range-values,
   .mobile-panel .timeline-labels {
     font-size: 0.85rem;
   }
-
   .mobile-panel .timeline-thumb {
     height: 14px;
     width: 14px;
