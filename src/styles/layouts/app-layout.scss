@@ -1,5 +1,3 @@
-// layouts/app-layout.scss
-
 .with-header, .app-layout, body, html {
   min-height: 100vh;
   width: 100%;
@@ -17,7 +15,6 @@
   margin: 0 auto;
   box-sizing: border-box;
   z-index: 1;
-  // background: rgba(0,255,0,0.12); // Debug: à enlever si pas utile
 }
 
 .main-content {

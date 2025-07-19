@@ -14,7 +14,7 @@ $text-light: #ffffff;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 3000;       // Plus haut que tout (mobile menu, etc)
   box-shadow: 0 3px 24px rgba(10, 30, 60, 0.14);
   border-bottom: 1.5px solid #2ef9c880;
   box-sizing: border-box;
@@ -42,6 +42,7 @@ $text-light: #ffffff;
   align-items: center;
   justify-content: flex-end;
   flex-shrink: 0;
+  gap: 1rem;
 }
 
 .search-input {
@@ -63,72 +64,6 @@ $text-light: #ffffff;
   }
 }
 
-// ≤ 768px : tablette
-@media (max-width: 768px) {
-  .header {
-    padding: 0 1rem;
-    height: 68px;
-  }
-
-  .logo {
-    height: 44px;
-  }
-
-  .search-input {
-    width: 180px;
-    font-size: 0.95rem;
-  }
-}
-
-// ≤ 500px : mobile
-@media (max-width: 500px) {
-  .header {
-    padding: 0 0.8rem;
-    height: 60px;
-  }
-
-  .logo {
-    height: 36px;
-  }
-
-  .search-input {
-    width: 130px;
-    font-size: 0.85rem;
-  }
-}
-
-// ≤ 400px : tout petit mobile
-@media (max-width: 400px) {
-  .search-input {
-    width: 100px;
-    font-size: 0.8rem;
-  }
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  // supprimez tout background inline pour reprendre votre gradient global
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.search-input {
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  border: none;
-  font-size: 1rem;
-  flex: 1; // pour que l’input prenne l’espace disponible
-  max-width: 300px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
 .quiz-button {
   background: linear-gradient(90deg, #32f6b8 10%, #32b3f6 90%);
   color: #0b2331;
@@ -146,5 +81,47 @@ $text-light: #ffffff;
     background: linear-gradient(90deg, #32b3f6 10%, #32f6b8 90%);
     color: #174233;
     transform: scale(1.06);
+  }
+}
+
+// Responsive TABLET
+@media (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
+    height: 68px;
+  }
+
+  .logo {
+    height: 44px;
+  }
+
+  .search-input {
+    width: 180px;
+    font-size: 0.95rem;
+  }
+}
+
+// Responsive MOBILE
+@media (max-width: 500px) {
+  .header {
+    padding: 0 0.8rem;
+    height: 60px;
+  }
+
+  .logo {
+    height: 36px;
+  }
+
+  .search-input {
+    width: 130px;
+    font-size: 0.85rem;
+  }
+}
+
+// Tout petit mobile
+@media (max-width: 400px) {
+  .search-input {
+    width: 100px;
+    font-size: 0.8rem;
   }
 }

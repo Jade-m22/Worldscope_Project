@@ -5,9 +5,6 @@ import Timeline from "./Timeline";
 export default function MobileMenu(props) {
   const [open, setOpen] = useState(false);
 
-  // !! On ne bloque PLUS le body ici !!
-  // useEffect inutile : on laisse le body scrollable
-
   return (
     <div className="mobile-menu-container">
       <button

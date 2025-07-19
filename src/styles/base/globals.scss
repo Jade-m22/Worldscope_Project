@@ -33,8 +33,6 @@ body {
   overflow-x: hidden;
 }
 
-/* PAS de background sur #root, .app-layout, .main-content etc. ! */
-
 /* Liens, titres, boutons, etc. */
 a {
   font-weight: 500;
@@ -71,7 +69,6 @@ button {
   }
 }
 
-/* Responsive : inchangé */
 @media (max-width: 700px) {
   h1 { font-size: 2.1em; }
 }
