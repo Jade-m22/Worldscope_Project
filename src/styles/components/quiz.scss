@@ -1,12 +1,10 @@
-// src/styles/components/quiz.scss
-
 .quiz {
-    background: #15232f;                // même fond que .filters
+    background: #15232f; // même fond que .filters
     border-radius: 16px;
     padding: 20px 16px;
     margin: 24px auto;
     max-width: 600px;
-    color: #eaf6ff;                     // texte clair
+    color: #eaf6ff; // texte clair
     box-sizing: border-box;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   
@@ -15,7 +13,7 @@
       font-size: 1rem;
       margin-bottom: 16px;
       font-weight: 600;
-      color: #35f5e7;                   // accent bleu cyan
+      color: #35f5e7;  // accent bleu cyan
       text-align: center;
     }
   
@@ -44,7 +42,7 @@
       button {
         width: 100%;
         padding: 12px 16px;
-        background: #1c3547;            // légèrement plus sombre
+        background: #1c3547;  // légèrement plus sombre
         border: 2px solid transparent;
         border-radius: 8px;
         font-size: 0.95rem;
@@ -65,7 +63,7 @@
       }
     }
   
-    // (optionnel) pieds de page : bouton « Suivant » ou « Terminer »
+    // Footer : bouton « Suivant » ou « Terminer »
     &-footer {
       margin-top: 20px;
       text-align: center;
@@ -86,4 +84,3 @@
       }
     }
   }
-  

@@ -7,13 +7,27 @@ export default function MobileMenu(props) {
 
   return (
     <div className="mobile-menu-container">
-      <button className="mobile-menu-toggle" onClick={() => setOpen(!open)}>
+      <button
+        className="mobile-menu-toggle"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-controls="mobile-panel"
+      >
         {open ? "❌ Fermer les filtres" : "☰ Filtres & Période"}
       </button>
 
-      <div className={`mobile-panel ${open ? "open" : ""}`}>
-        <Timeline {...props} />
-        <Filters {...props} />
+      {/* Panneau mobile overlay, mais body scrollable */}
+      <div
+        id="mobile-panel"
+        className={`mobile-panel${open ? " open" : ""}`}
+        tabIndex={-1}
+        aria-hidden={!open}
+        onClick={() => setOpen(false)}
+      >
+        <div className="mobile-panel-inner" onClick={e => e.stopPropagation()}>
+          <Timeline {...props} />
+          <Filters {...props} />
+        </div>
       </div>
     </div>
   );

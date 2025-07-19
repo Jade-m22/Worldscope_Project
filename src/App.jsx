@@ -37,7 +37,7 @@ export default function App() {
   } = useFiltersLogic();
 
   return (
-    <div className="dashboard-bg">
+    <div>
       <MainLayout
         header={<Header search={search} setSearch={setSearch} />}
         sidebar={
