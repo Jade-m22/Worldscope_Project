@@ -34,7 +34,7 @@ export default defineConfig({
         /* type: 'module', // Active seulement si tu as une erreur avec le SW */
       },
       workbox: {
-        // Cache par défaut, tu peux l’ajuster si tu veux
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       }
     })
   ]
