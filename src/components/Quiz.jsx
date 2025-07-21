@@ -1,64 +1,170 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import questionsData from "../data/quiz-questions.json";
+import "./../styles/components/quiz.scss";
 
 export default function Quiz() {
   const [questions, setQuestions] = useState([]);
-  const [current,   setCurrent]   = useState(0);
-  const [score,     setScore]     = useState(0);
-  const [loading,   setLoading]   = useState(true);
+  const [current, setCurrent] = useState(0);
+  const [score, setScore] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [finished, setFinished] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://opentdb.com/api.php?amount=15&category=22&encoding=url3986')
-      .then(res => {
-        if (!res.ok) throw new Error('Erreur réseau');
-        return res.json();
-      })
-      .then(data => {
-        const decoded = data.results.map(q => ({
-          ...q,
-          question:           decodeURIComponent(q.question),
-          correct_answer:     decodeURIComponent(q.correct_answer),
-          incorrect_answers:  q.incorrect_answers.map(a => decodeURIComponent(a))
-        }));
-        setQuestions(decoded);
-      })
-      .catch(err => {
-        console.error(err);
-        alert('Impossible de charger le quiz');
-      })
-      .finally(() => setLoading(false));
+    const shuffled = [...questionsData].sort(() => Math.random() - 0.5);
+    setQuestions(shuffled.slice(0, 10));
+    setCurrent(0);
+    setScore(0);
+    setSelected(null);
+    setShowAnswer(false);
+    setFinished(false);
   }, []);
 
-  const handleAnswer = answer => {
-    if (answer === questions[current].correct_answer) {
-      setScore(s => s + 1);
+  useEffect(() => {
+    setSelected(null);
+    setShowAnswer(false);
+  }, [current]);
+
+  const handleAnswer = (opt) => {
+    if (showAnswer || selected !== null) return;
+    setSelected(opt);
+    setShowAnswer(true);
+    if (opt === questions[current].answer) {
+      setScore((s) => s + 1);
     }
-    setCurrent(c => c + 1);
+    setTimeout(() => {
+      if (current + 1 >= questions.length) {
+        setFinished(true);
+      } else {
+        setCurrent((c) => c + 1);
+      }
+    }, 900);
   };
 
-  if (loading) return <p>Chargement…</p>;
-  if (current >= questions.length) {
+  const restart = () => {
+    const shuffled = [...questionsData].sort(() => Math.random() - 0.5);
+    setQuestions(shuffled.slice(0, 10));
+    setCurrent(0);
+    setScore(0);
+    setSelected(null);
+    setShowAnswer(false);
+    setFinished(false);
+  };
+
+  const options = useMemo(() => {
+    if (!questions[current]) return [];
+    const { choices } = questions[current];
+    return [...choices].sort(() => Math.random() - 0.5);
+  }, [questions, current]);
+
+  if (!questions.length) {
     return (
-      <div>
-        <h2>Quiz terminé!</h2>
-        <p>Ton score: <strong>{score}</strong> / {questions.length}</p>
+      <div className="quiz-page">
+        <div className="quiz" style={{ textAlign: "center" }}>
+          <div className="spinner" />
+          <p style={{ marginTop: 12 }}>Chargement…</p>
+        </div>
+        <QuizNavButton onClick={() => navigate("/app")} />
       </div>
     );
   }
 
-  const { question, correct_answer, incorrect_answers } = questions[current];
-  const options = [...incorrect_answers, correct_answer].sort(() => Math.random() - 0.5);
+  // Si terminé
+  if (finished) {
+    return (
+      <div className="quiz-page">
+        <div className="quiz">
+          <h3>Quiz terminé !</h3>
+          <p>
+            Ton score&nbsp;: <strong>{score}</strong> / {questions.length}
+          </p>
+          <div className="quiz-footer">
+            <button className="quiz-button" onClick={restart}>
+              Recommencer
+            </button>
+          </div>
+        </div>
+        <QuizNavButton onClick={() => navigate("/app")} />
+      </div>
+    );
+  }
+
+  // Question courante
+  const { question, flag } = questions[current];
 
   return (
-    <div>
-      <h3>Question {current+1} / {questions.length}</h3>
-      <p dangerouslySetInnerHTML={{ __html: question }} />
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {options.map((opt,i) => (
-          <li key={i} style={{ margin: '0.5rem 0' }}>
-            <button onClick={() => handleAnswer(opt)}>{opt}</button>
-          </li>
-        ))}
-      </ul>
+    <div className="quiz-page">
+      <div className="quiz" tabIndex={-1}>
+        <h3>
+          Question {current + 1} / {questions.length}
+        </h3>
+        <p>
+          {flag ? (
+            <>
+              {question}
+              <img
+                src={`https://flagcdn.com/48x36/${flag.toLowerCase()}.png`}
+                alt={flag}
+                style={{
+                  marginLeft: 12,
+                  height: "1.5em",
+                  verticalAlign: "middle",
+                  borderRadius: "0.18em",
+                  boxShadow: "0 1px 3px #0002",
+                  display: "inline-block",
+                }}
+              />
+            </>
+          ) : (
+            question
+          )}
+        </p>
+        <ul>
+          {options.map((opt) => {
+            let btnClass = "";
+            if (showAnswer) {
+              if (opt === questions[current].answer) btnClass = "selected good";
+              else if (opt === selected) btnClass = "selected wrong";
+            } else if (selected === opt) btnClass = "selected";
+            return (
+              <li key={opt}>
+                <button
+                  className={btnClass}
+                  disabled={showAnswer}
+                  onClick={() => handleAnswer(opt)}
+                  aria-pressed={selected === opt}
+                  tabIndex={0}
+                >
+                  {opt}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="quiz-footer" style={{ marginTop: 16 }}>
+          <span>
+            Score&nbsp;: <b>{score}</b> / {questions.length}
+          </span>
+        </div>
+      </div>
+      <QuizNavButton onClick={() => navigate("/app")} />
+    </div>
+  );
+}
+
+// Bouton navigation réutilisable
+function QuizNavButton({ onClick }) {
+  return (
+    <div className="quiz-nav-btn-wrap">
+      <button
+        className="quiz-nav-btn"
+        onClick={onClick}
+      >
+        🌍 Retourner explorer le monde
+      </button>
     </div>
   );
 }

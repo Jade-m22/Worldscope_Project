@@ -1,0 +1,298 @@
+[
+  {
+    "question": "Quelle est la capitale du Canada ?",
+    "choices": ["Toronto", "Ottawa", "Vancouver", "Montréal"],
+    "answer": "Ottawa"
+  },
+  {
+    "question": "Quel pays a pour drapeau une feuille d’érable rouge ?",
+    "choices": ["États-Unis", "Canada", "Mexique", "Australie"],
+    "answer": "Canada"
+  },
+  {
+    "question": "Quelle est la capitale de l’Espagne ?",
+    "choices": ["Madrid", "Barcelone", "Séville", "Valence"],
+    "answer": "Madrid"
+  },
+  {
+    "question": "Quelle est la capitale de l’Italie ?",
+    "choices": ["Milan", "Venise", "Florence", "Rome"],
+    "answer": "Rome"
+  },
+  {
+    "question": "Quel est le plus grand pays d’Amérique du Sud ?",
+    "choices": ["Argentine", "Brésil", "Pérou", "Colombie"],
+    "answer": "Brésil"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "JP",
+    "choices": ["Corée du Sud", "Japon", "Chine", "Thaïlande"],
+    "answer": "Japon"
+  },
+  {
+    "question": "Quelle ville est traversée par le fleuve Nil ?",
+    "choices": ["Lagos", "Le Caire", "Tunis", "Addis-Abeba"],
+    "answer": "Le Caire"
+  },
+  {
+    "question": "Quel est le monument emblématique de l’Inde, situé à Agra ?",
+    "choices": [
+      "Taj Mahal",
+      "Qutub Minar",
+      "Temple du Lotus",
+      "Porte de l'Inde"
+    ],
+    "answer": "Taj Mahal"
+  },
+  {
+    "question": "Quelle ville américaine est surnommée « Big Apple » ?",
+    "choices": ["Chicago", "Los Angeles", "San Francisco", "New York"],
+    "answer": "New York"
+  },
+  {
+    "question": "Quelle est la capitale de l’Australie ?",
+    "choices": ["Sydney", "Melbourne", "Canberra", "Brisbane"],
+    "answer": "Canberra"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "DE",
+    "choices": ["Belgique", "Autriche", "Allemagne", "Pologne"],
+    "answer": "Allemagne"
+  },
+  {
+    "question": "Quelle est la capitale du Maroc ?",
+    "choices": ["Marrakech", "Casablanca", "Rabat", "Fès"],
+    "answer": "Rabat"
+  },
+  {
+    "question": "Dans quelle ville se trouve la Sagrada Familia ?",
+    "choices": ["Madrid", "Barcelone", "Valence", "Séville"],
+    "answer": "Barcelone"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "BR",
+    "choices": ["Argentine", "Portugal", "Brésil", "Mexique"],
+    "answer": "Brésil"
+  },
+  {
+    "question": "Quelle est la capitale du Japon ?",
+    "choices": ["Kyoto", "Osaka", "Tokyo", "Sapporo"],
+    "answer": "Tokyo"
+  },
+  {
+    "question": "Quelle ville est célèbre pour son opéra en forme de voiles blanches ?",
+    "choices": ["Sydney", "Venise", "New York", "Barcelone"],
+    "answer": "Sydney"
+  },
+  {
+    "question": "Quel est le plus grand désert du monde ?",
+    "choices": ["Sahara", "Gobi", "Antarctique", "Kalahari"],
+    "answer": "Antarctique"
+  },
+  {
+    "question": "Quel fleuve traverse Paris ?",
+    "choices": ["La Loire", "La Seine", "Le Rhône", "La Garonne"],
+    "answer": "La Seine"
+  },
+  {
+    "question": "Quel monument est situé à Rio de Janeiro ?",
+    "choices": [
+      "La statue du Christ Rédempteur",
+      "La Tour Eiffel",
+      "Le Colisée",
+      "La Sagrada Familia"
+    ],
+    "answer": "La statue du Christ Rédempteur"
+  },
+  {
+    "question": "Quel pays européen n’a pas d’accès à la mer ?",
+    "choices": ["Portugal", "Hongrie", "Suède", "Norvège"],
+    "answer": "Hongrie"
+  },
+  {
+    "question": "De quel pays le drapeau porte une grande étoile jaune et quatre petites sur fond rouge ?",
+    "choices": ["Vietnam", "Chine", "Turquie", "Japon"],
+    "answer": "Chine"
+  },
+  {
+    "question": "Quelle est la capitale de la Turquie ?",
+    "choices": ["Istanbul", "Izmir", "Ankara", "Bursa"],
+    "answer": "Ankara"
+  },
+  {
+    "question": "Dans quel pays se trouvent les pyramides de Gizeh ?",
+    "choices": ["Maroc", "Égypte", "Soudan", "Arabie Saoudite"],
+    "answer": "Égypte"
+  },
+  {
+    "question": "Quelle ville est surnommée la « Ville Lumière » ?",
+    "choices": ["Paris", "Tokyo", "Londres", "Rome"],
+    "answer": "Paris"
+  },
+  {
+    "question": "Quel est le plus long fleuve d’Amérique du Sud ?",
+    "choices": ["Paraná", "Orénoque", "Amazonie", "São Francisco"],
+    "answer": "Amazonie"
+  },
+  {
+    "question": "Dans quel pays se trouve le Machu Picchu ?",
+    "choices": ["Chili", "Pérou", "Bolivie", "Colombie"],
+    "answer": "Pérou"
+  },
+  {
+    "question": "Quel est le plus haut sommet d’Afrique ?",
+    "choices": ["Kilimandjaro", "Mont Kenya", "Mont Elbrouz", "Ruwenzori"],
+    "answer": "Kilimandjaro"
+  },
+  {
+    "question": "Quelle mer borde la côte sud de la France ?",
+    "choices": ["Mer du Nord", "Mer Méditerranée", "Mer Noire", "Mer Rouge"],
+    "answer": "Mer Méditerranée"
+  },
+  {
+    "question": "Quel pays européen a pour capitale Sofia ?",
+    "choices": ["Roumanie", "Bulgarie", "Serbie", "Croatie"],
+    "answer": "Bulgarie"
+  },
+  {
+    "question": "De quel pays le drapeau est bleu et jaune, à bandes horizontales ?",
+    "choices": ["Suède", "Ukraine", "Finlande", "Grèce"],
+    "answer": "Ukraine"
+  },
+  {
+    "question": "Dans quelle ville se trouve le Colisée ?",
+    "choices": ["Athènes", "Rome", "Istanbul", "Milan"],
+    "answer": "Rome"
+  },
+  {
+    "question": "Quel océan sépare l’Afrique de l’Amérique du Sud ?",
+    "choices": [
+      "Océan Pacifique",
+      "Océan Indien",
+      "Océan Atlantique",
+      "Océan Arctique"
+    ],
+    "answer": "Océan Atlantique"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "IT",
+    "choices": ["France", "Italie", "Mexique", "Irlande"],
+    "answer": "Italie"
+  },
+  {
+    "question": "Quelle est la capitale du Brésil ?",
+    "choices": ["Brasilia", "Rio de Janeiro", "São Paulo", "Salvador"],
+    "answer": "Brasilia"
+  },
+  {
+    "question": "Quel monument historique se trouve à Pékin ?",
+    "choices": [
+      "Grande Muraille de Chine",
+      "Taj Mahal",
+      "Angkor Wat",
+      "Parthénon"
+    ],
+    "answer": "Grande Muraille de Chine"
+  },
+  {
+    "question": "Quel est le pays du Taj Mahal ?",
+    "choices": ["Inde", "Pakistan", "Bangladesh", "Népal"],
+    "answer": "Inde"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "FR",
+    "choices": ["Pays-Bas", "Italie", "France", "Russie"],
+    "answer": "France"
+  },
+  {
+    "question": "Quelle est la capitale du Sénégal ?",
+    "choices": ["Bamako", "Abidjan", "Dakar", "Lomé"],
+    "answer": "Dakar"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "AR",
+    "choices": ["Colombie", "Argentine", "Uruguay", "Chili"],
+    "answer": "Argentine"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "EG",
+    "choices": ["Tunisie", "Égypte", "Jordanie", "Syrie"],
+    "answer": "Égypte"
+  },
+  {
+    "question": "Quelle est la capitale de la Russie ?",
+    "choices": ["Saint-Pétersbourg", "Kiev", "Moscou", "Novossibirsk"],
+    "answer": "Moscou"
+  },
+  {
+    "question": "Quel monument se trouve à Athènes ?",
+    "choices": ["Colisée", "Big Ben", "Parthénon", "Tour Eiffel"],
+    "answer": "Parthénon"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "ES",
+    "choices": ["Italie", "Portugal", "Espagne", "Belgique"],
+    "answer": "Espagne"
+  },
+  {
+    "question": "Dans quel pays se trouve le lac Titicaca ?",
+    "choices": ["Brésil", "Chili", "Bolivie", "Mexique"],
+    "answer": "Bolivie"
+  },
+  {
+    "question": "Quel est le plus vaste pays du monde ?",
+    "choices": ["Chine", "États-Unis", "Russie", "Canada"],
+    "answer": "Russie"
+  },
+  {
+    "question": "Dans quelle ville peut-on admirer la Tour Eiffel ?",
+    "choices": ["Rome", "Paris", "Berlin", "Londres"],
+    "answer": "Paris"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "GB",
+    "choices": ["Australie", "Nouvelle-Zélande", "Royaume-Uni", "États-Unis"],
+    "answer": "Royaume-Uni"
+  },
+  {
+    "question": "Quel est le plus petit pays du monde ?",
+    "choices": ["Monaco", "Vatican", "Saint-Marin", "Andorre"],
+    "answer": "Vatican"
+  },
+  {
+    "question": "Quel est le continent du mont Everest ?",
+    "choices": ["Afrique", "Asie", "Europe", "Amérique"],
+    "answer": "Asie"
+  },
+  {
+    "question": "Dans quelle ville se trouve le Kremlin ?",
+    "choices": ["Moscou", "Saint-Pétersbourg", "Kiev", "Varsovie"],
+    "answer": "Moscou"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "CN",
+    "choices": ["Japon", "Corée du Sud", "Chine", "Vietnam"],
+    "answer": "Chine"
+  },
+  {
+    "question": "Quelle est la capitale de l’Inde ?",
+    "choices": ["New Delhi", "Mumbai", "Bangalore", "Kolkata"],
+    "answer": "New Delhi"
+  },
+  {
+    "question": "Quel pays correspond à ce drapeau ?",
+    "flag": "GR",
+    "choices": ["Grèce", "Turquie", "Chypre", "Italie"],
+    "answer": "Grèce"
+  }
+]

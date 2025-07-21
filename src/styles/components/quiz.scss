@@ -1,86 +1,172 @@
+.quiz-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Pour le bouton en dehors du quiz */
+.quiz-nav-btn-wrap {
+  margin-top: 32px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.quiz-nav-btn {
+  background: linear-gradient(90deg, #1b6fff, #26e6f7 70%);
+  color: #fff;
+  font-size: 1.08em;
+  font-weight: 600;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 9px;
+  box-shadow: 0 2px 12px #195ad327;
+  transition: filter 0.18s, transform 0.16s;
+  cursor: pointer;
+  margin: 0 auto;
+
+  &:hover {
+    filter: brightness(1.14) saturate(1.4);
+    transform: translateY(-2px) scale(1.05);
+  }
+}
+
+@media (max-width: 600px) {
+  .quiz-nav-btn {
+    width: 90vw;
+    max-width: 350px;
+    font-size: 1em;
+    padding: 10px 0;
+  }
+}
+
 .quiz {
-    background: #15232f; // même fond que .filters
-    border-radius: 16px;
-    padding: 20px 16px;
-    margin: 24px auto;
-    max-width: 600px;
-    color: #eaf6ff; // texte clair
-    box-sizing: border-box;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  
-    // En‑tête du quiz
-    > h3 {
-      font-size: 1rem;
-      margin-bottom: 16px;
-      font-weight: 600;
-      color: #35f5e7;  // accent bleu cyan
-      text-align: center;
-    }
-  
-    // Texte de la question
-    > p {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 16px;
-      text-align: center;
-    }
-  
-    // Liste des options
-    > ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    // Chaque option
-    > ul > li {
-      margin: 0;
-  
-      button {
-        width: 100%;
-        padding: 12px 16px;
-        background: #1c3547;  // légèrement plus sombre
-        border: 2px solid transparent;
-        border-radius: 8px;
-        font-size: 0.95rem;
-        color: #eaf6ff;
-        cursor: pointer;
-        text-align: left;
-        transition: background 0.2s, border-color 0.2s;
-  
-        &:hover {
-          background: #102334;
-        }
-  
-        // État « sélectionné »
-        &.selected {
-          border-color: #35f5e7;
-          background: #0f2b3d;
-        }
+  background: #15232f;
+  border-radius: 16px;
+  padding: 20px 16px;
+  margin: 24px auto;
+  max-width: 600px;
+  color: #eaf6ff;
+  box-sizing: border-box;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s;
+  width: 100%;
+  min-width: 0;
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to   { opacity: 1; transform: translateY(0);}
+  }
+
+  > h3 {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: #35f5e7;
+    text-align: center;
+  }
+
+  > p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  > ul > li {
+    margin: 0;
+
+    button {
+      width: 100%;
+      padding: 12px 16px;
+      background: #1c3547;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #eaf6ff;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+
+      &:hover {
+        background: #102334;
       }
-    }
-  
-    // Footer : bouton « Suivant » ou « Terminer »
-    &-footer {
-      margin-top: 20px;
-      text-align: center;
-  
-      .quiz-button {
-        padding: 10px 20px;
-        font-size: 1rem;
-        border: none;
-        border-radius: 8px;
-        background: #35f5e7;
-        color: #15232f;
-        cursor: pointer;
-        transition: opacity 0.2s;
-  
-        &:hover {
-          opacity: 0.8;
-        }
+
+      &.selected {
+        border-color: #35f5e7;
+        background: #0f2b3d;
+      }
+      &.good {
+        border-color: #00faab;
+        background: #0c3f37 !important;
+        color: #00faab;
+        font-weight: bold;
+      }
+      &.wrong {
+        border-color: #ff5252;
+        background: #3a1c24 !important;
+        color: #ffbebe;
+        font-weight: bold;
       }
     }
   }
+
+  .quiz-footer {
+    margin-top: 20px;
+    text-align: center;
+
+    .quiz-button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #35f5e7;
+      color: #15232f;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  // Spinner de chargement
+  .spinner {
+    border: 3px solid #223f59;
+    border-top: 3px solid #35f5e7;
+    border-radius: 50%;
+    width: 34px; height: 34px;
+    margin: 0 auto;
+    animation: spinQuiz 1s linear infinite;
+  }
+  @keyframes spinQuiz { 100% { transform: rotate(360deg); } }
+
+  // Responsive
+  @media (max-width: 600px) {
+    padding: 10px 3vw;
+    max-width: 98vw;
+    border-radius: 8px;
+    font-size: 0.98em;
+  }
+  @media (max-width: 400px) {
+    font-size: 0.92em;
+    padding: 8px 1vw;
+  }
+}
+
+/* Déplacement pour éviter les warnings de Sass */
+.quiz {
+  overflow-x: auto;
+}
