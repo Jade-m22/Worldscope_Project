@@ -1,5 +1,5 @@
 .see-more-btn {
-  background-color: #fff;
+  background: #fff;
   color: #1e1f2b;
   font-weight: bold;
   font-size: 0.85rem;
@@ -8,65 +8,98 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 38px;
+  min-height: 38px;
   padding: 6px;
   margin: 8px auto 20px auto;
   gap: 0;
-  transition: all 0.3s ease;
-  overflow: hidden;
+  transition: all 0.3s cubic-bezier(.5,1.5,.7,1);
   cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 1px 6px #1121;
 
   .text {
     opacity: 0;
     width: 0;
-    transition: all 0.3s ease;
+    max-width: 0;
+    margin: 0;
+    transition: all 0.25s;
     white-space: nowrap;
+    display: inline-block;
+    pointer-events: none;
   }
-
   .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.1rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.26s cubic-bezier(.56,1.2,.72,1.15);
+  }
+  .see-more-svg {
+    width: 1.4em;
+    height: 1.4em;
+    stroke: currentColor;
+    vertical-align: middle;
+    display: block;
+    margin-left: 0;
+    transition: transform 0.18s;
   }
 
-  &:hover {
-    padding: 6px 14px;
-    gap: 6px;
-    background-color: #fff;
+  &:hover, &:focus-visible {
+    background: #fff;
+    padding: 6px 18px;
+    gap: 8px;
 
     .text {
       opacity: 1;
       width: auto;
+      max-width: 300px;
       margin-right: 4px;
+      pointer-events: auto;
     }
-
     .icon {
       transform: translateX(2px);
     }
+  }
+
+  &:active .see-more-svg {
+    transform: scale(1.14) rotate(90deg);
   }
 }
 
 .see-more-btn.small {
   font-size: 0.75rem;
+  min-width: 32px;
+  min-height: 32px;
   padding: 4px 8px;
-
-  .icon {
-    font-size: 1rem;
-  }
+  .icon { font-size: 1rem; }
 }
 
 .see-more-btn.medium {
-  font-size: 0.85rem;
-  padding: 6px 10px;
+  font-size: 0.88rem;
+  min-width: 38px;
+  min-height: 38px;
+  padding: 6px 12px;
 }
 
 .see-more-btn.large {
-  font-size: 1rem;
-  padding: 10px 20px;
+  font-size: 1.1rem;
+  min-width: 46px;
+  min-height: 46px;
+  padding: 11px 24px;
+  .icon { font-size: 1.22rem; }
+  .text { font-size: 1.08em; }
+}
 
-  .icon {
-    font-size: 1.2rem;
-  }
-
-  .text {
-    font-size: 1rem;
+@media (max-width: 600px) {
+  .see-more-btn {
+    font-size: 0.97em;
+    min-width: 30px;
+    min-height: 30px;
+    padding: 6px 10px;
+    .see-more-svg {
+      width: 1.15em;
+      height: 1.15em;
+    }
   }
 }

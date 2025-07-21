@@ -53,7 +53,8 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
     }
 
     fetchNext();
-  }, [startIndex, data, wikiImages]);
+    // eslint-disable-next-line
+  }, [startIndex, data]);
 
   const handleShowMore = () => {
     setStartIndex(prev => {
