@@ -1,7 +1,6 @@
 // On importe useEffect et forwardRef
 import React, { useEffect, forwardRef } from "react";
 import Globe from "react-globe.gl";
-import countriesData from "../data/countries.json";
 
 const GlobeView = forwardRef(({ data, onMarkerClick }, ref) => {
   // ON AJOUTE DE NOUVEAU LE HOOK USEEFFECT
@@ -47,7 +46,6 @@ const GlobeView = forwardRef(({ data, onMarkerClick }, ref) => {
       }}
       pointRadius={0.5}
       onPointClick={handlePointClick}
-      polygonsData={countriesData.features}
       polygonCapColor={() => "rgba(0, 0, 0, 0)"}
       polygonSideColor={() => "rgba(0, 0, 0, 0)"}
       polygonStrokeColor={() => "#ffffff60"}
