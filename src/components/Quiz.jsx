@@ -28,7 +28,7 @@ export default function Quiz() {
     setShowAnswer(false);
   }, [current]);
 
-  const handleAnswer = (opt) => {
+    const handleAnswer = (opt) => {
     if (showAnswer || selected !== null) return;
     setSelected(opt);
     setShowAnswer(true);
@@ -41,7 +41,7 @@ export default function Quiz() {
       } else {
         setCurrent((c) => c + 1);
       }
-    }, 900);
+    }, 3000); // <---- METTRE 3000 ici (3 secondes)
   };
 
   const restart = () => {
