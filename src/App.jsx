@@ -7,7 +7,7 @@ import Map from "./components/Map";
 import Filters from "./components/Filters";
 import Timeline from "./components/Timeline";
 import CardList from "./components/CardList";
-import GlobeView from "./components/Globe";
+import CesiumGlobe from "./components/CesiumGlobe"; // <== Remplacer GlobeView
 import EventDetail from "./components/EventDetail";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import MobileMenu from "./components/MobileMenu";
@@ -26,7 +26,6 @@ export default function App() {
     setViewMode,
     filteredEvents,
     mapRef,
-    globeRef,
     detailRef,
     selected,
     setSelected,
@@ -35,6 +34,29 @@ export default function App() {
     handleCardClick,
     handleCloseDetail,
   } = useFiltersLogic();
+
+  // Mapping pour react-globe.gl
+  const getColorByType = (type) => {
+    switch (type) {
+      case "Conflit":
+        return "red";
+      case "À visiter":
+        return "green";
+      case "Dangereux":
+        return "orange";
+      case "À éviter":
+        return "purple";
+      default:
+        return "blue";
+    }
+  };
+
+  const globeEvents = filteredEvents.map(ev => ({
+    lat: ev.position[0],
+    lng: ev.position[1],
+    title: ev.title,
+    color: getColorByType(ev.type)
+  }));
 
   return (
     <div>
@@ -68,11 +90,7 @@ export default function App() {
                   onShowDetail={handleShowDetail}
                 />
               ) : (
-                <GlobeView
-                  ref={globeRef}
-                  data={filteredEvents}
-                  onMarkerClick={handleShowDetail}
-                />
+                <CesiumGlobe data={globeEvents} />
               )}
             </div>
 
