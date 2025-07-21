@@ -7,7 +7,7 @@ import Map from "./components/Map";
 import Filters from "./components/Filters";
 import Timeline from "./components/Timeline";
 import CardList from "./components/CardList";
-import CesiumGlobe from "./components/CesiumGlobe"; // <== Remplacer GlobeView
+import CesiumGlobe from "./components/CesiumGlobe";
 import EventDetail from "./components/EventDetail";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import MobileMenu from "./components/MobileMenu";
@@ -33,9 +33,10 @@ export default function App() {
     handleShowDetail,
     handleCardClick,
     handleCloseDetail,
+    setCountryFilter,
   } = useFiltersLogic();
 
-  // Mapping pour react-globe.gl
+  // Coloration pour les points du globe
   const getColorByType = (type) => {
     switch (type) {
       case "Conflit":
@@ -51,12 +52,27 @@ export default function App() {
     }
   };
 
+  // Data à passer au globe (points)
   const globeEvents = filteredEvents.map(ev => ({
     lat: ev.position[0],
     lng: ev.position[1],
     title: ev.title,
     color: getColorByType(ev.type)
   }));
+
+  // Affiche le détail d'un event quand on clique sur un marker sur le globe
+  const handleGlobeMarkerClick = (event) => {
+    const idx = filteredEvents.findIndex(
+      e => e.title === event.title &&
+           e.position[0] === event.lat &&
+           e.position[1] === event.lng
+    );
+    if (idx !== -1) handleShowDetail(idx);
+  };
+
+  const handleGlobeCountryClick = (countryName) => {
+    setCountryFilter(countryName);
+  };
 
   return (
     <div>
@@ -90,7 +106,11 @@ export default function App() {
                   onShowDetail={handleShowDetail}
                 />
               ) : (
-                <CesiumGlobe data={globeEvents} />
+                <CesiumGlobe
+                  data={globeEvents}
+                  onMarkerClick={handleGlobeMarkerClick}
+                  onCountryClick={handleGlobeCountryClick}
+                />
               )}
             </div>
 
