@@ -1,6 +1,8 @@
+// src/components/Filters.jsx
+import React from "react";
 import { subcategoryColors as subColors } from "../utils/colors";
-import events from "../data/events";
 import CountrySelect from "./CountrySelect";
+import "../styles/components/filters.scss";
 
 export default function Filters({
   onFilter,
@@ -8,41 +10,32 @@ export default function Filters({
   subFilter,
   onSubFilter,
   onCountryChange,
-  country
+  country,
 }) {
   const filters = [
-    { label: "Tous", value: "", icon: "🌍" },
-    { label: "Conflits", value: "Conflit", icon: "⚔️" },
-    { label: "À visiter", value: "À visiter", icon: "⭐" },
-    { label: "À éviter", value: "À éviter", icon: "⛔" },
-    { label: "Dangereux", value: "Dangereux", icon: "☢️" },
+    { label: "Tous",      value: "",           icon: "🌍" },
+    { label: "Conflits",   value: "Conflit",    icon: "⚔️" },
+    { label: "À visiter",  value: "À visiter",  icon: "⭐" },
+    { label: "À éviter",   value: "À éviter",   icon: "⛔" },
+    { label: "Dangereux",  value: "Dangereux",  icon: "☢️" },
   ];
 
   const subcategories = [
     "Merveilles du monde",
     "Monuments historiques",
     "Sites naturels",
-    "Merveilles antiques"
+    "Merveilles antiques",
   ];
-
-  // Liste unique des pays (utilisé par CountrySelect)
-  const countries = Array.from(new Set(events.map(e => e.country).filter(Boolean)))
-    .sort((a, b) => a.localeCompare(b));
 
   return (
     <section className="filters">
-      {/* Sélecteur de pays */}
       <div className="country-select">
-      <div className="country-select-title">
-        🌎Filtrer pays
+        <div className="country-select-title">🌎 Filtrer par pays</div>
+        <CountrySelect
+          value={country}
+          onChange={onCountryChange}
+        />
       </div>
-      <CountrySelect
-        id="country"
-        value={country}
-        onChange={onCountryChange}
-        countries={countries}
-      />
-    </div>
 
       <div className="filters-list">
         {filters.map((f) => (
@@ -64,17 +57,16 @@ export default function Filters({
                       type="checkbox"
                       checked={subFilter.includes(cat)}
                       onChange={(e) => {
-                        const checked = e.target.checked;
-                        const next = checked
+                        const next = e.target.checked
                           ? [...subFilter, cat]
-                          : subFilter.filter(c => c !== cat);
+                          : subFilter.filter((c) => c !== cat);
                         onSubFilter(next);
                       }}
                     />
                     <span
                       className="color-dot"
                       style={{ backgroundColor: subColors[cat] || "#ccc" }}
-                    ></span>
+                    />
                     {cat}
                   </label>
                 ))}
@@ -83,6 +75,7 @@ export default function Filters({
           </div>
         ))}
       </div>
+
       <button
         className="reset-button"
         onClick={() => {
