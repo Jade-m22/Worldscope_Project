@@ -73,8 +73,10 @@
     background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 40%);
   }
 
-  // On NE bouge plus le titre au hover
-  // &:hover .card-title { transform: translateY(-30%); }
+  &:hover .card-title {
+    bottom: 60%;
+    transform: translate(-50%, -50%);
+  }
 
   &:hover .card-details {
     opacity: 1;
@@ -94,31 +96,34 @@
   }
 
   .card-title {
-    display: flex;
-    align-items: center;
+    display: inline-flex;
+    align-items: flex-start;
     justify-content: center;
+    text-align: center;
     gap: 0.45em;
     width: 100%;
     min-height: 2.8em;   // plus haut pour 2 lignes de titre
     max-height: 3.1em;   // adapte si tu veux plus
-    font-size: 1.15em;
-    font-weight: 700;
+    font-weight: 800;
     color: #fff;
     text-shadow: 0 1px 4px #000000aa;
     line-height: 1.18;
-    text-align: center;
-    padding: 0 0.1em;
+    padding-inline: 15px;
     transition: background 0.2s;
     will-change: background;
     overflow: hidden;
     z-index: 5;
     background: transparent;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: bottom 0.3s ease, transform 0.3s ease;
 
     .flag-wrap {
       display: flex;
-      align-items: center;
-      margin-right: 0.17em;
       flex-shrink: 0;
+      height: 100%;
     }
     .title-text {
       display: -webkit-box;
@@ -128,8 +133,7 @@
       overflow: hidden;
       white-space: normal;
       word-break: break-word;
-      max-width: 90%;
-      text-align: left;
+      text-align: center;
     }
   }
 
@@ -140,16 +144,15 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    margin-bottom: 8px;
     color: #ffffff;
+    font-size: 0.88em;
+    font-weight: 500;
 
     .year {
       color: #ffe9c2;
-      font-size: 0.9em;
     }
 
     .status {
-      font-size: 0.88em;
       font-weight: bold;
       margin-top: 6px;
       padding: 3px 10px;
@@ -267,6 +270,9 @@
     }
 
     .card-title {
+      position: relative !important;
+      bottom: auto !important;
+      left: auto !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
