@@ -18,20 +18,41 @@
   .timeline-slider {
     flex: 1;
     padding: 0 10px;
+    width: 95%;
+    margin: 0 auto 20px auto;
   }
 
   .timeline-track {
     height: 8px;
-    border-radius: 6px;
-    background: linear-gradient(to right, #1e3a8a, #24dbb6);
+    border-radius: 7px;
+    /* Le background dynamique sera injecté via React */
+    position: relative;
+    transition: background 0.2s;
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
 
   .timeline-thumb {
-    height: 14px;
-    width: 14px;
+    height: 16px;
+    width: 16px;
     border: 2px solid #24dbb6;
     background-color: #0a2340;
     cursor: pointer;
+    border-radius: 50%;
+    transition: box-shadow 0.15s;
+    box-shadow: 0 2px 8px #20e1db22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    outline: none;
+
+    &:hover,
+    &:focus {
+      border-color: #1ae7c4;
+      box-shadow: 0 0 0 4px #21dbc847;
+    }
   }
 
   .timeline-labels {
@@ -61,8 +82,8 @@
     }
 
     .timeline-thumb {
-      height: 12px;
-      width: 12px;
+      height: 13px;
+      width: 13px;
       border-width: 1.5px;
     }
 

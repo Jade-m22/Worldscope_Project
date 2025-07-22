@@ -7,8 +7,9 @@
   color: #003a32;
   border: none;
   border-radius: 50%;
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
+  aspect-ratio: 1 / 1;
   box-shadow: 0 3px 16px #1ae7c456, 0 0.5px 4px #003a3255;
   display: flex;
   align-items: center;
@@ -16,16 +17,40 @@
   font-size: 2rem;
   cursor: pointer;
   opacity: 0.88;
-  transition: opacity 0.18s, box-shadow 0.22s, transform 0.14s;
+  transition: opacity 0.18s, box-shadow 0.22s, transform 0.14s, background 0.2s;
   outline: none;
   user-select: none;
+  padding: 0;
+
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    // SVG color normal
+    svg path {
+      stroke: #003a32;
+      transition: stroke 0.18s;
+    }
+  }
 }
 
 .scroll-to-top-btn:hover,
 .scroll-to-top-btn:focus {
   opacity: 1;
-  box-shadow: 0 5px 28px #23ffea85, 0 2px 8px #00a98177;
-  transform: scale(1.06);
+  box-shadow:
+    0 0 0 0px #24ffd8b8,
+    0 0 22px 7px #1affedcc,
+    0 5px 28px #1cf5c1a8, 
+    0 2px 8px #00a98177;
+  background: linear-gradient(90deg, #2fffd6 0%, #38ffb0 100%);
+  transform: scale(1.10);
+
+  .arrow svg path {
+    stroke: #fff !important;
+  }
 }
 
 .scroll-to-top-btn.hidden {
@@ -34,36 +59,30 @@
   transition: opacity 0.25s, visibility 0.25s;
 }
 
-.scroll-to-top-btn .arrow {
-  display: block;
-  margin-top: -2px;
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1;
-  color: #003a32;
-}
-
-/* Responsive : plus petit et plus haut sur mobile */
 @media (max-width: 650px) {
   .scroll-to-top-btn {
-    right: 14px;
+    right: 10px;
     bottom: 14px;
-    width: 42px;
-    height: 42px;
-    font-size: 1.3rem;
+    width: 44px;
+    height: 44px;
+    aspect-ratio: 1 / 1;
   }
   .scroll-to-top-btn .arrow {
-    font-size: 1.3rem;
+    width: 26px;
+    height: 26px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .scroll-to-top-btn {
-    bottom: 12px;
-    right: 12px;
-    width: 46px;
-    height: 46px;
-    font-size: 1.2rem;
-    z-index: 5000 !important;
+    right: 6px;
+    bottom: 10px;
+    width: 40px;
+    height: 40px;
+    aspect-ratio: 1 / 1;
+  }
+  .scroll-to-top-btn .arrow {
+    width: 22px;
+    height: 22px;
   }
 }

@@ -33,16 +33,16 @@ export default function Filters({
     <section className="filters">
       {/* Sélecteur de pays */}
       <div className="country-select">
-        <label htmlFor="country">
-          🌎 Filtrer par pays
-        </label>
-        <CountrySelect
-          id="country"
-          value={country}
-          onChange={onCountryChange}
-          countries={countries}
-        />
+      <div className="country-select-title">
+        🌎Filtrer pays
       </div>
+      <CountrySelect
+        id="country"
+        value={country}
+        onChange={onCountryChange}
+        countries={countries}
+      />
+    </div>
 
       <div className="filters-list">
         {filters.map((f) => (

@@ -125,3 +125,8 @@ $text-light: #ffffff;
     font-size: 0.8rem;
   }
 }
+
+.search-input::placeholder {
+  color: #fff;
+  opacity: 1;
+}

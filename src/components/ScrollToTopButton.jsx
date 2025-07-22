@@ -36,7 +36,14 @@ const ScrollToTopButton = () => {
       tabIndex={visible ? 0 : -1}
       type="button"
     >
-      <span className="arrow">↑</span>
+      {/* Utilisation d'un SVG pour un centrage parfait */}
+      <span className="arrow" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
+          style={{ display: "block", margin: "auto" }}
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 20V8M14 8L8 14M14 8L20 14" stroke="#003a32" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </span>
     </button>
   );
 };
