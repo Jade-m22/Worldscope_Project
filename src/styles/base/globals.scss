@@ -11,17 +11,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Le fond global : html qui porte le background */
+/* FOND: c’est html qui porte le background ! */
 html {
   min-height: 100vh;
   width: 100vw;
   background: inherit;
-  overflow-x: hidden; /* empêche le scroll horizontal */
 }
 
 body {
   min-height: 100vh;
-  /* on retire la min-width pour autoriser la taille < 320px */
+  min-width: 320px;
   margin: 0;
   padding: 0;
   display: flex;
@@ -31,7 +30,7 @@ body {
   box-sizing: border-box;
   width: 100vw;
   max-width: 100vw;
-  overflow-x: hidden; /* double-sécurité */
+  overflow-x: hidden;
 }
 
 /* Liens, titres, boutons, etc. */
@@ -40,10 +39,7 @@ a {
   color: #66e1d7;
   text-decoration: none;
   transition: color 0.22s ease;
-
-  &:hover {
-    color: #62a8f7;
-  }
+  &:hover { color: #62a8f7; }
 }
 
 h1 {
@@ -63,57 +59,28 @@ button {
   color: #eafcff;
   cursor: pointer;
   transition: border-color 0.25s, background 0.22s;
-
   &:hover {
     border-color: #5efef7;
     background: #112b39;
   }
-
   &:focus,
   &:focus-visible {
     outline: 3px auto -webkit-focus-ring-color;
   }
 }
 
-/* Ajustements typographiques sous 700px */
 @media (max-width: 700px) {
-  h1 {
-    font-size: 2.1em;
-  }
+  h1 { font-size: 2.1em; }
 }
-
-/* Ajustements sous 500px */
 @media (max-width: 500px) {
-  html {
-    font-size: 0.95rem;
-  }
-  h1 {
-    font-size: 1.8em;
-    margin: 0.4em 0 0.6em 0;
-  }
-  a {
-    font-size: 0.95em;
-  }
-  button {
-    padding: 0.5em 1em;
-    font-size: 0.9em;
-  }
+  html { font-size: 0.95rem; }
+  h1 { font-size: 1.8em; margin: 0.4em 0 0.6em 0; }
+  a { font-size: 0.95em; }
+  button { padding: 0.5em 1em; font-size: 0.9em; }
 }
-
-/* Ajustements sous 360px */
 @media (max-width: 360px) {
-  html {
-    font-size: 0.9rem;
-  }
-  h1 {
-    font-size: 1.6em;
-    margin: 0.3em 0 0.5em 0;
-  }
-  a {
-    font-size: 0.9em;
-  }
-  button {
-    padding: 0.4em 0.8em;
-    font-size: 0.85em;
-  }
+  html { font-size: 0.9rem; }
+  h1 { font-size: 1.6em; margin: 0.3em 0 0.5em 0; }
+  a { font-size: 0.9em; }
+  button { padding: 0.4em 0.8em; font-size: 0.85em; }
 }
