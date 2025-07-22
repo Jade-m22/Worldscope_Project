@@ -4,14 +4,23 @@
   padding: 20px 16px;
   margin-bottom: 20px;
   color: #eaf6ff;
-  box-sizing: border-box;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-sizing: border-box;
 
-  h3 {
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-    font-weight: 600;
-    color: #35f5e7;
+  // Titre du sélecteur de pays
+  .country-select-title {
+    font-size: 1.13rem;
+    font-weight: 800;
+    color: #40ffe8;
+    background: linear-gradient(90deg, #12354988 60%, transparent 100%);
+    text-align: center;
+    margin-bottom: 8px;
+    padding: 8px 0;
+    border-radius: 8px;
+    border: 1.5px solid #21dbc87b;
+    box-shadow: 0 1px 10px #22fce366;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 4px #05252088;
   }
 
   .filters-list {
@@ -19,56 +28,54 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    max-width: 100%;
   }
 
   .filter-button {
-  flex: 1 1 calc(48% - 10px);
-  min-width: 120px;
-  background: #1f2e3a;
-  color: #c8fff9;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5em;
-  cursor: pointer;
-  text-align: center;
-  transition:
-    background 0.22s cubic-bezier(.4,1,.7,1),
-    color 0.14s,
-    box-shadow 0.19s,
-    transform 0.18s;
-  box-shadow: 0 0 0 transparent;
+    flex: 1 1 calc(48% - 10px);
+    min-width: 120px;
+    background: #1f2e3a;
+    color: #c8fff9;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    cursor: pointer;
+    text-align: center;
+    transition:
+      background 0.22s cubic-bezier(.4,1,.7,1),
+      color 0.14s,
+      box-shadow 0.19s,
+      transform 0.18s;
 
-  &:hover,
-  &:focus-visible {
-    background: linear-gradient(90deg, #36ffe6 0%, #0c7fff 100%);
-    color: #fff; // texte blanc au hover
-    box-shadow: 0 0 14px 3px #2bf5e799, 0 1px 8px #20e1db55;
-    font-weight: 700;
-    border-color: #19ffcb88;
-    transform: scale(1.04) translateY(-1px);
-    outline: none;
-  }
+    &:hover,
+    &:focus-visible {
+      background: linear-gradient(90deg, #36ffe6 0%, #0c7fff 100%);
+      color: #ffffff;
+      box-shadow: 0 0 14px 3px #2bf5e799, 0 1px 8px #20e1db55;
+      font-weight: 700;
+      border-color: #19ffcb88;
+      transform: scale(1.04) translateY(-1px);
+      outline: none;
+    }
 
-  &.active {
-    background: linear-gradient(90deg, #2342d2 0%, #36ffe8b7 80%);
-    color: #fff;
-    font-weight: 800;
-    border: 2px solid #2ef9c880;
-    box-shadow: 0 0 10px #24fff955, 0 1px 12px #1e90ff55;
-    transform: scale(1.06);
-  }
+    &.active {
+      background: linear-gradient(90deg, #2342d2 0%, #36ffe8b7 80%);
+      color: #ffffff;
+      font-weight: 800;
+      border: 2px solid #2ef9c880;
+      box-shadow: 0 0 10px #24fff955, 0 1px 12px #1e90ff55;
+      transform: scale(1.06);
+    }
 
-  .icon {
-    font-size: 1.1rem;
-    filter: drop-shadow(0 1px 1px #002b2c33);
+    .icon {
+      font-size: 1.1rem;
+      filter: drop-shadow(0 1px 1px #002b2c33);
+    }
   }
-}
 
   .subfilters {
     margin-top: 14px;
@@ -97,11 +104,17 @@
         width: 15px;
         height: 15px;
         accent-color: #28ffe3;
-        cursor: pointer;
       }
 
       &:hover {
         color: #0fffd7;
+      }
+
+      .color-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
       }
     }
   }
@@ -109,28 +122,15 @@
   .country-select {
     margin-bottom: 14px;
 
-    label {
-      display: flex;
-      flex-direction: column;
-      font-weight: 600;
-      font-size: 0.9rem;
+    // Styles pour react-select (CountrySelect)
+    .country-select__input-container input,
+    .country-select__input {
+      color: #ffffff !important;
     }
-
-    select {
-      margin-top: 4px;
-      padding: 6px 8px;
-      font-size: 0.9rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      background: #1f2e3a;
-      color: #eaf6ff;
-      transition: border-color 0.2s;
-
-      &:focus {
-        outline: none;
-        border-color: #24dbb6;
-        box-shadow: 0 0 5px #24dbb6aa;
-      }
+    .country-select__single-value,
+    .css-1jqq78o-placeholder {
+      color: #ffffff !important;
+      opacity: 1 !important;
     }
   }
 
@@ -155,18 +155,15 @@
   }
 }
 
-/* Responsive */
+/* Responsive (mobile) */
 @media (max-width: 480px) {
   .filters {
     margin: 0 auto 20px;
     padding: 14px 8px;
-    max-width: 100%;
-    overflow: hidden;
   }
 
   .filters-list {
     gap: 8px;
-    justify-content: center;
   }
 
   .filter-button {
@@ -174,21 +171,6 @@
     max-width: 45%;
     font-size: 0.93rem;
     padding: 9px 8px;
-
-    .icon {
-      font-size: 1rem;
-    }
-
-    &:hover,
-    &:focus-visible {
-      background: linear-gradient(90deg, #36ffe6 0%, #0c7fff 100%);
-      color: #fff; // <-- écriture blanche au hover !
-      box-shadow: 0 0 14px 3px #2bf5e799, 0 1px 8px #20e1db55;
-      font-weight: 700;
-      border-color: #19ffcb88;
-      transform: scale(1.04) translateY(-1px);
-      outline: none;
-    }
   }
 
   .reset-button {
@@ -198,42 +180,7 @@
   }
 
   .subfilters {
-    padding-top: 8px;
     margin-top: 12px;
+    padding-top: 8px;
   }
-
-  .sub-title,
-  .subfilter-label,
-  .country-select label,
-  .country-select select {
-    font-size: 0.83rem;
-  }
-}
-
-/* Pour react-select ou CountrySelect custom */
-.country-select__input-container input,
-.country-select__input {
-  color: #fff !important;
-}
-
-.country-select__single-value,
-.css-1jqq78o-placeholder {
-  color: #fff !important;
-  opacity: 1 !important;
-}
-
-/* Titre pays custom si besoin */
-.country-select-title {
-  font-size: 1.13rem;
-  font-weight: 800;
-  color: #40ffe8;
-  background: linear-gradient(90deg, #12354988 60%, transparent 100%);
-  text-align: center;
-  margin-bottom: 8px;
-  letter-spacing: 0.04em;
-  border-radius: 8px;
-  padding: 8px 0 7px 0;
-  box-shadow: 0 1px 10px #22fce366;
-  border: 1.5px solid #21dbc87b;
-  text-shadow: 0 1px 4px #05252088;
 }
