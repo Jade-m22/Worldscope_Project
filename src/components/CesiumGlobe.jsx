@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import Globe from "react-globe.gl";
 
-const globeImageUrl = "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
-const countriesUrl = "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json";
+const globeImageUrl =
+  "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
+const countriesUrl =
+  "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json";
 
 const CesiumGlobe = ({ data = [], onMarkerClick, onCountryClick }) => {
   const globeEl = useRef();
@@ -14,8 +17,8 @@ const CesiumGlobe = ({ data = [], onMarkerClick, onCountryClick }) => {
 
   useEffect(() => {
     fetch(countriesUrl)
-      .then(res => res.json())
-      .then(geojson => setCountries(geojson.features));
+      .then((res) => res.json())
+      .then((geojson) => setCountries(geojson.features));
   }, []);
 
   useEffect(() => {
@@ -45,36 +48,49 @@ const CesiumGlobe = ({ data = [], onMarkerClick, onCountryClick }) => {
     }
   };
 
+  // SEO dynamique
+  const pageTitle = `Globe3D — ${data.length} événements`;
+  const pageDescription = data.length
+    ? `Explorez ${data.length} événements géolocalisés sur le Globe3D de WorldScope.`
+    : "Globe3D de WorldScope — aucun événement à afficher.";
+
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "600px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
-      <Globe
-        ref={globeEl}
-        globeImageUrl={globeImageUrl}
-        backgroundColor="rgba(0,0,0,0)"
-        pointsData={data}
-        pointLat={event => event.lat}
-        pointLng={event => event.lng}
-        pointLabel={event => event.title}
-        pointColor={event => event.color || "red"}
-        pointRadius={0.6}
-        onPointClick={handlePointClick}
-        polygonsData={countries}
-        polygonCapColor={() => "rgba(255,255,255,0.04)"}
-        polygonSideColor={() => "rgba(0,0,0,0.02)"}
-        polygonStrokeColor={() => "#ffffff"}
-        polygonStrokeWidth={0.6}
-        polygonLabel={d => d.properties && d.properties.name}
-        onPolygonClick={handleCountryClick}
-      />
-    </div>
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
+
+      <div
+        style={{
+          width: "100%",
+          height: "600px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Globe
+          ref={globeEl}
+          globeImageUrl={globeImageUrl}
+          backgroundColor="rgba(0,0,0,0)"
+          pointsData={data}
+          pointLat={(e) => e.lat}
+          pointLng={(e) => e.lng}
+          pointLabel={(e) => e.title}
+          pointColor={(e) => e.color || "red"}
+          pointRadius={0.6}
+          onPointClick={handlePointClick}
+          polygonsData={countries}
+          polygonCapColor={() => "rgba(255,255,255,0.04)"}
+          polygonSideColor={() => "rgba(0,0,0,0.02)"}
+          polygonStrokeColor={() => "#ffffff"}
+          polygonStrokeWidth={0.6}
+          polygonLabel={(d) => d.properties && d.properties.name}
+          onPolygonClick={handleCountryClick}
+        />
+      </div>
+    </>
   );
 };
 

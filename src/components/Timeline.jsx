@@ -1,7 +1,13 @@
 import React from "react";
 import { Range } from "react-range";
+import { Helmet } from "react-helmet";
 
-export default function Timeline({ min = -3000, max = 2025, range = [min, max], onChange }) {
+export default function Timeline({
+  min = -3000,
+  max = 2025,
+  range = [min, max],
+  onChange,
+}) {
   const STEP = 1;
 
   // Calcul des pourcentages pour le dégradé
@@ -19,51 +25,66 @@ export default function Timeline({ min = -3000, max = 2025, range = [min, max], 
     #17242b 100%
   )`;
 
+  // SEO dynamique
+  const pageTitle = `WorldScope — Période ${range[0]} à ${range[1]}`;
+  const pageDescription = `Affichage des événements de ${range[0]} à ${range[1]}.`;
+
   return (
-    <section className="timeline" aria-label="Plage temporelle">
-      <div className="timeline-range-values">
-        <span>{range[0]}</span> — <span>{range[1]}</span>
-      </div>
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
 
-      <div className="timeline-slider">
-        <Range
-          values={range}
-          step={STEP}
-          min={min}
-          max={max}
-          onChange={onChange}
-          renderTrack={({ props, children }) => {
-            // Ici on applique le background dynamique directement sur la track
-            const { key, ...rest } = props;
-            return (
-              <div
-                key={key}
-                {...rest}
-                className="timeline-track"
-                style={{
-                  ...props.style,
-                  background: trackBackground,
-                }}
-              >
-                {children}
-              </div>
-            );
-          }}
-          renderThumb={({ props }) => {
-            const { key, ...rest } = props;
-            return <div key={key} {...rest} className="timeline-thumb" />;
-          }}
-        />
-      </div>
+      <section className="timeline" aria-label="Plage temporelle">
+        <div className="timeline-range-values">
+          <span>{range[0]}</span> — <span>{range[1]}</span>
+        </div>
 
-      <div className="timeline-labels">
-        <span>{min}</span>
-        <span>{max}</span>
-      </div>
+        <div className="timeline-slider">
+          <Range
+            values={range}
+            step={STEP}
+            min={min}
+            max={max}
+            onChange={onChange}
+            renderTrack={({ props, children }) => {
+              // Ici on applique le background dynamique directement sur la track
+              const { key, ...rest } = props;
+              return (
+                <div
+                  key={key}
+                  {...rest}
+                  className="timeline-track"
+                  style={{
+                    ...props.style,
+                    background: trackBackground,
+                  }}
+                >
+                  {children}
+                </div>
+              );
+            }}
+            renderThumb={({ props }) => {
+              const { key, ...rest } = props;
+              return <div key={key} {...rest} className="timeline-thumb" />;
+            }}
+          />
+        </div>
 
-      <button className="timeline-reset" onClick={() => onChange([min, max])}>
-        🔄 Réinitialiser la période
-      </button>
-    </section>
+        <div className="timeline-labels">
+          <span>{min}</span>
+          <span>{max}</span>
+        </div>
+
+        <button
+          className="timeline-reset"
+          onClick={() => onChange([min, max])}
+          type="button"
+        >
+          🔄 Réinitialiser la période
+        </button>
+      </section>
+    </>
   );
 }

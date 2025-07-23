@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import countryToCode from "../utils/countryCodes";
 import { fetchWikiExtract } from "../utils/wiki";
@@ -29,10 +30,10 @@ export default function EventDetail({ event }) {
     };
   }, [event.title]);
 
-  // Optionnel : fermeture avec la touche Echap
+  // Optionnel : fermeture avec la touche Escape
   useEffect(() => {
     if (!isModalOpen) return;
-    const handleKey = (e) => {
+    const handleKey = e => {
       if (e.key === "Escape") setIsModalOpen(false);
     };
     window.addEventListener("keydown", handleKey);
@@ -41,66 +42,82 @@ export default function EventDetail({ event }) {
 
   if (!event) return null;
 
+  // SEO dynamique
+  const pageTitle = `${event.title} — ${event.country} ${event.year}`;
+  const pageDescription =
+    event.desc?.slice(0, 150) ||
+    wikiText?.slice(0, 150) ||
+    `Découvrez ${event.title} en ${event.country} (${event.year}).`;
+
   return (
-    <div className="event-detail">
-      <div className="event-detail-main">
-        {wikiImage && (
-          <div className="event-detail-image">
-            <img
-              src={wikiImage}
-              alt={event.title}
-              style={{ cursor: "zoom-in" }}
-              onClick={() => setIsModalOpen(true)}
-            />
-          </div>
-        )}
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription + "..."} />
+      </Helmet>
 
-        <div className="event-detail-text">
-          <div className="event-detail-title">
-            <FlagOrEmoji code={countryToCode[event.country]} size="1.5em" />
-            {event.title}
-          </div>
-
-          <div className="event-detail-meta">
-            {event.country} &middot; {event.year}
-          </div>
-
-          {event.type && (
-            <div className="event-detail-highlight">
-              <span className="event-detail-type">{event.type}</span>
-              {event.subcategory && (
-                <span className="event-detail-subcategory">
-                  {" "}
-                  — {event.subcategory}
-                </span>
-              )}
+      <div className="event-detail">
+        <div className="event-detail-main">
+          {wikiImage && (
+            <div className="event-detail-image">
+              <img
+                src={wikiImage}
+                alt={event.title}
+                style={{ cursor: "zoom-in" }}
+                onClick={() => setIsModalOpen(true)}
+              />
             </div>
           )}
 
-          {event.desc && (
-            <div className="event-detail-desc">{event.desc}</div>
-          )}
+          <div className="event-detail-text">
+            <div className="event-detail-title">
+              <FlagOrEmoji
+                code={countryToCode[event.country]}
+                size="1.5em"
+              />
+              {event.title}
+            </div>
 
-          {wikiText && (
-            <div className="event-detail-more">{wikiText}</div>
-          )}
+            <div className="event-detail-meta">
+              {event.country} · {event.year}
+            </div>
+
+            {event.type && (
+              <div className="event-detail-highlight">
+                <span className="event-detail-type">{event.type}</span>
+                {event.subcategory && (
+                  <span className="event-detail-subcategory">
+                    — {event.subcategory}
+                  </span>
+                )}
+              </div>
+            )}
+
+            {event.desc && (
+              <div className="event-detail-desc">{event.desc}</div>
+            )}
+
+            {wikiText && (
+              <div className="event-detail-more">{wikiText}</div>
+            )}
+          </div>
         </div>
+
+        {/* Modal lightbox */}
+        {isModalOpen && (
+          <div
+            className="modal-backdrop"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <img
+              src={wikiImage}
+              alt={event.title}
+              className="modal-image"
+              onClick={e => e.stopPropagation()}
+            />
+          </div>
+        )}
       </div>
-
-      {/* Modal lightbox */}
-      {isModalOpen && (
-        <div
-          className="modal-backdrop"
-          onClick={() => setIsModalOpen(false)}
-        >
-          <img
-            src={wikiImage}
-            alt={event.title}
-            className="modal-image"
-            onClick={(e) => e.stopPropagation()} // empêche fermeture en cliquant sur l'image
-          />
-        </div>
-      )}
-    </div>
+    </>
   );
 }

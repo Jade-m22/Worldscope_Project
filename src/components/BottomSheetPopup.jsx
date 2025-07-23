@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import countryToCode from "../utils/countryCodes";
 import "../styles/components/bottomsheetpopup.scss";
@@ -24,36 +25,47 @@ const PlusIcon = (
 export default function BottomSheetPopup({ event, onClose, onShowDetail }) {
   if (!event) return null;
 
+  const pageTitle = `${event.title} — WorldScope`;
+  const pageDescription = event.desc
+    ? `${event.desc.slice(0, 150)}…`
+    : `${event.title}, ${event.country}, ${event.year}`;
+
   return (
-    <div className="map-bottom-sheet" onClick={onClose}>
-      <div className="sheet-content" onClick={(e) => e.stopPropagation()}>
-        <div className="sheet-header">
-          <div className="handle" />
-        </div>
-
-        <div className="sheet-body">
-          <div className="sheet-title">
-            <FlagOrEmoji code={countryToCode[event.country]} size="1.5em" />
-            {event.title}
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
+      <div className="map-bottom-sheet" onClick={onClose}>
+        <div className="sheet-content" onClick={(e) => e.stopPropagation()}>
+          <div className="sheet-header">
+            <div className="handle" />
           </div>
 
-          <div className="sheet-meta">
-            {event.country} · {event.year}
-          </div>
+          <div className="sheet-body">
+            <div className="sheet-title">
+              <FlagOrEmoji code={countryToCode[event.country]} size="1.5em" />
+              {event.title}
+            </div>
 
-          {event.desc && <div className="sheet-desc">{event.desc}</div>}
+            <div className="sheet-meta">
+              {event.country} · {event.year}
+            </div>
 
-          <div className="sheet-actions">
-            <button
-              type="button"
-              className="detail-btn"
-              onClick={onShowDetail}
-            >
-              Voir plus de détails {PlusIcon}
-            </button>
+            {event.desc && <div className="sheet-desc">{event.desc}</div>}
+
+            <div className="sheet-actions">
+              <button
+                type="button"
+                className="detail-btn"
+                onClick={onShowDetail}
+              >
+                Voir plus de détails {PlusIcon}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

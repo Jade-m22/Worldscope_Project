@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
 import Globe from "globe.gl";
 import "../styles/components/globeDashboard.scss";
 
@@ -41,5 +42,19 @@ export default function GlobeDashboard() {
       window.removeEventListener("resize", resize, { passive: true });
   }, []);
 
-  return <div ref={globeRef} className="dashboard-globe-canvas" />;
+  // SEO statique pour ce composant
+  const pageTitle = "WorldScope — Vue Globe";
+  const pageDescription =
+    "Découvrez le globe 3D interactif de WorldScope : une vue animée et immersive de notre planète.";
+
+  return (
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
+
+      <div ref={globeRef} className="dashboard-globe-canvas" />
+    </>
+  );
 }

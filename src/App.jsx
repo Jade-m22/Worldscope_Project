@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import useFiltersLogic from "./hooks/useFiltersLogic";
 import useIsMobile from "./hooks/useIsMobile";
 
@@ -64,8 +65,18 @@ export default function App() {
     setCountryFilter(countryName);
   };
 
+  const pageTitle = `WorldScope — ${filteredEvents.length} événements`;
+  const pageDescription = filteredEvents.length
+    ? `Explorez ${filteredEvents.length} événements historiques sur WorldScope. Filtrez par période, type, et découvrez des extraits et images.`
+    : "WorldScope — Explorez des événements historiques sur carte 2D et globe 3D.";
+
   return (
     <div>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
+
       <MainLayout
         header={<Header search={search} setSearch={setSearch} />}
         sidebar={!isMobile ? (
@@ -78,11 +89,18 @@ export default function App() {
         )}
         main={
           <>
-            <div className="view-toggle" style={{ marginBottom: "1rem", textAlign: "center" }}>
-              <button onClick={() => setViewMode(viewMode === "map" ? "globe" : "map")}> 
-                Passer à la vue {viewMode === "map" ? "Globe 3D" : "Carte 2D"}
+            <div
+              className="view-toggle"
+              style={{ marginBottom: "1rem", textAlign: "center" }}
+            >
+              <button
+                type="button"
+                onClick={() => setViewMode(viewMode === "map" ? "globe" : "map")}
+              >
+                Passer à la vue {viewMode === "map" ? "Globe 3D" : "Carte 2D"}
               </button>
             </div>
+
             <div className="map-card">
               {viewMode === "map" ? (
                 <Map
@@ -100,12 +118,17 @@ export default function App() {
                 />
               )}
             </div>
+
             <CardList
               data={filteredEvents}
               onCardClick={handleCardClick}
               onShowDetail={handleShowDetail}
             />
-            <div ref={detailRef} style={{ minHeight: "240px", marginTop: "2.5em" }}>
+
+            <div
+              ref={detailRef}
+              style={{ minHeight: "240px", marginTop: "2.5em" }}
+            >
               {detailedIdx !== null && filteredEvents[detailedIdx] && (
                 <EventDetail
                   event={filteredEvents[detailedIdx]}
@@ -116,6 +139,7 @@ export default function App() {
           </>
         }
       />
+
       {isMobile && selected !== null && (
         <BottomSheetPopup
           event={filteredEvents[selected]}
@@ -123,6 +147,7 @@ export default function App() {
           onShowDetail={() => { handleShowDetail(selected); setSelected(null); }}
         />
       )}
+
       <ScrollToTopButton />
     </div>
   );

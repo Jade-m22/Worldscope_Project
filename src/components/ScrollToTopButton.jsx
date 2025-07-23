@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const getScrollTop = () =>
   window.pageYOffset ||
@@ -22,29 +23,52 @@ const ScrollToTopButton = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    // Double sécurité sur mobiles récalcitrants :
+    // Double sécurité sur mobiles récalcitrants
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }, 80);
   };
 
+  // SEO statique pour le bouton
+  const pageTitle = "WorldScope — Remonter en haut";
+  const pageDescription =
+    "Bouton pour remonter en haut de la page dans l'application WorldScope.";
+
   return (
-    <button
-      className={`scroll-to-top-btn${visible ? "" : " hidden"}`}
-      onClick={scrollToTop}
-      aria-label="Remonter en haut"
-      tabIndex={visible ? 0 : -1}
-      type="button"
-    >
-      {/* Utilisation d'un SVG pour un centrage parfait */}
-      <span className="arrow" aria-hidden="true">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
-          style={{ display: "block", margin: "auto" }}
-          xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 20V8M14 8L8 14M14 8L20 14" stroke="#003a32" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </span>
-    </button>
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
+
+      <button
+        className={`scroll-to-top-btn${visible ? "" : " hidden"}`}
+        onClick={scrollToTop}
+        aria-label="Remonter en haut"
+        tabIndex={visible ? 0 : -1}
+        type="button"
+      >
+        {/* Utilisation d'un SVG pour un centrage parfait */}
+        <span className="arrow" aria-hidden="true">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            style={{ display: "block", margin: "auto" }}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14 20V8M14 8L8 14M14 8L20 14"
+              stroke="#003a32"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </button>
+    </>
   );
 };
 

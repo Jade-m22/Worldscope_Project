@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import countryToCode from "../utils/countryCodes";
 import FlagOrEmoji from "../utils/FlagOrEmoji";
 import { subcategoryColors, markerColors } from "../utils/colors";
@@ -80,71 +81,81 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
     },
   }));
 
+  // Préparation SEO dynamique
+  const pageTitle = `Carte des événements — WorldScope`;
+  const pageDescription = `Carte interactive affichant ${data.length} événements. Cliquez sur un marqueur pour voir les détails.`;
+
   return (
-    <MapContainer
-      center={[20, 0]}
-      zoom={2}
-      minZoom={2}
-      maxZoom={6}
-      scrollWheelZoom
-      className="geoscope-map"
-      maxBounds={[[85, -180], [-85, 180]]}
-      maxBoundsViscosity={1.0}
-      whenCreated={(map) => {
-        mapInstance.current = map;
-      }}
-    >
-      <ForceLeafletResize />
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
-        attribution="© OpenStreetMap contributors, tiles: OpenStreetMap France"
-      />
-      {data.map((m, i) => (
-        <Marker
-          key={i}
-          position={m.position}
-          ref={(el) => (markersRef.current[i] = el)}
-          eventHandlers={{ click: () => setSelected(i) }}
-          icon={createColoredPinMarker(
-            subcategoryColors[m.subcategory] ||
-              markerColors[m.status] ||
-              markerColors[m.type] ||
-              "#4deed6"
-          )}
-        >
-          {window.innerWidth > 768 && (
-            <Popup>
-              <div className="map-popup">
-                <div className="map-popup-title">
-                  <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
-                  {m.title}
-                </div>
-                <div
-                  className="map-popup-meta"
-                  style={{ color: "#000", fontWeight: 600 }}
-                >
-                  {m.country} &middot; {m.year}
-                </div>
-                <div className="map-popup-desc">{m.desc}</div>
-                <div className="map-popup-coords" style={{ color: "#000" }}>
-                  Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
-                </div>
-                {onShowDetail && (
-                  <button
-                    type="button"
-                    className="map-popup-detail-btn"
-                    onClick={() => onShowDetail(i)}
+    <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+      </Helmet>
+      <MapContainer
+        center={[20, 0]}
+        zoom={2}
+        minZoom={2}
+        maxZoom={6}
+        scrollWheelZoom
+        className="geoscope-map"
+        maxBounds={[[85, -180], [-85, 180]]}
+        maxBoundsViscosity={1.0}
+        whenCreated={(map) => {
+          mapInstance.current = map;
+        }}
+      >
+        <ForceLeafletResize />
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
+          attribution="© OpenStreetMap contributors, tiles: OpenStreetMap France"
+        />
+        {data.map((m, i) => (
+          <Marker
+            key={i}
+            position={m.position}
+            ref={(el) => (markersRef.current[i] = el)}
+            eventHandlers={{ click: () => setSelected(i) }}
+            icon={createColoredPinMarker(
+              subcategoryColors[m.subcategory] ||
+                markerColors[m.status] ||
+                markerColors[m.type] ||
+                "#4deed6"
+            )}
+          >
+            {window.innerWidth > 768 && (
+              <Popup>
+                <div className="map-popup">
+                  <div className="map-popup-title">
+                    <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
+                    {m.title}
+                  </div>
+                  <div
+                    className="map-popup-meta"
+                    style={{ color: "#000", fontWeight: 600 }}
                   >
-                    Voir plus de détails
-                  </button>
-                )}
-              </div>
-            </Popup>
-          )}
-        </Marker>
-      ))}
-      <MapFlyAndPopup selected={selected} markersRef={markersRef} />
-    </MapContainer>
+                    {m.country} &middot; {m.year}
+                  </div>
+                  <div className="map-popup-desc">{m.desc}</div>
+                  <div className="map-popup-coords" style={{ color: "#000" }}>
+                    Lat: {m.position[0].toFixed(3)}, Lon: {m.position[1].toFixed(3)}
+                  </div>
+                  {onShowDetail && (
+                    <button
+                      type="button"
+                      className="map-popup-detail-btn"
+                      onClick={() => onShowDetail(i)}
+                    >
+                      Voir plus de détails
+                    </button>
+                  )}
+                </div>
+              </Popup>
+            )}
+          </Marker>
+        ))}
+        <MapFlyAndPopup selected={selected} markersRef={markersRef} />
+      </MapContainer>
+    </>
   );
 });
 
