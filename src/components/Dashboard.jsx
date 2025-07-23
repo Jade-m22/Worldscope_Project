@@ -1,26 +1,53 @@
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import GlobeDashboard from "./GlobeDashboard";
+import "./../styles/components/dashboard.scss";
 
 export default function Dashboard() {
   const navigate = useNavigate();
 
+  // ↳ état et restauration de la préférence dyslexie
+  const [dyslexiaEnabled, setDyslexiaEnabled] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("dyslexia") === "on") {
+      document.body.classList.add("dyslexia");
+      setDyslexiaEnabled(true);
+    }
+  }, []);
+
+  // ↳ fonction pour basculer OpenDyslexic
+  const toggleDyslexia = () => {
+    const on = !dyslexiaEnabled;
+    setDyslexiaEnabled(on);
+    document.body.classList.toggle("dyslexia", on);
+    localStorage.setItem("dyslexia", on ? "on" : "off");
+  };
+
   return (
     <div className="dashboard-bg">
       <header className="dashboard-header">
-        <img
-          src="/VERT_worldscope.webp"
-          alt="WorldScope logo"
-          className="dashboard-logo"
-        />
-        <div className="dashboard-title-zone">
-          <h1>
-            Bienvenue sur <span>WorldScope</span>
-          </h1>
-          <p className="dashboard-slogan">
-            Explorez l’actualité mondiale<br />via une vision planétaire interactive
-          </p>
+        <div className="dashboard-header-left">
+          <img
+            src="/VERT_worldscope.webp"
+            alt="WorldScope logo"
+            className="dashboard-logo"
+          />
+          <div className="dashboard-title-zone">
+            <h1>
+              Bienvenue sur <span>WorldScope</span>
+            </h1>
+            <p className="dashboard-slogan">
+              Explorez l’actualité mondiale<br />via une vision planétaire interactive
+            </p>
+          </div>
         </div>
+
+        {/* Toggle OpenDyslexic dans le header */}
+        <button className="dyslexia-button" onClick={toggleDyslexia}>
+          {dyslexiaEnabled ? "Désactiver OpenDys" : "Activer OpenDys"}
+        </button>
       </header>
+
       <main className="dashboard-content">
         <section className="dashboard-globe">
           <div className="dashboard-globe-wrap">
@@ -33,6 +60,7 @@ export default function Dashboard() {
             </button>
           </div>
         </section>
+
         <section className="dashboard-info">
           <h2>Qu’allez-vous explorer aujourd’hui&nbsp;?</h2>
           <ul>
@@ -63,8 +91,9 @@ export default function Dashboard() {
           </ul>
         </section>
       </main>
+
       <footer className="dashboard-footer">
-        <small>WorldScope &copy; 2025 — Tous droits réservés.</small>
+        <small>WorldScope © 2025 — Tous droits réservés.</small>
       </footer>
     </div>
   );
