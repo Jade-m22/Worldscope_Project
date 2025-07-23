@@ -1,9 +1,27 @@
+// src/pages/Quiz.jsx
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import questionsData from "../data/quiz-questions.json";
 import "./../styles/components/quiz.scss";
 
 export default function Quiz() {
+  // ↳ état et restauration de la préférence dyslexie
+  const [dyslexiaEnabled, setDyslexiaEnabled] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("dyslexia") === "on") {
+      document.body.classList.add("dyslexia");
+      setDyslexiaEnabled(true);
+    }
+  }, []);
+
+  // ↳ fonction pour basculer OpenDyslexic
+  const toggleDyslexia = () => {
+    const on = !dyslexiaEnabled;
+    setDyslexiaEnabled(on);
+    document.body.classList.toggle("dyslexia", on);
+    localStorage.setItem("dyslexia", on ? "on" : "off");
+  };
+
   const [questions, setQuestions] = useState([]);
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
@@ -28,7 +46,7 @@ export default function Quiz() {
     setShowAnswer(false);
   }, [current]);
 
-    const handleAnswer = (opt) => {
+  const handleAnswer = (opt) => {
     if (showAnswer || selected !== null) return;
     setSelected(opt);
     setShowAnswer(true);
@@ -41,7 +59,7 @@ export default function Quiz() {
       } else {
         setCurrent((c) => c + 1);
       }
-    }, 3000); // <---- METTRE 3000 ici (3 secondes)
+    }, 3000);
   };
 
   const restart = () => {
@@ -72,14 +90,13 @@ export default function Quiz() {
     );
   }
 
-  // Si terminé
   if (finished) {
     return (
       <div className="quiz-page">
         <div className="quiz">
-          <h3>Quiz terminé !</h3>
+          <h3>Quiz terminé !</h3>
           <p>
-            Ton score&nbsp;: <strong>{score}</strong> / {questions.length}
+            Ton score : <strong>{score}</strong> / {questions.length}
           </p>
           <div className="quiz-footer">
             <button className="quiz-button" onClick={restart}>
@@ -92,11 +109,20 @@ export default function Quiz() {
     );
   }
 
-  // Question courante
   const { question, flag } = questions[current];
 
   return (
     <div className="quiz-page">
+      {/* Toggle OpenDyslexic */}
+      <div
+        className="quiz-dyslexia-toggle"
+        style={{ display: "flex", justifyContent: "flex-end", margin: "1rem 0" }}
+      >
+        <button className="dyslexia-button" onClick={toggleDyslexia}>
+          {dyslexiaEnabled ? "Désactiver OpenDys" : "Activer OpenDys"}
+        </button>
+      </div>
+
       <div className="quiz" tabIndex={-1}>
         <h3>
           Question {current + 1} / {questions.length}
@@ -129,6 +155,7 @@ export default function Quiz() {
               if (opt === questions[current].answer) btnClass = "selected good";
               else if (opt === selected) btnClass = "selected wrong";
             } else if (selected === opt) btnClass = "selected";
+
             return (
               <li key={opt}>
                 <button
@@ -146,10 +173,11 @@ export default function Quiz() {
         </ul>
         <div className="quiz-footer" style={{ marginTop: 16 }}>
           <span>
-            Score&nbsp;: <b>{score}</b> / {questions.length}
+            Score : <b>{score}</b> / {questions.length}
           </span>
         </div>
       </div>
+
       <QuizNavButton onClick={() => navigate("/app")} />
     </div>
   );
@@ -159,10 +187,7 @@ export default function Quiz() {
 function QuizNavButton({ onClick }) {
   return (
     <div className="quiz-nav-btn-wrap">
-      <button
-        className="quiz-nav-btn"
-        onClick={onClick}
-      >
+      <button className="quiz-nav-btn" onClick={onClick}>
         🌍 Retourner explorer le monde
       </button>
     </div>
