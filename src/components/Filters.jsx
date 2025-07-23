@@ -59,7 +59,7 @@ export default function Filters({
         </div>
 
         <div className="country-select">
-          <div className="country-select-title">🌎 Filtrer par pays</div>
+          <div className="country-select-title">Filtrer par pays</div>
           <CountrySelect
             value={country}
             onChange={onCountryChange}
