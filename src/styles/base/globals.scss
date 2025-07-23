@@ -75,10 +75,22 @@ button {
   }
 }
 
+/* Styles pour le toggle dyslexie */
+.dyslexia-button {
+  @extend button;
+  margin-left: 1rem;
+}
+
 /* Ajustements typographiques sous 700px */
 @media (max-width: 700px) {
   h1 {
     font-size: 2.1em;
+  }
+
+  .dyslexia-button {
+    padding: 0.5em 1em;
+    font-size: 0.95em;
+    margin-left: 0.75rem;
   }
 }
 
@@ -98,6 +110,14 @@ button {
     padding: 0.5em 1em;
     font-size: 0.9em;
   }
+
+  .dyslexia-button {
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+    margin-left: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 /* Ajustements sous 360px */
@@ -115,5 +135,12 @@ button {
   button {
     padding: 0.4em 0.8em;
     font-size: 0.85em;
+  }
+
+  .dyslexia-button {
+    padding: 0.3em 0.6em;
+    font-size: 0.85em;
+    margin-left: 0.25rem;
+    width: 100%;
   }
 }
