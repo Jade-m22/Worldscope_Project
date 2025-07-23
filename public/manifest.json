@@ -7,14 +7,14 @@
   "theme_color": "#2bf5e3",
   "icons": [
     {
-      "src": "icons8-tromperie-192.png",
+      "src": "vert_worldscope_192.webp",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/webp"
     },
     {
-      "src": "icons8-tromperie-512.png",
+      "src": "vert_worldscope_512.webp",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ]
 }

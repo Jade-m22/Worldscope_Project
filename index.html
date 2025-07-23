@@ -2,12 +2,19 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/icons8-tromperie-192.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Icône de la page (favicon) -->
+    <link rel="icon"           type="image/webp" href="/vert_worldscope_192.webp" />
+    <!-- Pour iOS / Android home screen -->
+    <link rel="apple-touch-icon"           href="/vert_worldscope_192.webp" />
+
+    <!-- On pointe explicitement sur manifest.json généré par VitePWA -->
+    <link rel="manifest"       href="/manifest.json" />
+
+    <meta name="viewport"      content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color"   content="#1c2637" />
     <title>WorldScope — Tout un monde à découvrir</title>
-    <meta name="description" content="Découvrez le monde sur WorldScope: monuments, histoire, infos, carte interactive." />
-    <meta name="theme-color" content="#1c2637" />
+    <meta name="description"   content="Découvrez le monde sur WorldScope : monuments, histoire, infos, carte interactive." />
   </head>
   <body>
     <div id="root"></div>
