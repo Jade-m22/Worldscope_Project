@@ -69,25 +69,35 @@ export default function EventDetail({ event }) {
             <div className="event-detail-highlight">
               <span className="event-detail-type">{event.type}</span>
               {event.subcategory && (
-                <span className="event-detail-subcategory"> — {event.subcategory}</span>
+                <span className="event-detail-subcategory">
+                  {" "}
+                  — {event.subcategory}
+                </span>
               )}
             </div>
           )}
 
-          {event.desc && <div className="event-detail-desc">{event.desc}</div>}
+          {event.desc && (
+            <div className="event-detail-desc">{event.desc}</div>
+          )}
 
-          {wikiText && <div className="event-detail-more">{wikiText}</div>}
+          {wikiText && (
+            <div className="event-detail-more">{wikiText}</div>
+          )}
         </div>
       </div>
 
       {/* Modal lightbox */}
       {isModalOpen && (
-        <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
+        <div
+          className="modal-backdrop"
+          onClick={() => setIsModalOpen(false)}
+        >
           <img
             src={wikiImage}
             alt={event.title}
             className="modal-image"
-            onClick={e => e.stopPropagation()} // empêche fermeture en cliquant sur l'image
+            onClick={(e) => e.stopPropagation()} // empêche fermeture en cliquant sur l'image
           />
         </div>
       )}

@@ -36,23 +36,16 @@ export default function App() {
     setCountryFilter,
   } = useFiltersLogic();
 
-  // Coloration pour les points du globe
   const getColorByType = (type) => {
     switch (type) {
-      case "Conflit":
-        return "red";
-      case "À visiter":
-        return "green";
-      case "Dangereux":
-        return "orange";
-      case "À éviter":
-        return "purple";
-      default:
-        return "blue";
+      case "Conflit": return "red";
+      case "À visiter": return "green";
+      case "Dangereux": return "orange";
+      case "À éviter": return "purple";
+      default: return "blue";
     }
   };
 
-  // Data à passer au globe (points)
   const globeEvents = filteredEvents.map(ev => ({
     lat: ev.position[0],
     lng: ev.position[1],
@@ -60,12 +53,9 @@ export default function App() {
     color: getColorByType(ev.type)
   }));
 
-  // Affiche le détail d'un event quand on clique sur un marker sur le globe
-  const handleGlobeMarkerClick = (event) => {
+  const handleGlobeMarkerClick = ({ title, lat, lng }) => {
     const idx = filteredEvents.findIndex(
-      e => e.title === event.title &&
-           e.position[0] === event.lat &&
-           e.position[1] === event.lng
+      e => e.title === title && e.position[0] === lat && e.position[1] === lng
     );
     if (idx !== -1) handleShowDetail(idx);
   };
@@ -78,24 +68,21 @@ export default function App() {
     <div>
       <MainLayout
         header={<Header search={search} setSearch={setSearch} />}
-        sidebar={
-          !isMobile ? (
-            <div className="desktop-filters">
-              <Timeline {...filterProps} />
-              <Filters {...filterProps} />
-            </div>
-          ) : (
-            <MobileMenu {...filterProps} />
-          )
-        }
+        sidebar={!isMobile ? (
+          <div className="desktop-filters">
+            <Timeline {...filterProps} />
+            <Filters {...filterProps} />
+          </div>
+        ) : (
+          <MobileMenu {...filterProps} />
+        )}
         main={
           <>
             <div className="view-toggle" style={{ marginBottom: "1rem", textAlign: "center" }}>
-              <button onClick={() => setViewMode(viewMode === "map" ? "globe" : "map")}>
+              <button onClick={() => setViewMode(viewMode === "map" ? "globe" : "map")}> 
                 Passer à la vue {viewMode === "map" ? "Globe 3D" : "Carte 2D"}
               </button>
             </div>
-
             <div className="map-card">
               {viewMode === "map" ? (
                 <Map
@@ -113,13 +100,11 @@ export default function App() {
                 />
               )}
             </div>
-
             <CardList
               data={filteredEvents}
               onCardClick={handleCardClick}
               onShowDetail={handleShowDetail}
             />
-
             <div ref={detailRef} style={{ minHeight: "240px", marginTop: "2.5em" }}>
               {detailedIdx !== null && filteredEvents[detailedIdx] && (
                 <EventDetail
@@ -135,10 +120,7 @@ export default function App() {
         <BottomSheetPopup
           event={filteredEvents[selected]}
           onClose={() => setSelected(null)}
-          onShowDetail={() => {
-            handleShowDetail(selected);
-            setSelected(null);
-          }}
+          onShowDetail={() => { handleShowDetail(selected); setSelected(null); }}
         />
       )}
       <ScrollToTopButton />

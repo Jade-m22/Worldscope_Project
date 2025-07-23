@@ -102,7 +102,11 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                   <div className="country">{item.country}</div>
                   <div className="type">{item.subcategory || item.type}</div>
                   <div className="year">{item.year}</div>
-                  <div className={`status status-${item.status.replace(/ /g, "").toLowerCase()}`}>
+                  <div
+                    className={`status status-${item.status
+                      .replace(/ /g, "")
+                      .toLowerCase()}`}
+                  >
                     {item.status}
                   </div>
                   {onShowDetail && (

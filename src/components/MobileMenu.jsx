@@ -2,12 +2,17 @@ import { useState } from "react";
 import Filters from "./Filters";
 import Timeline from "./Timeline";
 
+/**
+ * MobileMenu Component
+ * Panneau mobile pour les filtres et la timeline, en conservant le style et la structure d'origine.
+ */
 export default function MobileMenu(props) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="mobile-menu-container">
       <button
+        type="button"
         className="mobile-menu-toggle"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
@@ -24,7 +29,7 @@ export default function MobileMenu(props) {
         aria-hidden={!open}
         onClick={() => setOpen(false)}
       >
-        <div className="mobile-panel-inner" onClick={e => e.stopPropagation()}>
+        <div className="mobile-panel-inner" onClick={(e) => e.stopPropagation()}>
           <Timeline {...props} />
           <Filters {...props} />
         </div>

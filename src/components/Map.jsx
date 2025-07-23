@@ -12,14 +12,18 @@ function createColoredPinMarker(color) {
     className: "custom-marker",
     html: `
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="44" viewBox="0 0 32 44">
-        <path d="M16 44C16 44 30 27 30 18C30 8.05887 23.9411 2 16 2C8.05887 2 2 8.05887 2 18C2 27 16 44 16 44Z"
-          fill="${color}" stroke="#fff" stroke-width="2"/>
+        <path
+          d="M16 44C16 44 30 27 30 18C30 8.05887 23.9411 2 16 2C8.05887 2 2 8.05887 2 18C2 27 16 44 16 44Z"
+          fill="${color}"
+          stroke="#fff"
+          stroke-width="2"
+        />
         <circle cx="16" cy="18" r="7" fill="#fff" opacity="0.20"/>
       </svg>
     `,
     iconSize: [32, 44],
     iconAnchor: [16, 44],
-    popupAnchor: [0, -40]
+    popupAnchor: [0, -40],
   });
 }
 
@@ -39,7 +43,6 @@ function ForceLeafletResize() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       map.invalidateSize();
-
       const bounds = map.getBounds();
       const center = bounds.getCenter();
       map.setView(center, map.getZoom(), { animate: false });
@@ -70,11 +73,11 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
   const mapInstance = useRef(null);
 
   useImperativeHandle(ref, () => ({
-    flyToEvent: idx => {
+    flyToEvent: (idx) => {
       if (markersRef.current[idx]) {
         markersRef.current[idx].openPopup();
       }
-    }
+    },
   }));
 
   return (
@@ -87,7 +90,9 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
       className="geoscope-map"
       maxBounds={[[85, -180], [-85, 180]]}
       maxBoundsViscosity={1.0}
-      whenCreated={(map) => { mapInstance.current = map }}
+      whenCreated={(map) => {
+        mapInstance.current = map;
+      }}
     >
       <ForceLeafletResize />
       <TileLayer
@@ -96,15 +101,15 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
       />
       {data.map((m, i) => (
         <Marker
-          position={m.position}
           key={i}
-          ref={el => (markersRef.current[i] = el)}
+          position={m.position}
+          ref={(el) => (markersRef.current[i] = el)}
           eventHandlers={{ click: () => setSelected(i) }}
           icon={createColoredPinMarker(
             subcategoryColors[m.subcategory] ||
-            markerColors[m.status] ||
-            markerColors[m.type] ||
-            "#4deed6"
+              markerColors[m.status] ||
+              markerColors[m.type] ||
+              "#4deed6"
           )}
         >
           {window.innerWidth > 768 && (
@@ -114,7 +119,10 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
                   <FlagOrEmoji code={countryToCode[m.country]} size="1.7em" />
                   {m.title}
                 </div>
-                <div className="map-popup-meta" style={{ color: "#000", fontWeight: 600 }}>
+                <div
+                  className="map-popup-meta"
+                  style={{ color: "#000", fontWeight: 600 }}
+                >
                   {m.country} &middot; {m.year}
                 </div>
                 <div className="map-popup-desc">{m.desc}</div>
@@ -123,6 +131,7 @@ const Map = forwardRef(function Map({ data, selected, setSelected, onShowDetail 
                 </div>
                 {onShowDetail && (
                   <button
+                    type="button"
                     className="map-popup-detail-btn"
                     onClick={() => onShowDetail(i)}
                   >
