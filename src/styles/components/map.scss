@@ -1,20 +1,15 @@
 .map-card {
   border-radius: 22px;
   padding: 0;
-  margin: 0 auto 24px auto;
+  margin: 0 auto 24px;
   position: relative;
   z-index: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 90vw;
   max-width: 1000px;
-  height: 480px;
-  min-height: 480px;
-  max-height: 480px;
   overflow: hidden;
   flex-shrink: 0;
 
+  // gradient derrière la carte
   &::before {
     content: '';
     position: absolute;
@@ -28,24 +23,26 @@
     z-index: -1;
     pointer-events: none;
   }
+
+  // wrapper 16/9
+  .map-responsive-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; // 16/9
+  }
 }
 
-.geoscope-map {
-  width: 100%;
-  height: 100%;
-  flex: 1;
-  overflow: hidden;
+// **TOUS** les enfants directs du wrapper passent en absolute
+.map-responsive-wrapper > * {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
   border-radius: inherit;
 }
 
-.custom-marker {
-  filter: drop-shadow(0 2px 8px #0006);
-  transition: filter 0.16s;
-
-  svg {
-    display: block;
-  }
-}
+/* POPUP, MARKERS, ETC. (inchangé) */
 
 .map-popup {
   min-width: 180px;
@@ -99,18 +96,15 @@
   }
 }
 
-/* ----------- Responsive ----------- */
+/* ----------- Responsive overrides ----------- */
 
 @media (max-width: 768px) {
   .map-card {
-    height: 360px;
-    min-height: 360px;
-    max-height: 360px;
     margin-bottom: 8px !important;
-  }
 
-  .geoscope-map {
-    height: 400px;
+    .map-responsive-wrapper {
+      padding-bottom: 66.6667%; // ratio plus carré (4/3) sur tablette
+    }
   }
 
   .map-popup {
@@ -140,13 +134,13 @@
 @media (max-width: 480px) {
   .map-card {
     margin-bottom: 4px !important;
+
+    .map-responsive-wrapper {
+      padding-bottom: 75%; // presque carré sur mobile petit
+    }
   }
 
   .geoscope-map {
-    height: 300px;
-  }
-
-  .custom-marker {
     transform: scale(0.85);
   }
 
@@ -177,10 +171,6 @@
 
 @media (max-width: 360px) {
   .geoscope-map {
-    height: 240px;
-  }
-
-  .custom-marker {
     transform: scale(0.7);
   }
 

@@ -39,24 +39,32 @@ export default function App() {
 
   const getColorByType = (type) => {
     switch (type) {
-      case "Conflit": return "red";
-      case "À visiter": return "green";
-      case "Dangereux": return "orange";
-      case "À éviter": return "purple";
-      default: return "blue";
+      case "Conflit":
+        return "red";
+      case "À visiter":
+        return "green";
+      case "Dangereux":
+        return "orange";
+      case "À éviter":
+        return "purple";
+      default:
+        return "blue";
     }
   };
 
-  const globeEvents = filteredEvents.map(ev => ({
+  const globeEvents = filteredEvents.map((ev) => ({
     lat: ev.position[0],
     lng: ev.position[1],
     title: ev.title,
-    color: getColorByType(ev.type)
+    color: getColorByType(ev.type),
   }));
 
   const handleGlobeMarkerClick = ({ title, lat, lng }) => {
     const idx = filteredEvents.findIndex(
-      e => e.title === title && e.position[0] === lat && e.position[1] === lng
+      (e) =>
+        e.title === title &&
+        e.position[0] === lat &&
+        e.position[1] === lng
     );
     if (idx !== -1) handleShowDetail(idx);
   };
@@ -79,63 +87,99 @@ export default function App() {
 
       <MainLayout
         header={<Header search={search} setSearch={setSearch} />}
-        sidebar={!isMobile ? (
-          <div className="desktop-filters">
-            <Timeline {...filterProps} />
-            <Filters {...filterProps} />
-          </div>
-        ) : (
-          <MobileMenu {...filterProps} />
-        )}
+        sidebar={
+          !isMobile ? (
+            <div className="desktop-filters">
+              <Timeline {...filterProps} />
+              <Filters {...filterProps} />
+            </div>
+          ) : (
+            <MobileMenu {...filterProps} />
+          )
+        }
         main={
           <>
+            {/* Bascule carte / globe */}
             <div className="view-toggle">
-              <button onClick={() => setViewMode(viewMode === "map" ? "globe" : "map")}>
+              <button
+                onClick={() =>
+                  setViewMode(viewMode === "map" ? "globe" : "map")
+                }
+              >
                 <div className="button-content">
                   <div className="icon-wrapper">
                     {viewMode === "map" ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                      // Icône globe 3D
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                       </svg>
                     ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
-                        <line x1="8" y1="2" x2="8" y2="18"/>
-                        <line x1="16" y1="6" x2="16" y2="22"/>
+                      // Icône carte 2D
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                        <line x1="8" y1="2" x2="8" y2="18" />
+                        <line x1="16" y1="6" x2="16" y2="22" />
                       </svg>
                     )}
                   </div>
-                  <span className="text">{viewMode === "map" ? "Vue Globe 3D" : "Vue Carte 2D"}</span>
+                  <span className="text">
+                    {viewMode === "map" ? "Vue Globe 3D" : "Vue Carte 2D"}
+                  </span>
                 </div>
               </button>
             </div>
 
+            {/* Carte responsive (wrapper 16/9) */}
             <div className="map-card">
-              {viewMode === "map" ? (
-                <Map
-                  data={filteredEvents}
-                  selected={selected}
-                  setSelected={setSelected}
-                  ref={mapRef}
-                  onShowDetail={handleShowDetail}
-                />
-              ) : (
-                <CesiumGlobe
-                  data={globeEvents}
-                  onMarkerClick={handleGlobeMarkerClick}
-                  onCountryClick={handleGlobeCountryClick}
-                />
-              )}
+              <div className="map-responsive-wrapper">
+                {viewMode === "map" ? (
+                  <Map
+                    data={filteredEvents}
+                    selected={selected}
+                    setSelected={setSelected}
+                    ref={mapRef}
+                    onShowDetail={handleShowDetail}
+                  />
+                ) : (
+                  <CesiumGlobe
+                    data={globeEvents}
+                    onMarkerClick={handleGlobeMarkerClick}
+                    onCountryClick={handleGlobeCountryClick}
+                  />
+                )}
+              </div>
             </div>
 
+            {/* Liste de cartes */}
             <CardList
               data={filteredEvents}
               onCardClick={handleCardClick}
               onShowDetail={handleShowDetail}
             />
 
+            {/* Détail événement */}
             <div
               ref={detailRef}
               style={{ minHeight: "240px", marginTop: "2.5em" }}
@@ -151,11 +195,15 @@ export default function App() {
         }
       />
 
+      {/* Bottom sheet sur mobile */}
       {isMobile && selected !== null && (
         <BottomSheetPopup
           event={filteredEvents[selected]}
           onClose={() => setSelected(null)}
-          onShowDetail={() => { handleShowDetail(selected); setSelected(null); }}
+          onShowDetail={() => {
+            handleShowDetail(selected);
+            setSelected(null);
+          }}
         />
       )}
 

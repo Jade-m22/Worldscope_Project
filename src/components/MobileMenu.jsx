@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Filters from "./Filters";
 import Timeline from "./Timeline";
+import "../styles/components/mobilemenu.scss"; // si tu as un fichier SCSS pour ce composant
 
 /**
  * MobileMenu Component
@@ -66,11 +67,9 @@ export default function MobileMenu(props) {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Toggle OpenDyslexic */}
-            <div style={{ textAlign: "right", marginBottom: "1rem" }}>
+            <div style={{ textAlign: "center", margin: "1rem 0" }}>
               <button className="quiz-button" onClick={toggleDyslexia}>
-                {dyslexiaEnabled
-                  ? "Désactiver OpenDys"
-                  : "Activer OpenDys"}
+                {dyslexiaEnabled ? "Désactiver OpenDys" : "Activer OpenDys"}
               </button>
             </div>
 
