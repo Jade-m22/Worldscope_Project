@@ -6,7 +6,6 @@ import Timeline from "./Timeline";
 export default function MobileMenu(props) {
   const [open, setOpen] = useState(false);
 
-  // ↳ état et restauration de la préférence dyslexie
   const [dyslexiaEnabled, setDyslexiaEnabled] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("dyslexia") === "on") {
@@ -15,7 +14,6 @@ export default function MobileMenu(props) {
     }
   }, []);
 
-  // ↳ fonction pour basculer OpenDyslexic
   const toggleDyslexia = () => {
     const on = !dyslexiaEnabled;
     setDyslexiaEnabled(on);
@@ -25,7 +23,6 @@ export default function MobileMenu(props) {
 
   return (
     <div className="mobile-menu-container">
-      {/* Bouton toggle OpenDys, même style que le Quiz */}
       <button
         className="quiz-button"
         onClick={toggleDyslexia}
@@ -43,7 +40,6 @@ export default function MobileMenu(props) {
         {open ? "❌ Fermer les filtres" : "☰ Filtres & Période"}
       </button>
 
-      {/* Panneau mobile overlay, mais body scrollable */}
       <div
         id="mobile-panel"
         className={`mobile-panel${open ? " open" : ""}`}

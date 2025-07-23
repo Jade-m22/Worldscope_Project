@@ -6,7 +6,6 @@ import "./../styles/components/dashboard.scss";
 export default function Dashboard() {
   const navigate = useNavigate();
 
-  // ↳ état et restauration de la préférence dyslexie
   const [dyslexiaEnabled, setDyslexiaEnabled] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("dyslexia") === "on") {
@@ -15,7 +14,6 @@ export default function Dashboard() {
     }
   }, []);
 
-  // ↳ fonction pour basculer OpenDyslexic
   const toggleDyslexia = () => {
     const on = !dyslexiaEnabled;
     setDyslexiaEnabled(on);
@@ -42,7 +40,6 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Toggle OpenDyslexic dans le header avec style Quiz */}
         <button className="quiz-button" onClick={toggleDyslexia}>
           {dyslexiaEnabled ? "Désactiver OpenDys" : "Activer OpenDys"}
         </button>

@@ -29,7 +29,7 @@ export default function EventDetail({ event }) {
     };
   }, [event.title]);
 
-  // Optionnel : fermeture avec la touche Echap
+  // fermeture avec la touche Echap
   useEffect(() => {
     if (!isModalOpen) return;
     const handleKey = (e) => {

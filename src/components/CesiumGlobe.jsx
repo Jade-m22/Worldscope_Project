@@ -8,7 +8,6 @@ const CesiumGlobe = ({ data = [], onMarkerClick, onCountryClick }) => {
   const globeEl = useRef();
   const [countries, setCountries] = useState([]);
 
-  // Zoom params en kilomètres
   const MIN_ZOOM = 200;
   const MAX_ZOOM = 600;
 
@@ -28,7 +27,6 @@ const CesiumGlobe = ({ data = [], onMarkerClick, onCountryClick }) => {
     }
   }, [countries]);
 
-  // Quand on clique sur un pays
   const handleCountryClick = (country) => {
     if (!country.properties || !country.properties.name) return;
     if (typeof onCountryClick === "function") {
@@ -38,7 +36,6 @@ const CesiumGlobe = ({ data = [], onMarkerClick, onCountryClick }) => {
     }
   };
 
-  // Quand on clique sur un marker/événement
   const handlePointClick = (event) => {
     if (typeof onMarkerClick === "function") {
       onMarkerClick(event);

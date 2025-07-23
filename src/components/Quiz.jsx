@@ -5,7 +5,6 @@ import questionsData from "../data/quiz-questions.json";
 import "./../styles/components/quiz.scss";
 
 export default function Quiz() {
-  // ↳ état et restauration de la préférence dyslexie
   const [dyslexiaEnabled, setDyslexiaEnabled] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("dyslexia") === "on") {
@@ -14,7 +13,6 @@ export default function Quiz() {
     }
   }, []);
 
-  // ↳ fonction pour basculer OpenDyslexic
   const toggleDyslexia = () => {
     const on = !dyslexiaEnabled;
     setDyslexiaEnabled(on);

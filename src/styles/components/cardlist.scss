@@ -102,8 +102,8 @@
     text-align: center;
     gap: 0.45em;
     width: 100%;
-    min-height: 2.8em;   // plus haut pour 2 lignes de titre
-    max-height: 3.1em;   // adapte si tu veux plus
+    min-height: 2.8em;   
+    max-height: 3.1em;   
     font-weight: 800;
     color: #fff;
     text-shadow: 0 1px 4px #000000aa;
@@ -234,9 +234,7 @@
   }
 }
 
-/* -------------------------- */
 /* RESPONSIVE - TABLET + MOBILE ( < 900px ) */
-/* -------------------------- */
 @media (max-width: 900px) {
   .cards {
     flex-wrap: wrap;

@@ -1,4 +1,3 @@
-// src/styles/components/dashboard.scss
 .dashboard-bg {
   min-height: 100vh;
   background: linear-gradient(135deg, #0d2127 0%, #0a1e29 50%, #174233 100%);
@@ -54,11 +53,9 @@
     }
   }
 
-  /* Wrapper pour le bouton OpenDyslexic */
   .dashboard-header-right {
     display: flex;
     align-items: center;
-    /* margin-left auto pas nécessaire car justify-content gère l'espacement */
   }
 }
 

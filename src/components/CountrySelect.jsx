@@ -3,7 +3,6 @@ import Select from "react-select";
 import CountryFlag from "react-country-flag";
 import countryToCode from "../utils/countryCodes";
 
-// Génère les options enrichies (emoji| drapeau SVG| texte)
 const getCountryOptions = () =>
   Object.entries(countryToCode)
     .map(([country, code]) => {
@@ -18,7 +17,6 @@ const getCountryOptions = () =>
           ),
         };
       }
-      // Code ISO à deux lettres
       if (/^[A-Z]{2}$/.test(code)) {
         return {
           value: country,
@@ -40,7 +38,6 @@ const getCountryOptions = () =>
           ),
         };
       }
-      // Multi‑pays (ex. "KP/KR")
       if (/^([A-Z]{2}\/)+[A-Z]{2}$/.test(code)) {
         return {
           value: country,
@@ -65,7 +62,6 @@ const getCountryOptions = () =>
           ),
         };
       }
-      // Fallback texte
       return {
         value: country,
         label: country,
@@ -86,10 +82,9 @@ export default function CountrySelect({ value, onChange }) {
       options={options}
       value={options.find((o) => o.value === value) || null}
       onChange={(selected) => {
-        // quand on clique sur la croix, selected=null → onChange("")
         onChange(selected ? selected.value : "");
       }}
-      isClearable               // active le bouton "vider"
+      isClearable              
       placeholder="🌍 Tous les pays"
       styles={{
         control: (base) => ({

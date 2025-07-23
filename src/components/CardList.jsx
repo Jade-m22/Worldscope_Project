@@ -53,7 +53,6 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
     }
 
     fetchNext();
-    // eslint-disable-next-line
   }, [startIndex, data]);
 
   const handleShowMore = () => {
