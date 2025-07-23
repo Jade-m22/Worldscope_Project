@@ -1,3 +1,4 @@
+// src/styles/globals.scss
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
@@ -21,7 +22,6 @@ html {
 
 body {
   min-height: 100vh;
-  /* on retire la min-width pour autoriser la taille < 320px */
   margin: 0;
   padding: 0;
   display: flex;
@@ -75,14 +75,28 @@ button {
   }
 }
 
-/* Ajustements typographiques sous 700px */
+/* Styles pour le toggle dyslexie */
+.dyslexia-button {
+  @extend button;
+  /* Espace initial à gauche sur écrans larges */
+  margin-left: 1rem;
+  flex-shrink: 0; /* Empêche le bouton de rapetisser sur grand écran */
+}
+
+/* Ajustements typographiques et responsivité */
 @media (max-width: 700px) {
   h1 {
     font-size: 2.1em;
   }
+
+  .dyslexia-button {
+    /* Réduction du padding et du text size */
+    padding: 0.5em 1em;
+    font-size: 0.95em;
+    margin-left: 0.75rem;
+  }
 }
 
-/* Ajustements sous 500px */
 @media (max-width: 500px) {
   html {
     font-size: 0.95rem;
@@ -98,9 +112,17 @@ button {
     padding: 0.5em 1em;
     font-size: 0.9em;
   }
+
+  .dyslexia-button {
+    /* Retrait de la marge, autorise le flex-shrink pour ne pas chevaucher */
+    margin-left: 0;
+    flex: 1 1 auto; /* Permet de réduire si nécessaire */
+    min-width: 0;
+    padding: 0.4em 0.8em;
+    font-size: 0.9em;
+  }
 }
 
-/* Ajustements sous 360px */
 @media (max-width: 360px) {
   html {
     font-size: 0.9rem;
@@ -115,5 +137,13 @@ button {
   button {
     padding: 0.4em 0.8em;
     font-size: 0.85em;
+  }
+
+  .dyslexia-button {
+    /* Plus compact sur très petit écran */
+    padding: 0.3em 0.6em;
+    font-size: 0.85em;
+    margin-left: 0;
+    flex: 1 1 auto;
   }
 }

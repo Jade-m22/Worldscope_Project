@@ -12,3 +12,7 @@
 @use 'components/globeDashboard';
 @use 'components/mobilemenu';
 @use 'components/scrolltotop';
+body.dyslexia {
+    font-family: 'OpenDyslexic', sans-serif;
+    line-height: 1.5;
+  }

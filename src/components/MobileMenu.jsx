@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Filters from "./Filters";
 import Timeline from "./Timeline";
@@ -10,13 +10,30 @@ import Timeline from "./Timeline";
 export default function MobileMenu(props) {
   const [open, setOpen] = useState(false);
 
+  // ↳ état et restauration de la préférence dyslexie
+  const [dyslexiaEnabled, setDyslexiaEnabled] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("dyslexia") === "on") {
+      document.body.classList.add("dyslexia");
+      setDyslexiaEnabled(true);
+    }
+  }, []);
+
+  // ↳ fonction pour basculer OpenDyslexic
+  const toggleDyslexia = () => {
+    const on = !dyslexiaEnabled;
+    setDyslexiaEnabled(on);
+    document.body.classList.toggle("dyslexia", on);
+    localStorage.setItem("dyslexia", on ? "on" : "off");
+  };
+
   // SEO dynamique selon l'état du panneau
   const pageTitle = open
-    ? "Filtres & Période — WorldScope"
-    : "WorldScope — Explorateur d'événements";
+    ? "Filtres & Période — WorldScope"
+    : "WorldScope — Explorateur d’événements";
   const pageDescription = open
     ? "Affinez votre recherche d'événements avec les filtres et la timeline sur WorldScope."
-    : "Application WorldScope – explorez des événements historiques sur carte et globe.";
+    : "Application WorldScope – explorez des événements historiques sur carte et globe.";
 
   return (
     <>
@@ -48,6 +65,15 @@ export default function MobileMenu(props) {
             className="mobile-panel-inner"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Toggle OpenDyslexic */}
+            <div style={{ textAlign: "right", marginBottom: "1rem" }}>
+              <button className="quiz-button" onClick={toggleDyslexia}>
+                {dyslexiaEnabled
+                  ? "Désactiver OpenDys"
+                  : "Activer OpenDys"}
+              </button>
+            </div>
+
             <Timeline {...props} />
             <Filters {...props} />
           </div>
