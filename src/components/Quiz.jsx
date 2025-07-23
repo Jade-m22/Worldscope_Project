@@ -5,7 +5,7 @@ import questionsData from "../data/quiz-questions.json";
 import "../styles/components/quiz.scss";
 
 export default function Quiz() {
-  // ↳ état et restauration de la préférence dyslexie
+  // etat et restauration de la preference dyslexie
   const [dyslexiaEnabled, setDyslexiaEnabled] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("dyslexia") === "on") {
@@ -14,7 +14,7 @@ export default function Quiz() {
     }
   }, []);
 
-  // ↳ fonction pour basculer OpenDyslexic
+  // fonction pour basculer OpenDyslexic
   const toggleDyslexia = () => {
     const on = !dyslexiaEnabled;
     setDyslexiaEnabled(on);
@@ -42,7 +42,7 @@ export default function Quiz() {
     setFinished(false);
   }, []);
 
-  // reset de la sélection à chaque question
+  // reset de la selection a chaque question
   useEffect(() => {
     setSelected(null);
     setShowAnswer(false);
@@ -80,10 +80,10 @@ export default function Quiz() {
     return [...choices].sort(() => Math.random() - 0.5);
   }, [questions, current]);
 
-  // État : chargement
+  // Etat : chargement
   if (!questions.length) {
-    const pageTitle = "Quiz WorldScope — Chargement";
-    const pageDescription = "Le quiz se charge, veuillez patienter…";
+    const pageTitle = "Quiz WorldScope - Chargement";
+    const pageDescription = "Le quiz se charge, veuillez patienter...";
     return (
       <>
         <Helmet>
@@ -94,7 +94,7 @@ export default function Quiz() {
         <div className="quiz-page">
           <div className="quiz" style={{ textAlign: "center" }}>
             <div className="spinner" />
-            <p style={{ marginTop: 12 }}>Chargement…</p>
+            <p style={{ marginTop: 12 }}>Chargement...</p>
           </div>
           <QuizNavButton onClick={() => navigate("/app")} />
         </div>
@@ -102,10 +102,10 @@ export default function Quiz() {
     );
   }
 
-  // État : terminé
+  // Etat : termine
   if (finished) {
-    const pageTitle = `Quiz terminé — Score ${score}/${questions.length}`;
-    const pageDescription = `Vous avez obtenu ${score} bonnes réponses sur ${questions.length} questions.`;
+    const pageTitle = `Quiz termine - Score ${score}/${questions.length}`;
+    const pageDescription = `Vous avez obtenu ${score} bonnes reponses sur ${questions.length} questions.`;
     return (
       <>
         <Helmet>
@@ -115,9 +115,9 @@ export default function Quiz() {
 
         <div className="quiz-page">
           <div className="quiz">
-            <h3>Quiz terminé !</h3>
+            <h3>Quiz termine !</h3>
             <p>
-              Ton score : <strong>{score}</strong> / {questions.length}
+              Ton score : <strong>{score}</strong> / {questions.length}
             </p>
             <div className="quiz-footer">
               <button className="quiz-button" onClick={restart}>
@@ -131,9 +131,9 @@ export default function Quiz() {
     );
   }
 
-  // État : question en cours
+  // Etat : question en cours
   const { question, flag } = questions[current];
-  const pageTitle = `Quiz — Question ${current + 1}/${questions.length}`;
+  const pageTitle = `Quiz - Question ${current + 1}/${questions.length}`;
   const pageDescription = flag ? `${question} (${flag})` : question;
 
   return (
@@ -150,7 +150,7 @@ export default function Quiz() {
           style={{ display: "flex", justifyContent: "flex-end", margin: "1rem 0" }}
         >
           <button className="quiz-button" onClick={toggleDyslexia}>
-            {dyslexiaEnabled ? "Désactiver OpenDys" : "Activer OpenDys"}
+            {dyslexiaEnabled ? "Desactiver OpenDys" : "Activer OpenDys"}
           </button>
         </div>
 
@@ -205,7 +205,7 @@ export default function Quiz() {
           </ul>
           <div className="quiz-footer" style={{ marginTop: 16 }}>
             <span>
-              Score : <b>{score}</b> / {questions.length}
+              Score : <b>{score}</b> / {questions.length}
             </span>
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function Quiz() {
   );
 }
 
-// Bouton navigation réutilisable
+// Bouton navigation reutilisable
 function QuizNavButton({ onClick }) {
   return (
     <div className="quiz-nav-btn-wrap">
