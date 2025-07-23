@@ -118,7 +118,7 @@ export default function Quiz() {
         className="quiz-dyslexia-toggle"
         style={{ display: "flex", justifyContent: "flex-end", margin: "1rem 0" }}
       >
-        <button className="dyslexia-button" onClick={toggleDyslexia}>
+        <button className="quiz-button" onClick={toggleDyslexia}>
           {dyslexiaEnabled ? "Désactiver OpenDys" : "Activer OpenDys"}
         </button>
       </div>
