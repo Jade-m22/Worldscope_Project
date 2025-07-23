@@ -70,22 +70,26 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
       <div className="cardlist-outer">
         <div className="cards">
           {visibleData.map((item, i) => {
+            const idx = i + startIndex;
             const imageUrl = wikiImages[item.title];
             const isLoading = loadingTitles.includes(item.title);
+            const titleId = `card-title-${idx}`;
+            const descId = `card-desc-${idx}`;
 
             return (
               <div
-                className="card"
                 key={item.title}
-                onClick={() => onCardClick?.(i + startIndex)}
+                className="card"
+                role="button"
+                tabIndex={0}
+                aria-labelledby={titleId}
+                aria-describedby={descId}
+                onClick={() => onCardClick?.(idx)}
                 style={{
                   "--bg-url": imageUrl ? `url(${imageUrl})` : "none",
                   backgroundColor: imageUrl ? "transparent" : "#111",
                   position: "relative"
                 }}
-                tabIndex={0}
-                role="button"
-                aria-pressed="false"
               >
                 {isLoading && <div className="card-skeleton" />}
                 {isLoading && (
@@ -94,14 +98,17 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                   </div>
                 )}
 
-                <div className="card-overlay">
-                  <h4 className="card-title">
+                <div className="card-overlay" aria-hidden="true">
+                  <h4 id={titleId} className="card-title">
                     <span className="flag-wrap">
-                      <FlagOrEmoji code={countryToCode[item.country]} size="1.5em" />
+                      <FlagOrEmoji
+                        code={countryToCode[item.country]}
+                        size="1.5em"
+                      />
                     </span>
                     <span className="title-text">{item.title}</span>
                   </h4>
-                  <div className="card-details">
+                  <div className="card-details" aria-hidden="true">
                     <div className="country">{item.country}</div>
                     <div className="type">{item.subcategory || item.type}</div>
                     <div className="year">{item.year}</div>
@@ -116,11 +123,18 @@ export default function CardList({ data = events, onCardClick, onShowDetail }) {
                       <SeeMoreButton
                         onClick={e => {
                           e.stopPropagation();
-                          onShowDetail(i + startIndex);
+                          onShowDetail(idx);
                         }}
                       />
                     )}
                   </div>
+                </div>
+
+                {/* Description accessible pour lecteurs d'écran */}
+                <div id={descId} className="sr-only">
+                  {`${item.title} — ${item.country}, ${item.year}. Type: ${
+                    item.subcategory || item.type
+                  }. Statut: ${item.status}.`}
                 </div>
               </div>
             );
