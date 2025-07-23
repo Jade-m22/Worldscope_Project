@@ -42,8 +42,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Toggle OpenDyslexic dans le header */}
-        <button className="dyslexia-button" onClick={toggleDyslexia}>
+        {/* Toggle OpenDyslexic dans le header avec style Quiz */}
+        <button className="quiz-button" onClick={toggleDyslexia}>
           {dyslexiaEnabled ? "Désactiver OpenDys" : "Activer OpenDys"}
         </button>
       </header>
