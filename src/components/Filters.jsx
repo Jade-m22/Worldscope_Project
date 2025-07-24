@@ -29,6 +29,37 @@ export default function Filters({
     localStorage.setItem("dyslexia", on ? "on" : "off");
   };
 
+  const triggerParticles = (e) => {
+    const button = e.currentTarget;
+    const rect = button.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickY = e.clientY - rect.top;
+
+    const particleContainer = document.createElement("div");
+    particleContainer.className = "particle-container";
+    particleContainer.style.left = `${clickX}px`;
+    particleContainer.style.top = `${clickY}px`;
+    particleContainer.style.transform = "translate(-50%, -50%)";
+
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement("span");
+      particle.className = "particle";
+      const angle = Math.random() * 2 * Math.PI;
+      const radius = Math.random() * 30;
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+      particle.style.setProperty("--x", `${x}px`);
+      particle.style.setProperty("--y", `${y}px`);
+      particleContainer.appendChild(particle);
+    }
+
+    button.appendChild(particleContainer);
+
+    setTimeout(() => {
+      particleContainer.remove();
+    }, 700);
+  };
+
   // 📝 SEO dynamique
   const filtersList = [
     { label: "Tous",      value: "",           icon: "🌍" },
@@ -42,6 +73,20 @@ export default function Filters({
   const subLabel     = subFilter.length ? subFilter.join(", ") : "aucune sous-catégorie";
   const pageTitle       = `Filtres: ${activeLabel} | ${countryLabel} — WorldScope`;
   const pageDescription = `Affichage des événements filtrés: type "${activeLabel}", pays "${countryLabel}", sous-catégories: ${subLabel}.`;
+
+  const handleMouseMove = (e) => {
+    const button = e.currentTarget;
+    const glow = button.querySelector(".glow");
+    const rect = button.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    glow.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.15), transparent 60%)`;
+  };
+
+  const handleMouseLeave = (e) => {
+    const glow = e.currentTarget.querySelector(".glow");
+    glow.style.background = "none";
+  };
 
   return (
     <>
@@ -59,7 +104,7 @@ export default function Filters({
         </div>
 
         <div className="country-select">
-          <div className="country-select-title">🌎 Filtrer par pays</div>
+          <div className="country-select-title">Filtrer par pays</div>
           <CountrySelect
             value={country}
             onChange={onCountryChange}
@@ -71,8 +116,14 @@ export default function Filters({
             <div key={f.value}>
               <button
                 className={`filter-button ${active === f.value ? "active" : ""}`}
-                onClick={() => onFilter(f.value)}
+                onClick={(e) => {
+                  onFilter(f.value);
+                  triggerParticles(e);
+                }}
+                onMouseMove={(e) => handleMouseMove(e)}
+                onMouseLeave={(e) => handleMouseLeave(e)}
               >
+                <span className="glow" />
                 <span className="icon">{f.icon}</span>
                 {f.label}
               </button>
