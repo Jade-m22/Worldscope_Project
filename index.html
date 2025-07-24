@@ -4,50 +4,97 @@
     <meta charset="UTF-8" />
 
     <!-- Icône de la page (favicon) -->
-    <link rel="icon"           type="image/webp" href="/vert_worldscope_192.webp" />
+    <link rel="icon" type="image/webp" href="/vert_worldscope_192.webp" />
     <!-- Pour iOS / Android home screen -->
-    <link rel="apple-touch-icon"           href="/vert_worldscope_192.webp" />
+    <link rel="apple-touch-icon" href="/vert_worldscope_192.webp" />
 
     <!-- Manifest PWA -->
-    <link rel="manifest"       href="/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
 
     <!-- Mobile first -->
-    <meta name="viewport"      content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color"   content="#1c2637" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1c2637" />
 
-    <!-- Référencement -->
-
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic.min.css"  />
-
+    <!-- Référencement de base -->
     <title>WorldScope — Tout un monde à découvrir</title>
     <meta
       name="description"
       content="Découvrez le monde sur WorldScope : monuments, histoire, infos, carte interactive."
     />
-    <link rel="canonical" href="https://ton-domaine.com/" />
+    <link
+      rel="canonical"
+      href="https://worldscope-project.vercel.app/"
+    />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph pour Facebook, LinkedIn, etc. -->
-    <meta property="og:type"        content="website" />
-    <meta property="og:locale"      content="fr_FR" />
-    <meta property="og:site_name"   content="WorldScope" />
-    <meta property="og:title"       content="WorldScope — Tout un monde à découvrir" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="WorldScope" />
+    <meta
+      property="og:title"
+      content="WorldScope — Tout un monde à découvrir"
+    />
     <meta
       property="og:description"
       content="Découvrez le monde sur WorldScope : monuments, histoire, infos, carte interactive."
     />
-    <meta property="og:url"         content="https://ton-domaine.com/" />
+    <meta
+      property="og:url"
+      content="https://worldscope-project.vercel.app/"
+    />
     <meta
       property="og:image"
-      content="https://ton-domaine.com/vert_worldscope_192.webp"
+      content="https://worldscope-project.vercel.app/vert_worldscope_192.webp"
     />
-    <meta property="og:image:alt"   content="Logo WorldScope" />
+    <meta property="og:image:alt" content="Logo WorldScope" />
+
+    <!-- JSON-LD Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://worldscope-project.vercel.app/#website",
+          "url": "https://worldscope-project.vercel.app/",
+          "name": "WorldScope",
+          "description": "Explorez monuments, histoire et actualité mondiale via une carte interactive et un globe 3D.",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://worldscope-project.vercel.app/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://worldscope-project.vercel.app/#webpage",
+          "url": "https://worldscope-project.vercel.app/",
+          "name": "Accueil — WorldScope",
+          "isPartOf": {
+            "@id": "https://worldscope-project.vercel.app/#website"
+          },
+          "description": "Découvrez le monde sur WorldScope : monuments, histoire, infos, carte interactive.",
+          "inLanguage": "fr"
+        }
+      ]
+    }
+    </script>
+
+    <!-- CSS Dyslexie -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic.min.css"
+    />
 
     <!-- Entrée Vite -->
     <script type="module" src="/src/main.jsx"></script>
   </head>
+
   <body>
+    <!-- Ancre pour le bouton "Remonter en haut" -->
+    <div id="top"></div>
+
     <div id="root"></div>
   </body>
 </html>
