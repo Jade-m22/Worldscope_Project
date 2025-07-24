@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Filters from "./Filters";
 import Timeline from "./Timeline";
@@ -6,27 +6,10 @@ import "../styles/components/mobilemenu.scss"; // si tu as un fichier SCSS pour 
 
 /**
  * MobileMenu Component
- * Panneau mobile pour les filtres et la timeline, en conservant le style et la structure d'origine.
+ * Panneau mobile pour les filtres et la timeline.
  */
 export default function MobileMenu(props) {
   const [open, setOpen] = useState(false);
-
-  // ↳ état et restauration de la préférence dyslexie
-  const [dyslexiaEnabled, setDyslexiaEnabled] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem("dyslexia") === "on") {
-      document.body.classList.add("dyslexia");
-      setDyslexiaEnabled(true);
-    }
-  }, []);
-
-  // ↳ fonction pour basculer OpenDyslexic
-  const toggleDyslexia = () => {
-    const on = !dyslexiaEnabled;
-    setDyslexiaEnabled(on);
-    document.body.classList.toggle("dyslexia", on);
-    localStorage.setItem("dyslexia", on ? "on" : "off");
-  };
 
   // SEO dynamique selon l'état du panneau
   const pageTitle = open
@@ -66,13 +49,6 @@ export default function MobileMenu(props) {
             className="mobile-panel-inner"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Toggle OpenDyslexic */}
-            <div style={{ textAlign: "center", margin: "1rem 0" }}>
-              <button className="quiz-button" onClick={toggleDyslexia}>
-                {dyslexiaEnabled ? "Désactiver OpenDys" : "Activer OpenDys"}
-              </button>
-            </div>
-
             <Timeline {...props} />
             <Filters {...props} />
           </div>
