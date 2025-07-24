@@ -15,11 +15,10 @@
     .quiz-button {
       padding: 0.6em 1.2em;
       font-size: 0.95rem;
-      /* hérite de votre style de bouton quiz-button */
     }
   }
 
-  // Titre du sélecteur de pays
+  /* Titre du sélecteur de pays */
   .country-select-title {
     font-size: 1.05rem;
     font-weight: 600;
@@ -158,7 +157,6 @@
   .country-select {
     margin-bottom: 14px;
 
-    // Styles pour react-select (CountrySelect)
     .country-select__input-container input,
     .country-select__input {
       color: #ffffff !important;
@@ -191,7 +189,7 @@
   }
 }
 
-/* Responsive (mobile) */
+/* Responsive (≤ 480px) */
 @media (max-width: 480px) {
   .filters {
     margin: 0 auto 20px;
@@ -218,5 +216,30 @@
   .subfilters {
     margin-top: 12px;
     padding-top: 8px;
+  }
+}
+
+/* Tablettes larges (≤ 1024px) : plein écran, défilement horizontal */
+@media (max-width: 1024px) {
+  .filters {
+    width: 100%;
+    max-width: none;
+    padding: 20px 16px;
+    margin: 0 auto 20px;
+  }
+
+  .filters-list {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 0 8px;
+  }
+
+  .filter-button {
+    flex: 1 0 auto;
+    min-width: 100px;
+    max-width: none;
   }
 }

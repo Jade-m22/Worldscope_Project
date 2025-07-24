@@ -157,3 +157,29 @@ body,
     padding-top: 70px;
   }
 }
+
+/* --------------- */
+/* Tablettes larges */
+/* 1024px et moins */
+@media (max-width: 1024px) {
+  .app-layout {
+    flex-direction: column;  /* empile verticalement */
+    gap: 16px;
+    padding: 24px 2vw 20px;
+  }
+  /* On affiche la sidebar au-dessus */
+  .desktop-filters {
+    width: 100%;
+    order: 1;
+    margin-bottom: 0 !important;
+  }
+  /* Puis le contenu principal */
+  .main-content {
+    width: 100%;
+    order: 2;
+  }
+  /* Centrage du toggle */
+  .view-toggle {
+    margin: 0 auto 1rem;
+  }
+}
