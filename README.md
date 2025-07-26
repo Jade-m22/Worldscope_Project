@@ -4,6 +4,10 @@
 
 > 🚀 Projet collaboratif réalisé par [Slingo](https://github.com/Slingod), [Jade](https://github.com/Jade-m22), [Jeremy](https://github.com/jeremyfonnard), et [Gaetan](https://github.com/GaetanBordes).
 
+**Lien en prod** : https://worldscope-project.vercel.app
+**Trello** : https://trello.com/b/d0anS2rd/projet-final-dev
+
+
 ---
 
 ## 📋 Table des matières
